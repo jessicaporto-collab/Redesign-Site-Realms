@@ -115,68 +115,156 @@ body {
 
 /* Hero Section */
 .hero-section {
-    background: var(--light-blue);
-    padding: 80px 0;
+    background: var(--white);
+    padding: 60px 0 80px;
+    border-bottom: 1px solid #e8f0ff;
 }
 
-.hero-content {
+.hero-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 106px;
+    padding-top: 20px;
+}
+
+.hero-left {
+    flex: 0 0 auto;
+    max-width: 507px;
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    align-items: center;
-    text-align: center;
+    gap: 59px;
 }
 
-.hero-title {
-    font-family: var(--font-heading);
-    font-size: 34px;
-    font-weight: 700;
-    color: var(--white);
-    max-width: 800px;
-}
-
-.hero-subtitle {
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--text-dark);
-}
-
-.features-cards {
-    display: flex;
-    gap: 32px;
-    justify-content: center;
-    width: 100%;
-}
-
-.feature-card {
-    background: var(--ultra-light-blue);
-    border-radius: 13.8px;
-    padding: 24px;
-    width: 316px;
+.header-container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    align-items: center;
-    text-align: center;
+    gap: 12px;
 }
 
-.feature-img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-.feature-title {
+.hero-main-title {
     font-family: var(--font-heading);
-    font-size: 22px;
+    font-size: 40px;
     font-weight: 700;
-    color: var(--text-dark);
+    color: var(--primary-blue);
+    line-height: normal;
+    max-width: 413px;
+}
+
+.hero-main-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--dark-blue);
+    max-width: 440px;
+}
+
+.description-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.hero-description {
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--dark-blue);
+    max-width: 507px;
+}
+
+.features-container {
+    display: flex;
+    gap: 24px;
+}
+
+.feature-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 0 0 auto;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.check-icon {
+    width: 18px;
+    height: 18px;
 }
 
 .feature-text {
+    font-family: 'Inter', sans-serif;
     font-size: 16px;
-    line-height: 1.5;
+    font-weight: 500;
     color: var(--dark-blue);
+    line-height: normal;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.btn-hero {
+    background: var(--teal);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(65, 162, 134, 0.3);
+}
+
+.btn-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.hero-right {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.hero-illustration {
+    width: 767px;
+    height: auto;
+    display: block;
+}
+
+/* Headline Section */
+.headline-section {
+    background: var(--light-blue);
+    padding: 80px 0;
+    text-align: center;
+}
+
+.headline-title {
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 /* How It Works */
@@ -461,6 +549,37 @@ body {
         padding-right: 40px;
     }
     
+    .hero-container {
+        flex-direction: column;
+        gap: 60px;
+    }
+    
+    .hero-left {
+        align-items: center;
+        text-align: center;
+    }
+    
+    .hero-main-title {
+        max-width: 100%;
+    }
+    
+    .hero-description {
+        max-width: 100%;
+    }
+    
+    .features-container {
+        justify-content: center;
+    }
+    
+    .button-container {
+        justify-content: center;
+    }
+    
+    .hero-illustration {
+        width: 100%;
+        max-width: 600px;
+    }
+    
     .features-cards {
         flex-wrap: wrap;
     }
@@ -484,6 +603,27 @@ body {
     
     .navigation {
         padding-left: 0;
+    }
+    
+    .hero-main-title {
+        font-size: 32px;
+    }
+    
+    .hero-main-subtitle {
+        font-size: 20px;
+    }
+    
+    .headline-title {
+        font-size: 32px;
+    }
+    
+    .features-container {
+        flex-direction: column;
+    }
+    
+    .hero-illustration {
+        width: 100%;
+        max-width: 450px;
     }
     
     .hero-title {

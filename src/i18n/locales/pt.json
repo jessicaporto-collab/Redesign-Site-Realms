@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Produtos Realms",
+    "about": "Sobre Nós",
+    "press": "Na Imprensa",
+    "contact": "Contato",
+    "login": "Entrar"
+  },
+  "products": {
+    "eduxgen": "EduXGen.ai",
+    "myclass": "MyClass",
+    "personas": "Realms Personas",
+    "edurealms": "EduRealms",
+    "iptv": "IP.TV Conteúdo Educacional"
+  },
+  "hero": {
+    "tagline": "Plataforma EdTech de Nova Geração",
+    "title": "Design &",
+    "title2": "Estratégia",
+    "subtitle": "Transformamos ideias ousadas em marcas de destaque e experiências digitais elegantes. Vamos dar vida à sua visão.",
+    "cta1": "Explorar Produtos",
+    "cta2": "Fale Conosco"
+  },
+  "home": {
+    "products_title": "Nossos Produtos",
+    "products_subtitle": "Soluções inovadoras em tecnologia educacional construídas para o futuro do aprendizado",
+    "tech_title": "Nossa Tecnologia",
+    "tech_subtitle": "Infraestrutura de última geração para a educação moderna",
+    "tech_body": "Nossa plataforma é construída com tecnologia de ponta, aproveitando IA, computação em nuvem e tecnologias imersivas para oferecer experiências educacionais transformadoras em escala.",
+    "stats_students": "Alunos",
+    "stats_educators": "Educadores",
+    "stats_institutions": "Instituições",
+    "stats_countries": "Países",
+    "tech_ai": "Inteligência Artificial",
+    "tech_cloud": "Cloud Native",
+    "tech_analytics": "Análise em Tempo Real",
+    "tech_gamification": "Gamificação",
+    "partners_title": "Confiado por Líderes do Setor",
+    "cta_title": "Pronto para transformar a educação?",
+    "cta_subtitle": "Junte-se a milhares de educadores e alunos que já usam nossa plataforma",
+    "cta_button": "Comece Gratuitamente"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados.",
+    "tagline": "Transformando a educação através de tecnologia inovadora.",
+    "products": "Produtos",
+    "company": "Empresa",
+    "follow": "Siga-nos"
+  },
+  "pages": {
+    "eduxgen": {
+      "hero_title": "EduXGen.ai",
+      "hero_subtitle": "Plataforma de geração de conteúdo educacional com IA para educadores e instituições",
+      "content_title": "Revolucione a Criação de Conteúdo",
+      "content_text": "O EduXGen.ai usa inteligência artificial de ponta para gerar conteúdo educacional personalizado em escala. De planos de aula a avaliações, nossa IA cria tudo.",
+      "features": ["Geração automática de planos de aula", "Banco de questões com IA", "Avaliações personalizadas", "Suporte a múltiplos idiomas", "Alinhamento curricular", "Exportação em múltiplos formatos"]
+    },
+    "myclass": {
+      "hero_title": "MyClass",
+      "hero_subtitle": "Solução completa de gestão de sala de aula e aprendizagem colaborativa",
+      "content_title": "Sua Solução Completa para a Sala de Aula",
+      "content_text": "O MyClass fornece a professores e alunos todas as ferramentas necessárias para um aprendizado eficaz — presencial ou remoto — desde aulas ao vivo até tarefas e notas.",
+      "features": ["Salas de aula virtuais ao vivo", "Gestão de tarefas e notas", "Acompanhamento do progresso", "Portal de comunicação com pais", "Videoconferência integrada", "Suporte offline"]
+    },
+    "personas": {
+      "hero_title": "Realms Personas",
+      "hero_subtitle": "Jornadas de aprendizagem personalizadas e adaptativas para cada aluno",
+      "content_title": "Perfis de Aprendizagem Adaptativa",
+      "content_text": "O Realms Personas cria perfis de aprendizagem únicos que se adaptam ao ritmo, estilo e objetivos de cada aluno — entregando caminhos educacionais hiperpersonalizados.",
+      "features": ["Detecção dinâmica do estilo de aprendizagem", "Entrega adaptativa de conteúdo", "Desafios baseados em progresso", "Análise comportamental", "Metas de aprendizagem personalizadas", "Conexão mentor-aluno"]
+    },
+    "edurealms": {
+      "hero_title": "EduRealms",
+      "hero_subtitle": "Ambientes educacionais imersivos com 3D e gamificação",
+      "content_title": "Aprenda em Mundos Imersivos",
+      "content_text": "O EduRealms traz a educação à vida por meio de ambientes 3D interativos e experiências de aprendizado gamificadas que cativam e engajam os alunos.",
+      "features": ["Salas de aula 3D interativas", "Quests de aprendizado gamificadas", "Excursões virtuais", "Mundos colaborativos", "Conteúdo para AR/VR", "Sistema de conquistas e badges"]
+    },
+    "iptv": {
+      "hero_title": "IP.TV Conteúdo Educacional",
+      "hero_subtitle": "Streaming educacional com qualidade broadcast entregue em qualquer lugar",
+      "content_title": "Educação Através do Broadcast",
+      "content_text": "Entregue conteúdo educacional de alta qualidade por meio de infraestrutura IPTV para alcançar alunos em qualquer lugar — inclusive em regiões com conectividade limitada.",
+      "features": ["Streaming ao vivo e sob demanda", "Transmissão multicanal", "Entrega com baixa largura de banda", "Agendamento de conteúdo", "Análise e dados de audiência", "Entrega otimizada por CDN"]
+    },
+    "about": {
+      "hero_title": "Sobre Nós",
+      "hero_subtitle": "Nossa história, missão e os valores que nos guiam",
+      "content_title": "Quem Somos",
+      "content_text": "Somos uma empresa líder em EdTech dedicada a transformar a educação por meio de soluções tecnológicas inovadoras. Nossa equipe de engenheiros apaixonados, educadores e designers trabalha junta para tornar o aprendizado mais eficaz e acessível para todos.",
+      "mission_title": "Nossa Missão",
+      "mission_text": "Democratizar a educação de qualidade colocando tecnologia poderosa nas mãos de educadores e aprendizes em todo o mundo.",
+      "vision_title": "Nossa Visão",
+      "vision_text": "Um mundo onde cada aprendiz tem acesso a uma educação personalizada e de alta qualidade, independentemente da localização ou contexto.",
+      "values": ["Inovação", "Acessibilidade", "Impacto", "Excelência"]
+    },
+    "press": {
+      "hero_title": "Na Imprensa",
+      "hero_subtitle": "Últimas notícias, comunicados e cobertura da mídia",
+      "content_title": "Cobertura da Mídia",
+      "content_text": "Fique atualizado com nossas últimas notícias, comunicados de imprensa e aparições na mídia. Para consultas de imprensa, entre em contato com nossa equipe de comunicações.",
+      "press_contact": "Contato de Imprensa",
+      "download_kit": "Baixar Kit de Mídia"
+    },
+    "contact": {
+      "hero_title": "Contato",
+      "hero_subtitle": "Entre em contato — adoraríamos ouvir você",
+      "content_title": "Vamos Conversar",
+      "content_text": "Tem uma pergunta ou quer saber mais sobre nossos produtos? Preencha o formulário abaixo e nossa equipe retornará em até 24 horas.",
+      "name": "Nome Completo",
+      "email": "Endereço de E-mail",
+      "subject": "Assunto",
+      "message": "Sua Mensagem",
+      "send": "Enviar Mensagem",
+      "sending": "Enviando...",
+      "success": "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+      "phone": "Telefone",
+      "address": "Endereço",
+      "email_label": "E-mail"
+    }
+  }
+}

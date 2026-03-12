@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Realms Products",
+    "about": "About Us",
+    "press": "In the Press",
+    "contact": "Contact",
+    "login": "Login"
+  },
+  "products": {
+    "eduxgen": "EduXGen.ai",
+    "myclass": "MyClass",
+    "personas": "Realms Personas",
+    "edurealms": "EduRealms",
+    "iptv": "IP.TV Educational Content"
+  },
+  "hero": {
+    "tagline": "Next-Gen EdTech Platform",
+    "title": "Design &",
+    "title2": "Strategy",
+    "subtitle": "We transform bold ideas into standout brands and sleek digital experiences. Let's bring your vision to life.",
+    "cta1": "Explore Products",
+    "cta2": "Contact Us"
+  },
+  "home": {
+    "products_title": "Our Products",
+    "products_subtitle": "Innovative educational technology solutions built for the future of learning",
+    "tech_title": "Our Technology",
+    "tech_subtitle": "State-of-the-art infrastructure for modern education",
+    "tech_body": "Our platform is built on cutting-edge technology, leveraging AI, cloud computing, and immersive technologies to deliver transformative educational experiences at scale.",
+    "stats_students": "Students",
+    "stats_educators": "Educators",
+    "stats_institutions": "Institutions",
+    "stats_countries": "Countries",
+    "tech_ai": "Artificial Intelligence",
+    "tech_cloud": "Cloud Native",
+    "tech_analytics": "Real-time Analytics",
+    "tech_gamification": "Gamification",
+    "partners_title": "Trusted by Leading Organizations",
+    "cta_title": "Ready to transform education?",
+    "cta_subtitle": "Join thousands of educators and students already using our platform",
+    "cta_button": "Get Started Free"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "tagline": "Transforming education through innovative technology.",
+    "products": "Products",
+    "company": "Company",
+    "follow": "Follow Us"
+  },
+  "pages": {
+    "eduxgen": {
+      "hero_title": "EduXGen.ai",
+      "hero_subtitle": "AI-powered educational content generation platform for educators and institutions",
+      "content_title": "Revolutionize Content Creation",
+      "content_text": "EduXGen.ai leverages cutting-edge artificial intelligence to generate personalized educational content at scale. From lesson plans to assessments, our AI writes it all.",
+      "features": ["Automatic lesson plan generation", "AI-powered question bank", "Personalized assessments", "Multi-language content support", "Curriculum alignment tools", "Export to multiple formats"]
+    },
+    "myclass": {
+      "hero_title": "MyClass",
+      "hero_subtitle": "Complete classroom management and collaborative learning solution",
+      "content_title": "Your Complete Classroom Solution",
+      "content_text": "MyClass provides teachers and students with all the tools needed for effective remote and in-person learning — from live sessions to assignments, grades and more.",
+      "features": ["Live virtual classrooms", "Assignment & grade management", "Student progress tracking", "Parent communication portal", "Integrated video conferencing", "Offline mode support"]
+    },
+    "personas": {
+      "hero_title": "Realms Personas",
+      "hero_subtitle": "Personalized adaptive learning journeys for every student",
+      "content_title": "Adaptive Learning Profiles",
+      "content_text": "Realms Personas creates unique learning profiles that adapt to each student's pace, style, and goals — delivering hyper-personalized educational pathways.",
+      "features": ["Dynamic learning style detection", "Adaptive content delivery", "Progress-based challenges", "Behavioral analytics", "Custom learning goals", "Mentor-student matching"]
+    },
+    "edurealms": {
+      "hero_title": "EduRealms",
+      "hero_subtitle": "Immersive educational environments powered by 3D and gamification",
+      "content_title": "Learn in Immersive Worlds",
+      "content_text": "EduRealms brings education to life through interactive 3D environments and gamified learning experiences that captivate and engage students.",
+      "features": ["3D interactive classrooms", "Gamified learning quests", "Virtual field trips", "Collaborative worlds", "AR/VR ready content", "Achievement & badge system"]
+    },
+    "iptv": {
+      "hero_title": "IP.TV Educational Content",
+      "hero_subtitle": "Broadcast-quality educational streaming delivered anywhere",
+      "content_title": "Education Through Broadcast",
+      "content_text": "Deliver high-quality educational content through IPTV infrastructure to reach students everywhere — including areas with limited internet connectivity.",
+      "features": ["Live & on-demand streaming", "Multi-channel broadcasting", "Low-bandwidth delivery", "Content scheduling", "Analytics & viewership data", "CDN-optimized delivery"]
+    },
+    "about": {
+      "hero_title": "About Us",
+      "hero_subtitle": "Our story, mission and the values that drive us",
+      "content_title": "Who We Are",
+      "content_text": "We are a leading EdTech company dedicated to transforming education through innovative technology solutions. Our team of passionate engineers, educators, and designers work together to make learning more effective and accessible for everyone.",
+      "mission_title": "Our Mission",
+      "mission_text": "To democratize high-quality education by putting powerful technology in the hands of educators and learners worldwide.",
+      "vision_title": "Our Vision",
+      "vision_text": "A world where every learner has access to personalized, high-quality education regardless of location or background.",
+      "values": ["Innovation", "Accessibility", "Impact", "Excellence"]
+    },
+    "press": {
+      "hero_title": "In the Press",
+      "hero_subtitle": "Latest news, announcements and media coverage",
+      "content_title": "Media Coverage",
+      "content_text": "Stay up to date with our latest news, press releases, and media appearances. For press inquiries, please contact our communications team.",
+      "press_contact": "Press Contact",
+      "download_kit": "Download Media Kit"
+    },
+    "contact": {
+      "hero_title": "Contact",
+      "hero_subtitle": "Get in touch — we'd love to hear from you",
+      "content_title": "Let's Talk",
+      "content_text": "Have a question or want to learn more about our products? Fill out the form below and our team will get back to you within 24 hours.",
+      "name": "Full Name",
+      "email": "Email Address",
+      "subject": "Subject",
+      "message": "Your Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully! We'll be in touch soon.",
+      "phone": "Phone",
+      "address": "Address",
+      "email_label": "Email"
+    }
+  }
+}

@@ -202,7 +202,7 @@ export default function Home() {
               <h2 data-reveal data-delay="2" className="text-5xl lg:text-6xl font-black text-gray-900 leading-[1.05] mb-8">
                 Vamos transformar as{' '}
                 <span className="font-serif italic font-normal">Salas de Aula</span>
-                {' '}com Educação Potencializada por IA.
+                {' '}com Educação Potencializada por IA!.
               </h2>
               <p data-reveal data-delay="3" className="text-base text-gray-500 leading-relaxed mb-5">
                 Capacitamos professores a <strong className="text-gray-800 font-semibold">fazer mais em menos tempo</strong> e a cativar alunos como nunca antes.

@@ -4,9 +4,10 @@ const variantClasses = {
   primary: 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white shadow-sm hover:shadow-md',
   secondary: 'border-2 border-white text-white hover:bg-white hover:text-gray-900',
   outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white',
+  'outline-white': 'border border-white/30 text-white hover:bg-white hover:text-gray-900',
   ghost: 'text-gray-600 hover:text-blue-600 hover:bg-gray-50',
   dark: 'bg-gray-900 hover:bg-gray-800 text-white',
-  white: 'bg-white text-blue-700 hover:bg-blue-50 shadow-sm',
+  white: 'bg-white text-gray-900 hover:bg-gray-100 shadow-sm',
 }
 
 const sizeClasses = {

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +10,8 @@
   }
 
   body {
-    @apply font-sans antialiased text-gray-800 bg-white;
+    @apply font-sans antialiased text-white;
+    background-color: #0a0a0a;
   }
 
   * {
@@ -17,34 +20,69 @@
 }
 
 @layer components {
-  .nav-link {
-    @apply px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200;
+  /* ── Scroll reveal ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.22s; }
+  .delay-3 { transition-delay: 0.36s; }
+  .delay-4 { transition-delay: 0.5s; }
+  .delay-5 { transition-delay: 0.64s; }
+  .delay-6 { transition-delay: 0.78s; }
+
+  /* ── Section badge ── */
+  .section-badge {
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40;
   }
 
-  .nav-link-active {
-    @apply bg-blue-50 text-blue-600;
+  /* ── Dark card ── */
+  .card-dark {
+    @apply bg-dark-700 border border-white/[0.06] rounded-2xl transition-all duration-300;
   }
 
-  .btn {
-    @apply inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 cursor-pointer select-none;
+  /* ── Marquee ── */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 35s linear infinite;
   }
-
-  .btn-primary {
-    @apply btn bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white shadow-sm hover:shadow-md;
+  .marquee-track-reverse {
+    display: flex;
+    width: max-content;
+    animation: marqueeReverse 35s linear infinite;
   }
-
-  .btn-secondary {
-    @apply btn border-2 border-white text-white hover:bg-white hover:text-gray-900;
+  .marquee-track:hover,
+  .marquee-track-reverse:hover {
+    animation-play-state: paused;
   }
+}
 
-  .btn-outline {
-    @apply btn border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white;
-  }
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marqueeReverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+@keyframes fadeUp {
+  0%   { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
 
+@layer components {
+  /* ── Legacy light-theme helpers (used by inner pages) ── */
   .card {
     @apply bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300;
   }
-
   .section-label {
     @apply text-blue-600 font-semibold text-sm uppercase tracking-widest;
   }

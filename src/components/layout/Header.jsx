@@ -9,7 +9,6 @@ import logoRealms from '../../assets/logo realms branca.svg'
 const NAV_LINKS = [
   { key: 'about', path: '/sobre-nos' },
   { key: 'press', path: '/na-imprensa' },
-  { key: 'contact', path: '/contato' },
 ]
 
 export default function Header() {
@@ -51,7 +50,7 @@ export default function Header() {
       {/* â”€â”€ Floating pill header â”€â”€ */}
       <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
         <div
-          className={`pointer-events-auto w-full max-w-5xl border rounded-2xl transition-all duration-500 ${pillBg}`}
+          className={`pointer-events-auto w-full max-w-5xl border rounded-full transition-all duration-500 ${pillBg}`}
           role="banner"
         >
           <div className="flex items-center justify-between h-14 px-5">
@@ -159,7 +158,6 @@ export default function Header() {
                       onClick={closeMobile}
                       className="flex items-center gap-3 py-2.5 text-base text-white/60 hover:text-white transition-colors"
                     >
-                      <span className="text-xl">{product.icon}</span>
                       <span>{t(`products.${product.key}`)}</span>
                     </Link>
                   ))}

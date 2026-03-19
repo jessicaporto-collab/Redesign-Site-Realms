@@ -56,9 +56,6 @@ export default function ProductsDropdown({ onClose }) {
                   onClick={() => { setOpen(false); onClose?.() }}
                   className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/[0.05] transition-colors"
                 >
-                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-base flex-shrink-0 ${product.bg}`}>
-                    <span className={product.accent}>{product.icon}</span>
-                  </div>
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-white/80 group-hover:text-white transition-colors truncate">
                       {t(`products.${product.key}`)}

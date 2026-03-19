@@ -2,9 +2,9 @@
 import { useTranslation } from 'react-i18next'
 
 const LANGUAGES = [
-  { code: 'pt', label: 'PT', flag: 'ðŸ‡§ðŸ‡·', name: 'PortuguÃªs' },
-  { code: 'en', label: 'EN', flag: 'ðŸ‡ºðŸ‡¸', name: 'English' },
-  { code: 'es', label: 'ES', flag: 'ðŸ‡ªðŸ‡¸', name: 'EspaÃ±ol' },
+  { code: 'pt', label: 'BR PT', name: 'Português' },
+  { code: 'en', label: 'EN', name: 'English' },
+  { code: 'es', label: 'ES', name: 'Español' },
 ]
 
 export default function LanguageSwitcher({ className = '' }) {
@@ -31,7 +31,6 @@ export default function LanguageSwitcher({ className = '' }) {
         aria-expanded={open}
         className="flex items-center gap-1.5 text-sm font-medium text-white/60 hover:text-white border border-white/20 hover:border-white/40 rounded-full px-3 py-1.5 transition-all duration-200"
       >
-        <span>{current.flag}</span>
         <span>{current.label}</span>
         <svg
           className={`w-3 h-3 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
@@ -56,7 +55,6 @@ export default function LanguageSwitcher({ className = '' }) {
                     : 'text-white/60 hover:text-white hover:bg-white/[0.06]'
                 }`}
               >
-                <span>{lang.flag}</span>
                 <span>{lang.name}</span>
                 {lang.code === i18n.language && (
                   <svg className="w-3.5 h-3.5 ml-auto text-blue-400" fill="currentColor" viewBox="0 0 20 20">

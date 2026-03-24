@@ -37,17 +37,59 @@ export default function StatsSection() {
   useReveal(sectionRef)
 
   return (
-    <section id="stats" className="bg-[#0d0d0d] py-20 lg:py-28 relative overflow-hidden">
-      {/* Subtle blue radial glow */}
+    <section id="stats" className="bg-[#0d0d0d] py-20 lg:py-28 relative">
+      {/* ── Aurora background ── */}
+      {/* Blob 1: azul → roxo */}
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,rgba(37,99,235,0.07)_0%,transparent_70%)] pointer-events-none"
+        className="stats-blob-1 absolute pointer-events-none"
+        style={{
+          width: '100%', height: '100%',
+          left: '0', top: '0',
+          background: 'radial-gradient(ellipse 70% 80% at 15% 50%, rgba(29,78,216,0.75) 0%, transparent 65%)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Blob 2: índigo → rosa */}
+      <div
+        className="stats-blob-2 absolute pointer-events-none"
+        style={{
+          width: '100%', height: '100%',
+          left: '0', top: '0',
+          background: 'radial-gradient(ellipse 65% 75% at 85% 50%, rgba(99,60,255,0.7) 0%, transparent 65%)',
+        }}
+        aria-hidden="true"
+      />
+      {/* Blob 3: ciano → verde */}
+      <div
+        className="stats-blob-3 absolute pointer-events-none"
+        style={{
+          width: '100%', height: '100%',
+          left: '0', top: '0',
+          background: 'radial-gradient(ellipse 55% 60% at 50% 50%, rgba(56,189,248,0.4) 0%, transparent 65%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Dot grid subtle overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px)',
+          backgroundSize: '30px 30px',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Bottom fade */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0d0d0d] via-[#0d0d0d]/80 to-transparent pointer-events-none"
         aria-hidden="true"
       />
 
       <Container>
         <div ref={sectionRef}>
           {/* Header */}
-          <div className="text-center mb-14 lg:mb-16">
+          <div className="text-center mb-20 lg:mb-24">
             <span className="reveal section-badge mb-4 block">
               <span className="w-5 h-px bg-current" aria-hidden="true" />
               {t('stats.badge')}

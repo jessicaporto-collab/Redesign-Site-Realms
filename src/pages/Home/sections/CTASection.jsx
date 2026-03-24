@@ -4,6 +4,64 @@ import { useTranslation } from 'react-i18next'
 import Button from '../../../components/ui/Button'
 import Container from '../../../components/ui/Container'
 
+function useParticles(containerId) {
+  useEffect(() => {
+    const PARTICLES_CONFIG = {
+      particles: {
+        number: { value: 160, density: { enable: true, value_area: 800 } },
+        color: { value: '#ffffff' },
+        shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+        opacity: { value: 0.6, random: true, anim: { enable: true, speed: 1, opacity_min: 0, sync: false } },
+        size: { value: 3, random: true, anim: { enable: false, speed: 4, size_min: 0.3, sync: false } },
+        line_linked: { enable: false },
+        move: { enable: true, speed: 1, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false },
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: { enable: true, mode: 'bubble' },
+          onclick: { enable: true, mode: 'repulse' },
+          resize: true,
+        },
+        modes: {
+          bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+          repulse: { distance: 400, duration: 0.4 },
+        },
+      },
+      retina_detect: true,
+    }
+
+    const init = () => {
+      if (window.particlesJS) {
+        window.particlesJS(containerId, PARTICLES_CONFIG)
+      }
+    }
+
+    if (window.particlesJS) {
+      init()
+      return () => {
+        if (window.pJSDom && window.pJSDom.length > 0) {
+          window.pJSDom.forEach((dom) => dom.pJS.fn.vendors.destroypJS())
+          window.pJSDom = []
+        }
+      }
+    }
+
+    const script = document.createElement('script')
+    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'
+    script.async = true
+    script.onload = init
+    document.body.appendChild(script)
+
+    return () => {
+      if (window.pJSDom && window.pJSDom.length > 0) {
+        window.pJSDom.forEach((dom) => dom.pJS.fn.vendors.destroypJS())
+        window.pJSDom = []
+      }
+    }
+  }, [containerId])
+}
+
 const ARTICLES = [
   {
     dateKey: 'Mar 2026',
@@ -74,6 +132,7 @@ export default function CTASection() {
   const ctaRef = useRef(null)
   useReveal(pressRef)
   useReveal(ctaRef)
+  useParticles('cta-particles')
 
   return (
     <>
@@ -144,19 +203,26 @@ export default function CTASection() {
 
       {/* ── Final CTA ── */}
       <section id="cta" className="bg-[#080808] py-24 lg:py-36 relative overflow-hidden">
+        {/* Particles / stars */}
+        <div
+          id="cta-particles"
+          className="absolute inset-0 w-full h-full"
+          style={{ zIndex: 0 }}
+          aria-hidden="true"
+        />
         {/* Radial blue glow */}
         <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,rgba(37,99,235,0.13)_0%,transparent_70%)] pointer-events-none"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,rgba(37,99,235,0.13)_0%,transparent_70%)] pointer-events-none z-[1]"
           aria-hidden="true"
         />
         {/* Top line accent */}
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent"
+          className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent z-[1]"
           aria-hidden="true"
         />
 
         <Container>
-          <div ref={ctaRef} className="text-center max-w-3xl mx-auto">
+          <div ref={ctaRef} className="text-center max-w-3xl mx-auto relative z-10">
             <h2 className="reveal text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-white leading-[0.9] tracking-tight mb-6">
               <span className="block">{t('cta.heading1')}</span>
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400">

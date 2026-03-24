@@ -77,6 +77,44 @@
   0%   { opacity: 0; transform: translateY(30px); }
   100% { opacity: 1; transform: translateY(0); }
 }
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-28px) scale(1.04); }
+}
+@keyframes floatY2 {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(22px) scale(0.97); }
+}
+@keyframes floatY3 {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-18px) scale(1.02); }
+}
+/* ── Stats aurora blobs ── */
+.stats-blob-1 { animation: blobAnim1 18s ease-in-out infinite; }
+.stats-blob-2 { animation: blobAnim2 23s ease-in-out infinite; }
+.stats-blob-3 { animation: blobAnim3 14s ease-in-out infinite; }
+
+@keyframes blobAnim1 {
+  0%   { opacity: 0.85; filter: hue-rotate(0deg);   background-position: 15% 50%; }
+  20%  { opacity: 0.2;  filter: hue-rotate(50deg);  background-position: 25% 30%; }
+  45%  { opacity: 0.9;  filter: hue-rotate(95deg);  background-position: 5%  70%; }
+  70%  { opacity: 0.15; filter: hue-rotate(50deg);  background-position: 20% 40%; }
+  100% { opacity: 0.85; filter: hue-rotate(0deg);   background-position: 15% 50%; }
+}
+@keyframes blobAnim2 {
+  0%   { opacity: 0.7;  filter: hue-rotate(0deg);   background-position: 85% 50%; }
+  30%  { opacity: 0.1;  filter: hue-rotate(-55deg); background-position: 70% 70%; }
+  55%  { opacity: 0.8;  filter: hue-rotate(-100deg);background-position: 90% 30%; }
+  80%  { opacity: 0.12; filter: hue-rotate(-45deg); background-position: 75% 55%; }
+  100% { opacity: 0.7;  filter: hue-rotate(0deg);   background-position: 85% 50%; }
+}
+@keyframes blobAnim3 {
+  0%   { opacity: 0.6;  filter: hue-rotate(0deg);   background-position: 50% 50%; }
+  35%  { opacity: 0.08; filter: hue-rotate(75deg);  background-position: 40% 35%; }
+  60%  { opacity: 0.65; filter: hue-rotate(130deg); background-position: 60% 65%; }
+  85%  { opacity: 0.1;  filter: hue-rotate(60deg);  background-position: 45% 45%; }
+  100% { opacity: 0.6;  filter: hue-rotate(0deg);   background-position: 50% 50%; }
+}
 
 @layer components {
   /* ── Legacy light-theme helpers (used by inner pages) ── */

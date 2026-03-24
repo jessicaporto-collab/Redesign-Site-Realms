@@ -1,6 +1,18 @@
 import { useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import Container from '../../../components/ui/Container'
+import imgAssespro from '../assets/Logo premio Assespro-RJ NOVA VERSAO.svg'
+import imgGesa from '../assets/premio-internacional-gesa.png'
+import imgTechLearning from '../assets/premio-internacional-techandlearning.png'
+import imgQS from '../assets/premio-internacional-qs.png'
+import imgNacional1 from '../assets/premio-nacional-1.png'
+import imgNacional2 from '../assets/premio-nacional-2.png'
+import imgNacional3 from '../assets/premio-nacional-3.png'
+import imgNacional4 from '../assets/premio-nacional-4.png'
+import imgNacional6 from '../assets/premio-nacional-6.png'
+import imgNacional7 from '../assets/premio-nacional-7.png'
+import imgNacional8 from '../assets/premio-nacional-8.png'
+import imgUpscale from '../assets/upscalemedia-transformed (1).jpeg'
 
 const TESTIMONIALS = [
   {
@@ -46,12 +58,18 @@ const BRANDS = [
 const BRANDS_DOUBLED = [...BRANDS, ...BRANDS]
 
 const AWARDS = [
-  '🏆 EdTech Award 2024',
-  '⭐ Prêmio BETT Brasil',
-  '🎖 Top 100 Startups',
-  '🌟 Inovação Educacional MEC',
-  '🏅 Forbes Educa 2023',
-  '✨ Prêmio E‑Learning Brasil',
+  { src: imgAssespro,    alt: 'Prêmio Assespro RJ' },
+  { src: imgGesa,        alt: 'Prêmio Internacional GESA' },
+  { src: imgTechLearning,alt: 'Prêmio Internacional Tech & Learning'},
+  { src: imgNacional1,   alt: 'Prêmio Nacional' },
+  { src: imgNacional2,   alt: 'Prêmio Nacional' },
+  { src: imgNacional3,   alt: 'Prêmio Nacional' },
+  { src: imgNacional4,   alt: 'Prêmio Nacional' },
+  { src: imgNacional6,   alt: 'Prêmio Nacional', cls: 'h-[53px]' },
+  { src: imgNacional7,   alt: 'Prêmio Nacional', cls: 'h-[53px]' },
+  { src: imgNacional8,   alt: 'Prêmio Nacional', cls: 'h-[53px]' },
+  { src: imgUpscale,     alt: 'Prêmio' },
+  { src: imgQS,          alt: 'Prêmio Internacional QS' , cls: 'h-20'  },
 ]
 const AWARDS_DOUBLED = [...AWARDS, ...AWARDS]
 
@@ -159,9 +177,13 @@ export default function TestimonialsSection() {
         <div className="overflow-hidden">
           <div className="marquee-track-reverse gap-12" aria-hidden="true">
             {AWARDS_DOUBLED.map((award, i) => (
-              <span key={i} className="text-white/28 text-sm font-medium whitespace-nowrap px-8 hover:text-white/55 transition-colors cursor-default">
-                {award}
-              </span>
+              <div key={i} className="flex-shrink-0 px-6 flex items-center justify-center">
+                <img
+                  src={award.src}
+                  alt={award.alt}
+                  className={`${award.cls ?? 'h-14'} w-auto object-contain opacity-50 hover:opacity-80 transition-opacity duration-200`}
+                />
+              </div>
             ))}
           </div>
         </div>

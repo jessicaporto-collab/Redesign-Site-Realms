@@ -1,18 +1,18 @@
-import { useTranslation } from 'react-i18next'
+﻿import { useTranslation } from 'react-i18next'
 import PageHero from '../../components/ui/PageHero'
 import Container from '../../components/ui/Container'
 import Section from '../../components/ui/Section'
 import Button from '../../components/ui/Button'
 
-export default function EduRealms() {
+export default function EduxRealms() {
   const { t } = useTranslation()
-  const features = t('pages.edurealms.features', { returnObjects: true })
+  const features = t('pages.eduxrealms.features', { returnObjects: true })
 
   return (
     <>
       <PageHero
-        title={t('pages.edurealms.hero_title')}
-        subtitle={t('pages.edurealms.hero_subtitle')}
+        title={t('pages.eduxrealms.hero_title')}
+        subtitle={t('pages.eduxrealms.hero_subtitle')}
         gradient="from-orange-500 via-amber-600 to-red-800"
         icon="🌐"
         label="Realms Products"
@@ -33,10 +33,10 @@ export default function EduRealms() {
 
             <div className="order-1 lg:order-2">
               <h2 className="text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight">
-                {t('pages.edurealms.content_title')}
+                {t('pages.eduxrealms.content_title')}
               </h2>
               <p className="text-gray-500 text-lg leading-relaxed mb-8">
-                {t('pages.edurealms.content_text')}
+                {t('pages.eduxrealms.content_text')}
               </p>
 
               <ul className="space-y-3 mb-10">
@@ -74,10 +74,10 @@ export default function EduRealms() {
         <Container className="text-center">
           <h3 className="text-3xl font-black text-white mb-4">Make learning an adventure</h3>
           <p className="text-orange-100 mb-8 max-w-lg mx-auto">
-            EduRealms turns every lesson into an immersive experience students will never forget.
+            EduxRealms turns every lesson into an immersive experience students will never forget.
           </p>
           <Button to="/contato" size="lg" variant="white">
-            Explore EduRealms
+            Explore EduxRealms
           </Button>
         </Container>
       </Section>

@@ -7,7 +7,7 @@ const PRODUCT_LINKS = [
   { key: 'eduxgen',  path: '/eduxgen' },
   { key: 'myclass',  path: '/myclass' },
   { key: 'personas', path: '/realms-personas' },
-  { key: 'edurealms',path: '/edurealms' },
+  { key: 'eduxrealms',path: '/eduxrealms' },
   { key: 'iptv',     path: '/iptv-conteudo' },
   { key: 'conteudo', path: '/iptv-conteudo' },
 ]

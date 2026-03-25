@@ -25,6 +25,124 @@ function useReveal(ref) {
 // ─────────────────────────────────────────────────────────────────
 //  Data
 // ─────────────────────────────────────────────────────────────────
+
+const DESTAQUES = [
+  {
+    id: 1,
+    imgColor: 'bg-slate-800',
+    title: 'Convite interativo para minhas palestras na Bett Nordeste 4 e 5 de setembro de 2024:',
+    excerpt:
+      'Acompanhe nossas participações em eventos para ficar por dentro de todos os nossos lançamentos. Com a mais nova ferramenta Eduxgen.AI o professor ganhará um aliado para ajudar nas demandas de ensino. Nossa ferramenta será um grande aliado nessa nova era da educação.',
+    link: '#',
+  },
+  {
+    id: 2,
+    imgColor: 'bg-slate-400',
+    imgUrl: null,
+    source: 'https://www.ultimahoraonline.com.br/noticia/eduardo-giraldezfala-sobre-a-inovadora-plataforma-de-inteligencia-artificial-para-professores',
+    title: 'Eduardo Giraldez fala sobre a inovadora plataforma de inteligência artificial para professores',
+    excerpt:
+      'Estamos no Golfe Olímpico, onde está acontecendo um grande evento do cinturão de turismo. Hoje, tivemos o privilégio de conversar com Eduardo Giraldez, que recentemente deu uma palestra sobre inteligência artificial...',
+    link: '#',
+  },
+]
+
+const OUTRAS_MATERIAS = [
+  {
+    id: 1,
+    imgColor: 'bg-blue-200',
+    title: 'Metaverso na educação:',
+    date: '10 de maio de 2023',
+    excerpt:
+      'Parem as máquinas! Ou melhor, liguem as máquinas. A educação digital, pela Internet, já é uma realidade para muitas pessoas...',
+    link: '#',
+  },
+  {
+    id: 2,
+    imgColor: 'bg-yellow-300',
+    title: 'Tecnologia brasileira leva conhecimento a regiões isoladas',
+    date: 'Há 1 ano',
+    excerpt:
+      'O sistema une professores que vivem em cidades com mais estrutura e alunos de locais que vão do interior da Amazônia aos rincões da África.',
+    link: '#',
+  },
+  {
+    id: 3,
+    imgColor: 'bg-green-300',
+    title: 'Cariri, participa da experiência pioneira...',
+    date: '16:54 | 19/09/2023',
+    excerpt:
+      'plataforma que será usada é resultado de uma aliança internacional com o aval do Instituto Federal do Amazonas e das Universidades Federais do Cariri e do Maranhão.',
+    link: '#',
+  },
+  {
+    id: 4,
+    imgColor: 'bg-teal-300',
+    title: 'Porteiras participa de experiência de inclusão do metaverso...',
+    date: 'Quarta-feira, 20 de Setembro de 2023',
+    excerpt:
+      'A plataforma que será usada é resultado de uma aliança internacional com o aval do Instituto Federal do Amazonas',
+    link: '#',
+  },
+]
+
+const ULTIMAS_NOTICIAS = [
+  {
+    id: 1,
+    imgColor: 'bg-slate-600',
+    title: 'Eduardo Giráldez no Evento Anual do Grupo Cerc de Ensino',
+    excerpt:
+      'Tivemos o prazer de assistir nosso Chairman, iluminar o evento anual do Grupo Cerc de Ensino com sua palestra inspiradora sobre a transformação da educação através da inteligência artificial. Eduardo abordou um tema vital: a utilização da IA como um assistente...',
+    link: '#',
+    cta: 'Leia Mais',
+  },
+  {
+    id: 2,
+    imgColor: 'bg-blue-700',
+    title: 'Liderança Visionária na Discussão sobre Soberania Digital no CGI.br',
+    excerpt:
+      'Em sua apresentação, Eduardo enfatizou a importância de abordar a tecnologia com cautela, especialmente em relação ao uso da inteligência artificial na educação. Ele destacou os desafios enfrentados pelos professores e a necessidade de ferramentas que apoiem sua produtividade, sem comprometer seu papel insubstituível...',
+    link: '#',
+    cta: 'Saiba Mais',
+  },
+  {
+    id: 3,
+    imgColor: 'bg-gray-900',
+    title: 'Estamos entusiasmados em compartilhar nosso mais recente vídeo sobre o EduxGen.AI',
+    excerpt:
+      'No vídeo, exploramos: Funcionalidades Chave: Como o EduxGen.AI otimiza o gerenciamento de tarefas e avaliações, economizando tempo valioso para os professores. Benefícios para Professores e Alunos: Demonstramos como nossa tecnologia apoia...',
+    link: '#',
+    cta: 'Saiba Mais',
+  },
+  {
+    id: 4,
+    imgColor: 'bg-sky-200',
+    title: 'Realms na Vanguarda da Educação Digital nas Escolas Públicas',
+    excerpt:
+      'Parceria inovadora leva tecnologia de ponta para estudantes de regiões remotas do Brasil, transformando a experiência de aprendizado com recursos digitais acessíveis...',
+    link: '#',
+    cta: 'Leia Mais',
+  },
+  {
+    id: 5,
+    imgColor: 'bg-indigo-200',
+    title: 'Professores Ganham Aliado Poderoso com a IA da Realms',
+    excerpt:
+      'A plataforma EduxGen.AI está revolucionando a forma como professores planejam aulas e avaliam alunos, reduzindo em até 40% o tempo gasto em tarefas administrativas...',
+    link: '#',
+    cta: 'Leia Mais',
+  },
+  {
+    id: 6,
+    imgColor: 'bg-blue-100',
+    title: 'Realms Expande Presença Internacional com Parceiros Educacionais',
+    excerpt:
+      'A empresa fecha acordos estratégicos com instituições de ensino em países da América Latina e África, levando soluções educacionais inovadoras para além das fronteiras do Brasil...',
+    link: '#',
+    cta: 'Leia Mais',
+  },
+]
+
 const PRESS_ITEMS = [
   {
     outlet: 'Forbes Brasil',
@@ -103,6 +221,29 @@ const BRANDS = [
 ]
 const BRANDS_DOUBLED = [...BRANDS, ...BRANDS]
 
+const STATS = [
+  { value: '200+', labelKey: 'press_page.stat1_label' },
+  { value: '50+', labelKey: 'press_page.stat2_label' },
+  { value: '20+', labelKey: 'press_page.stat3_label' },
+  { value: '8', labelKey: 'press_page.stat4_label' },
+]
+
+// ─────────────────────────────────────────────────────────────────
+//  Image placeholder helper
+// ─────────────────────────────────────────────────────────────────
+function ImgPlaceholder({ colorClass, className = '' }) {
+  return (
+    <div
+      className={`${colorClass} ${className} w-full h-full flex items-center justify-center`}
+      aria-hidden="true"
+    >
+      <svg className="w-10 h-10 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    </div>
+  )
+}
+
 // ─────────────────────────────────────────────────────────────────
 //  Hero
 // ─────────────────────────────────────────────────────────────────
@@ -132,7 +273,6 @@ function HeroSection() {
       id="press-hero"
       className="relative min-h-[75vh] w-full overflow-hidden flex items-center bg-[#0a0a0a]"
     >
-      {/* Grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.025]"
         style={{
@@ -142,7 +282,6 @@ function HeroSection() {
         }}
         aria-hidden="true"
       />
-      {/* Violet radial glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(124,58,237,0.12)_0%,transparent_70%)] pointer-events-none"
         aria-hidden="true"
@@ -151,7 +290,6 @@ function HeroSection() {
         className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none"
         aria-hidden="true"
       />
-
       <div
         ref={contentRef}
         className="relative z-10 w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20"
@@ -161,7 +299,6 @@ function HeroSection() {
             <span className="w-8 h-px bg-white/35" aria-hidden="true" />
             {t('press_page.hero_tagline')}
           </p>
-
           <h1 className="hero-item text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[0.92] tracking-tight mb-6">
             {t('press_page.hero_line1')}
             <br />
@@ -169,11 +306,9 @@ function HeroSection() {
               {t('press_page.hero_line2')}
             </span>
           </h1>
-
           <p className="hero-item text-base sm:text-lg text-white/45 leading-relaxed max-w-2xl mb-10 font-light">
             {t('press_page.hero_description')}
           </p>
-
           <div className="hero-item flex flex-wrap gap-4">
             <Button to="/contato" size="lg" variant="primary">
               {t('press_page.hero_cta_contact')}
@@ -218,7 +353,7 @@ function BrandsSection() {
 }
 
 // ─────────────────────────────────────────────────────────────────
-//  News grid + sidebar
+//  News grid + sidebar (dark)
 // ─────────────────────────────────────────────────────────────────
 function NewsSection() {
   const { t } = useTranslation()
@@ -254,13 +389,10 @@ function NewsSection() {
                   key={item.titleKey}
                   className={`reveal delay-${Math.min(i + 1, 6)} group flex items-start gap-5 card-dark p-5 hover:-translate-y-0.5 hover:border-white/10 transition-all duration-300 cursor-pointer`}
                 >
-                  {/* Thumbnail */}
                   <div
                     className={`bg-gradient-to-br ${item.gradient} w-20 h-[60px] rounded-xl flex-shrink-0`}
                     aria-hidden="true"
                   />
-
-                  {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 text-[10px] text-white/28 font-semibold mb-1.5 uppercase tracking-[0.15em]">
                       <span className="text-white/50">{item.outlet}</span>
@@ -278,8 +410,6 @@ function NewsSection() {
                       {t(item.titleKey)}
                     </h3>
                   </div>
-
-                  {/* Arrow */}
                   <svg
                     className="w-4 h-4 text-white/20 flex-shrink-0 mt-1 group-hover:text-white/50 transition-colors duration-200"
                     fill="none"
@@ -295,7 +425,6 @@ function NewsSection() {
 
             {/* Sidebar */}
             <div className="reveal delay-3 space-y-5 lg:sticky lg:top-28">
-              {/* Press contact */}
               <div className="card-dark p-6">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-violet-800 flex items-center justify-center mb-4">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -311,7 +440,6 @@ function NewsSection() {
                 </Button>
               </div>
 
-              {/* Media kit */}
               <div className="card-dark p-6">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mb-4">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -327,7 +455,6 @@ function NewsSection() {
                 </Button>
               </div>
 
-              {/* Awards */}
               <div className="card-dark p-6">
                 <h3 className="font-bold text-white mb-4">{t('press_page.awards_title')}</h3>
                 <ul className="space-y-3">
@@ -350,13 +477,6 @@ function NewsSection() {
 // ─────────────────────────────────────────────────────────────────
 //  Stats bar
 // ─────────────────────────────────────────────────────────────────
-const STATS = [
-  { value: '200+', labelKey: 'press_page.stat1_label' },
-  { value: '50+', labelKey: 'press_page.stat2_label' },
-  { value: '20+', labelKey: 'press_page.stat3_label' },
-  { value: '8', labelKey: 'press_page.stat4_label' },
-]
-
 function StatsBarSection() {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
@@ -439,6 +559,114 @@ function CTAFinalSection() {
 }
 
 // ─────────────────────────────────────────────────────────────────
+//  Destaques
+// ─────────────────────────────────────────────────────────────────
+function DestaquesSection() {
+  return (
+    <section className="bg-[#0d0d0d] py-14 border-t border-white/[0.05]">
+      <Container>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-white text-center mb-10">
+          Destaques
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {DESTAQUES.map((item) => (
+            <article key={item.id} className="flex flex-col">
+              {/* image */}
+              <div className="w-full aspect-[16/9] overflow-hidden rounded-xl mb-4">
+                <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl" />
+              </div>
+              {/* source URL for second card */}
+              {item.source && (
+                <p className="text-xs text-white/30 break-all mb-2">{item.source}</p>
+              )}
+              <h3 className="text-lg font-bold text-white leading-snug mb-2">{item.title}</h3>
+              <p className="text-sm text-white/50 leading-relaxed mb-3">{item.excerpt}</p>
+              <a
+                href={item.link}
+                className="text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors"
+              >
+                Leia Mais
+              </a>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Veja outras matérias
+// ─────────────────────────────────────────────────────────────────
+function OutrasMaterialsSection() {
+  return (
+    <section className="bg-[#0a0a0a] py-14 border-t border-white/[0.05]">
+      <Container>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-white text-center mb-10">
+          Veja outras matérias
+        </h2>
+        <div className="border border-white/[0.07] rounded-2xl divide-y divide-white/[0.06]">
+          {OUTRAS_MATERIAS.map((item) => (
+            <article key={item.id} className="flex gap-5 p-5 hover:bg-white/[0.02] transition-colors duration-200">
+              {/* thumbnail */}
+              <div className="flex-shrink-0 w-36 h-24 overflow-hidden rounded-xl">
+                <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl h-24" />
+              </div>
+              {/* content */}
+              <div className="flex flex-col justify-between min-w-0">
+                <div>
+                  <h3 className="text-base font-bold text-white leading-snug mb-1">{item.title}</h3>
+                  <p className="text-xs text-white/35 mb-2">{item.date}</p>
+                  <p className="text-sm text-white/50 leading-relaxed line-clamp-2">{item.excerpt}</p>
+                </div>
+                <a
+                  href={item.link}
+                  className="mt-2 text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors"
+                >
+                  Leia Mais
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Últimas notícias
+// ─────────────────────────────────────────────────────────────────
+function UltimasNoticiasSection() {
+  return (
+    <section className="bg-[#0d0d0d] py-14 border-t border-white/[0.05]">
+      <Container>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-white text-center mb-10">
+          Últimas notícias
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {ULTIMAS_NOTICIAS.map((item) => (
+            <article key={item.id} className="flex flex-col group cursor-pointer">
+              <div className="w-full aspect-video overflow-hidden rounded-xl mb-4">
+                <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl h-full" />
+              </div>
+              <h3 className="text-base font-bold text-white leading-snug mb-2 group-hover:text-violet-300 transition-colors duration-200">{item.title}</h3>
+              <p className="text-sm text-white/50 leading-relaxed mb-3 line-clamp-4">{item.excerpt}</p>
+              <a
+                href={item.link}
+                className="mt-auto text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors"
+              >
+                {item.cta}
+              </a>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────
 //  Page
 // ─────────────────────────────────────────────────────────────────
 export default function NaImprensa() {
@@ -446,6 +674,9 @@ export default function NaImprensa() {
     <>
       <HeroSection />
       <BrandsSection />
+      <DestaquesSection />
+      <OutrasMaterialsSection />
+      <UltimasNoticiasSection />
       <NewsSection />
       <StatsBarSection />
       <CTAFinalSection />

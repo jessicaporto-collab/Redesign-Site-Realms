@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+﻿import { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Container from '../../../components/ui/Container'
@@ -32,8 +32,8 @@ const PRODUCTS = [
     symbol: '◉',
   },
   {
-    key: 'edurealms',
-    path: '/edurealms',
+    key: 'eduxrealms',
+    path: '/eduxrealms',
     gradientFrom: '#431407',
     gradientTo: '#ea580c',
     gridColor: 'rgba(234,88,12,0.12)',

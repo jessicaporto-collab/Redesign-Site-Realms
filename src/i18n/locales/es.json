@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "home": "Inicio",
     "products": "Productos Realms",
@@ -11,19 +11,19 @@
     "eduxgen": "EduXGen.AI",
     "myclass": "MyClass",
     "personas": "Realms Persona",
-    "edurealms": "EduRealms",
+    "eduxrealms": "EduxRealms",
     "iptv": "IP.TV",
     "conteudo": "Contenido Educativo",
     "eduxgen_name": "EduXGen.AI",
     "myclass_name": "MyClass",
     "personas_name": "Realms Persona",
-    "edurealms_name": "EduRealms",
+    "eduxrealms_name": "EduxRealms",
     "iptv_name": "IP.TV",
     "conteudo_name": "Contenido Educativo",
     "eduxgen_desc": "Genera planes de clase, preguntas y evaluaciones completas en minutos con inteligencia artificial.",
     "myclass_desc": "Sistema completo de gestión de tareas y seguimiento pedagógico para docentes y gestores.",
     "personas_desc": "Asistente virtual de IA que responde preguntas de estudiantes en lenguaje natural.",
-    "edurealms_desc": "Experiencias inmersivas creadas a partir de entornos reales para involucrar a los estudiantes.",
+    "eduxrealms_desc": "Experiencias inmersivas creadas a partir de entornos reales para involucrar a los estudiantes.",
     "iptv_desc": "Plataforma de videoconferencia con chat multimedia y soporte para eventos a gran escala.",
     "conteudo_desc": "Alianza con Smile and Learn ofreciendo contenido multimedia K-12.",
     "eduxgen_tag1": "IA Generativa",
@@ -32,8 +32,8 @@
     "myclass_tag2": "Pedagógico",
     "personas_tag1": "IA Conversacional",
     "personas_tag2": "Asistente",
-    "edurealms_tag1": "Realidad Virtual",
-    "edurealms_tag2": "Inmersivo",
+    "eduxrealms_tag1": "Realidad Virtual",
+    "eduxrealms_tag2": "Inmersivo",
     "iptv_tag1": "Videoconferencia",
     "iptv_tag2": "Transmisión",
     "conteudo_tag1": "K-12",
@@ -165,7 +165,7 @@
     "item2_title": "Realms capta R$ 50M para expandir plataforma EdTech en América Latina",
     "item3_title": "EduXGen.ai alcanza 2 millones de contenidos generados en 12 meses",
     "item4_title": "Startup brasileña de EdTech firma alianza estratégica con Google for Education",
-    "item5_title": "EduRealms: la plataforma inmersiva que transforma cómo aprenden los estudiantes",
+    "item5_title": "EduxRealms: la plataforma inmersiva que transforma cómo aprenden los estudiantes",
     "item6_title": "IP.TV lleva educación de calidad a regiones con acceso limitado a internet",
     "contact_desc": "Para entrevistas, reportajes y materiales de prensa, contacta a nuestro equipo de comunicaciones.",
     "kit_desc": "Logotipos, identidad visual, fotos de ejecutivos y ficha de empresa.",
@@ -236,11 +236,11 @@
       "content_text": "Realms Personas crea perfiles de aprendizaje únicos que se adaptan al ritmo, estilo y objetivos de cada estudiante — ofreciendo rutas educativas hiperpersonalizadas.",
       "features": ["Detección dinámica del estilo de aprendizaje", "Entrega adaptativa de contenido", "Desafíos basados en progreso", "Análisis conductual", "Objetivos de aprendizaje personalizados", "Conexión mentor-estudiante"]
     },
-    "edurealms": {
-      "hero_title": "EduRealms",
+    "eduxrealms": {
+      "hero_title": "EduxRealms",
       "hero_subtitle": "Entornos educativos inmersivos con 3D y gamificación",
       "content_title": "Aprende en Mundos Inmersivos",
-      "content_text": "EduRealms da vida a la educación a través de entornos 3D interactivos y experiencias de aprendizaje gamificadas que cautivan y comprometen a los estudiantes.",
+      "content_text": "EduxRealms da vida a la educación a través de entornos 3D interactivos y experiencias de aprendizaje gamificadas que cautivan y comprometen a los estudiantes.",
       "features": ["Aulas 3D interactivas", "Quests de aprendizaje gamificadas", "Excursiones virtuales", "Mundos colaborativos", "Contenido para AR/VR", "Sistema de logros y badges"]
     },
     "iptv": {

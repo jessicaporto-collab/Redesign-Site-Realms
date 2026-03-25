@@ -6,7 +6,7 @@ const PRODUCTS = [
   { key: 'eduxgen',  path: '/eduxgen',        icon: 'âœ¦', accent: 'text-blue-400',   bg: 'bg-blue-500/10' },
   { key: 'myclass',  path: '/myclass',         icon: 'â—ˆ', accent: 'text-violet-400', bg: 'bg-violet-500/10' },
   { key: 'personas', path: '/realms-personas', icon: 'â—‰', accent: 'text-emerald-400',bg: 'bg-emerald-500/10' },
-  { key: 'edurealms',path: '/edurealms',       icon: 'â—Ž', accent: 'text-orange-400', bg: 'bg-orange-500/10' },
+  { key: 'eduxrealms',path: '/eduxrealms',       icon: 'â—Ž', accent: 'text-orange-400', bg: 'bg-orange-500/10' },
   { key: 'iptv',     path: '/iptv-conteudo',   icon: 'â—', accent: 'text-rose-400',   bg: 'bg-rose-500/10' },
   { key: 'conteudo', path: '/iptv-conteudo',   icon: 'â—‘', accent: 'text-amber-400',  bg: 'bg-amber-500/10' },
 ]

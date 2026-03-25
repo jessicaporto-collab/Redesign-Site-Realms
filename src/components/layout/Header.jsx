@@ -42,15 +42,20 @@ export default function Header() {
   }
 
   const pillBg = scrolled
-    ? 'bg-dark-900/90 backdrop-blur-xl border-white/10 shadow-2xl shadow-black/40'
+    ? 'bg-dark-900/90 backdrop-blur-xl border-white/10'
     : 'bg-dark-900/60 backdrop-blur-md border-white/[0.08]'
+
+  const pillShadow = scrolled
+    ? '-20px 0 35px rgba(99,102,241,0.4), 20px 0 35px rgba(168,85,247,0.4), 0 8px 24px rgba(0,0,0,0.7)'
+    : '-12px 0 28px rgba(99,102,241,0.25), 12px 0 28px rgba(168,85,247,0.25), 0 6px 18px rgba(0,0,0,0.55)'
 
   return (
     <>
-      {/* â”€â”€ Floating pill header â”€â”€ */}
+      {/* ── Floating pill header ── */}
       <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
         <div
           className={`pointer-events-auto w-full max-w-5xl border rounded-full transition-all duration-500 ${pillBg}`}
+          style={{ boxShadow: pillShadow }}
           role="banner"
         >
           <div className="flex items-center justify-between h-14 px-5">

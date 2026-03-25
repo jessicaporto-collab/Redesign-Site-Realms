@@ -1,10 +1,11 @@
 ﻿import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import 'flag-icons/css/flag-icons.min.css'
 
 const LANGUAGES = [
-  { code: 'pt', label: 'BR PT', name: 'Português' },
-  { code: 'en', label: 'EN', name: 'English' },
-  { code: 'es', label: 'ES', name: 'Español' },
+  { code: 'pt', label: 'BR PT', name: 'Português', flagCode: 'br' },
+  { code: 'en', label: 'EN', name: 'English', flagCode: 'us' },
+  { code: 'es', label: 'ES', name: 'Español', flagCode: 'es' },
 ]
 
 export default function LanguageSwitcher({ className = '' }) {
@@ -31,6 +32,7 @@ export default function LanguageSwitcher({ className = '' }) {
         aria-expanded={open}
         className="flex items-center gap-1.5 text-sm font-medium text-white/60 hover:text-white border border-white/20 hover:border-white/40 rounded-full px-3 py-1.5 transition-all duration-200"
       >
+        <span className={`fi fi-${current.flagCode} rounded-sm`} />
         <span>{current.label}</span>
         <svg
           className={`w-3 h-3 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
@@ -55,6 +57,7 @@ export default function LanguageSwitcher({ className = '' }) {
                     : 'text-white/60 hover:text-white hover:bg-white/[0.06]'
                 }`}
               >
+                <span className={`fi fi-${lang.flagCode} rounded-sm`} />
                 <span>{lang.name}</span>
                 {lang.code === i18n.language && (
                   <svg className="w-3.5 h-3.5 ml-auto text-blue-400" fill="currentColor" viewBox="0 0 20 20">

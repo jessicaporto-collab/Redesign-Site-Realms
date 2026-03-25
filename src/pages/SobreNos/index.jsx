@@ -24,6 +24,99 @@ function useReveal(ref) {
 }
 
 // ─────────────────────────────────────────────────────────────────
+//  Tech Particles Background (canvas)
+// ─────────────────────────────────────────────────────────────────
+function TechParticlesBg() {
+  const canvasRef = useRef(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    let w = 0, h = 0
+    let pts = []
+    let raf
+
+    const resize = () => {
+      w = canvas.offsetWidth
+      h = canvas.offsetHeight
+      canvas.width = w
+      canvas.height = h
+      rebuildPts()
+    }
+
+    const rebuildPts = () => {
+      const n = Math.min(Math.floor((w * h) / 9000), 110)
+      pts = Array.from({ length: n }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.32,
+        vy: (Math.random() - 0.5) * 0.32,
+        r: Math.random() * 1.6 + 0.4,
+        cyan: Math.random() > 0.55,
+        alpha: Math.random() * 0.55 + 0.25,
+      }))
+    }
+
+    const LINK = 145
+
+    const tick = () => {
+      ctx.clearRect(0, 0, w, h)
+
+      // connections
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x
+          const dy = pts[i].y - pts[j].y
+          const d = Math.hypot(dx, dy)
+          if (d < LINK) {
+            ctx.beginPath()
+            ctx.moveTo(pts[i].x, pts[i].y)
+            ctx.lineTo(pts[j].x, pts[j].y)
+            ctx.strokeStyle = `rgba(96,165,250,${(1 - d / LINK) * 0.22})`
+            ctx.lineWidth = 0.55
+            ctx.stroke()
+          }
+        }
+      }
+
+      // dots
+      pts.forEach(p => {
+        p.x += p.vx
+        p.y += p.vy
+        if (p.x < 0 || p.x > w) p.vx *= -1
+        if (p.y < 0 || p.y > h) p.vy *= -1
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+        ctx.fillStyle = p.cyan
+          ? `rgba(34,211,238,${p.alpha})`
+          : `rgba(96,165,250,${p.alpha})`
+        ctx.fill()
+      })
+
+      raf = requestAnimationFrame(tick)
+    }
+
+    resize()
+    window.addEventListener('resize', resize)
+    tick()
+
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('resize', resize)
+    }
+  }, [])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      style={{ opacity: 0.65 }}
+    />
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────
 //  Hero
 // ─────────────────────────────────────────────────────────────────
 function HeroSection() {
@@ -50,26 +143,99 @@ function HeroSection() {
   return (
     <section
       id="about-hero"
-      className="relative min-h-[92vh] w-full overflow-hidden flex items-center bg-[#0a0a0a]"
+      className="relative min-h-[92vh] w-full overflow-hidden flex items-center"
+      style={{ background: '#0a0a0a' }}
     >
-      {/* Grid pattern */}
+      {/* Animated particle network */}
+      <TechParticlesBg />
+
+      {/* Dot grid overlay */}
       <div
-        className="absolute inset-0 opacity-[0.025]"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
+          backgroundImage: 'radial-gradient(circle, rgba(96,165,250,0.75) 1px, transparent 1px)',
+          backgroundSize: '44px 44px',
+          opacity: 0.13,
         }}
         aria-hidden="true"
       />
-      {/* Blue radial glow */}
+
+      {/* Multi-layer depth gradients */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.14)_0%,transparent_70%)] pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: [
+            'radial-gradient(ellipse 85% 60% at 12% 48%, rgba(37,99,235,0.22) 0%, transparent 60%)',
+            'radial-gradient(ellipse 65% 50% at 88% 18%, rgba(124,58,237,0.16) 0%, transparent 58%)',
+            'radial-gradient(ellipse 55% 55% at 58% 88%, rgba(6,182,212,0.13) 0%, transparent 60%)',
+            'radial-gradient(ellipse 40% 35% at 72% 55%, rgba(37,99,235,0.10) 0%, transparent 55%)',
+          ].join(', '),
+        }}
         aria-hidden="true"
       />
+
+      {/* Pulsing glow orb – top left */}
+      <div
+        className="absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full pointer-events-none animate-pulse"
+        style={{
+          background: 'radial-gradient(circle, rgba(37,99,235,0.16) 0%, transparent 70%)',
+          animationDuration: '5s',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Pulsing glow orb – bottom right */}
+      <div
+        className="absolute -bottom-28 -right-28 w-[600px] h-[600px] rounded-full pointer-events-none animate-pulse"
+        style={{
+          background: 'radial-gradient(circle, rgba(124,58,237,0.13) 0%, transparent 70%)',
+          animationDuration: '7s',
+          animationDelay: '2.5s',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Cyan accent orb – top right */}
+      <div
+        className="absolute top-8 right-8 w-72 h-72 rounded-full pointer-events-none animate-pulse"
+        style={{
+          background: 'radial-gradient(circle, rgba(34,211,238,0.09) 0%, transparent 70%)',
+          animationDuration: '9s',
+          animationDelay: '1s',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Corner circuit decoration – top right */}
+      <svg
+        className="absolute top-0 right-0 w-72 h-72 pointer-events-none opacity-[0.06]"
+        viewBox="0 0 200 200"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M200 0 L200 80 L140 80 L140 140 L80 140 L80 200" stroke="rgba(96,165,250,1)" strokeWidth="1" />
+        <path d="M200 30 L170 30 L170 110 L110 110 L110 200" stroke="rgba(34,211,238,1)" strokeWidth="1" />
+        <circle cx="140" cy="80" r="4" fill="rgba(96,165,250,1)" />
+        <circle cx="110" cy="110" r="4" fill="rgba(34,211,238,1)" />
+        <circle cx="80" cy="140" r="3" fill="rgba(96,165,250,1)" />
+      </svg>
+
+      {/* Corner circuit decoration – bottom left */}
+      <svg
+        className="absolute bottom-0 left-0 w-56 h-56 pointer-events-none opacity-[0.05]"
+        viewBox="0 0 160 160"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M0 160 L0 80 L60 80 L60 40 L120 40 L120 0" stroke="rgba(124,58,237,1)" strokeWidth="1" />
+        <circle cx="60" cy="80" r="4" fill="rgba(124,58,237,1)" />
+        <circle cx="120" cy="40" r="3" fill="rgba(96,165,250,1)" />
+      </svg>
+
       {/* Bottom fade */}
       <div
-        className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none"
+        className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
+        style={{ background: 'linear-gradient(to top, #0a0a0a 0%, transparent 100%)' }}
         aria-hidden="true"
       />
 
@@ -141,9 +307,26 @@ function MissionSection() {
   useReveal(sectionRef)
 
   return (
-    <section id="mission" className="bg-[#0d0d0d] py-24 lg:py-32 relative overflow-hidden">
+    <section id="mission" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: '#0a0a0a' }}>
+      {/* Top border glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-white/8 to-transparent"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(96,165,250,0.25) 40%, rgba(34,211,238,0.3) 50%, rgba(96,165,250,0.25) 60%, transparent)' }}
+        aria-hidden="true"
+      />
+      {/* Subtle hexagonal dot pattern */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(96,165,250,0.4) 1px, transparent 1px)',
+          backgroundSize: '52px 52px',
+          opacity: 0.07,
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 50%, rgba(37,99,235,0.09) 0%, transparent 70%)' }}
         aria-hidden="true"
       />
 
@@ -218,9 +401,25 @@ function TimelineSection() {
   useReveal(sectionRef)
 
   return (
-    <section id="timeline" className="bg-[#0a0a0a] py-24 lg:py-32 relative overflow-hidden">
+    <section id="timeline" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: '#0d0d0d' }}>
+      {/* Top border glow */}
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(37,99,235,0.06)_0%,transparent_70%)] pointer-events-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-px"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.22) 40%, rgba(96,165,250,0.28) 50%, rgba(124,58,237,0.22) 60%, transparent)' }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 80% 45% at 50% 0%, rgba(37,99,235,0.10) 0%, transparent 65%)' }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(96,165,250,0.35) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+          opacity: 0.06,
+        }}
         aria-hidden="true"
       />
       <Container>
@@ -242,7 +441,8 @@ function TimelineSection() {
           <div className="relative max-w-4xl mx-auto">
             {/* Vertical line */}
             <div
-              className="absolute left-4 lg:left-1/2 lg:-translate-x-1/2 top-0 bottom-0 w-px bg-white/[0.06]"
+              className="absolute left-4 lg:left-1/2 lg:-translate-x-1/2 top-0 bottom-0 w-px"
+              style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.25) 8%, rgba(255,255,255,0.25) 92%, transparent 100%)' }}
               aria-hidden="true"
             />
 
@@ -258,7 +458,7 @@ function TimelineSection() {
                 >
                   {/* Dot */}
                   <div
-                    className={`absolute left-2 lg:left-1/2 lg:-translate-x-1/2 top-6 w-4 h-4 rounded-full ${m.accent} ring-4 ring-[#0a0a0a] z-10`}
+                    className="absolute left-2 lg:left-1/2 lg:-translate-x-1/2 top-6 w-4 h-4 rounded-full z-10 bg-transparent border-2 border-white/70"
                     aria-hidden="true"
                   />
 
@@ -331,9 +531,16 @@ function ValuesSection() {
   useReveal(sectionRef)
 
   return (
-    <section id="values" className="bg-[#0d0d0d] py-24 lg:py-32 relative overflow-hidden">
+    <section id="values" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: '#0a0a0a' }}>
+      {/* Top border glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-white/8 to-transparent"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(34,211,238,0.18) 35%, rgba(96,165,250,0.28) 50%, rgba(34,211,238,0.18) 65%, transparent)' }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 60% 40% at 80% 60%, rgba(124,58,237,0.08) 0%, transparent 60%)' }}
         aria-hidden="true"
       />
       <Container>
@@ -388,7 +595,18 @@ function TeamSection() {
   useReveal(sectionRef)
 
   return (
-    <section id="team" className="bg-[#0a0a0a] py-24 lg:py-32 relative overflow-hidden">
+    <section id="team" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: '#0d0d0d' }}>
+      {/* Top border glow */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-px"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(96,165,250,0.22) 40%, rgba(34,211,238,0.28) 50%, rgba(96,165,250,0.22) 60%, transparent)' }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 100%, rgba(37,99,235,0.09) 0%, transparent 65%)' }}
+        aria-hidden="true"
+      />
       <Container>
         <div ref={sectionRef}>
           <div className="text-center mb-14">
@@ -435,13 +653,27 @@ function CTAFinalSection() {
   useReveal(sectionRef)
 
   return (
-    <section id="about-cta" className="bg-[#0d0d0d] py-24 lg:py-32 relative overflow-hidden">
+    <section id="about-cta" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: '#0a0a0a' }}>
+      {/* Deep glow center */}
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(37,99,235,0.1)_0%,transparent_70%)] pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 65% 65% at 50% 50%, rgba(37,99,235,0.14) 0%, transparent 68%)' }}
         aria-hidden="true"
       />
+      {/* Top border glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-white/8 to-transparent"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-px"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(96,165,250,0.28) 35%, rgba(34,211,238,0.38) 50%, rgba(96,165,250,0.28) 65%, transparent)' }}
+        aria-hidden="true"
+      />
+      {/* Dot grid */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(96,165,250,0.6) 1px, transparent 1px)',
+          backgroundSize: '44px 44px',
+          opacity: 0.07,
+        }}
         aria-hidden="true"
       />
 

@@ -30,6 +30,10 @@ export default {
           accent: '#60a5fa',
         },
       },
+      boxShadow: {
+        'header': '0 4px 32px rgba(99,102,241,0.25), 0 2px 16px rgba(168,85,247,0.2), 0 1px 8px rgba(236,72,153,0.15)',
+        'header-scrolled': '0 6px 40px rgba(99,102,241,0.45), 0 4px 24px rgba(168,85,247,0.35), 0 2px 16px rgba(236,72,153,0.3)',
+      },
       animation: {
         'marquee': 'marquee 35s linear infinite',
         'marquee-reverse': 'marqueeReverse 35s linear infinite',

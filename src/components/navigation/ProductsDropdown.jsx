@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 const PRODUCTS = [
@@ -15,7 +15,12 @@ export { PRODUCTS }
 
 export default function ProductsDropdown({ onClose }) {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
   const [open, setOpen] = useState(false)
+
+  const activeProduct = PRODUCTS.find((p) => pathname === p.path || pathname.startsWith(p.path + '/'))
+  const buttonLabel = activeProduct ? t(`products.${activeProduct.key}`) : t('nav.products')
+  const isActive = !!activeProduct
 
   return (
     <div
@@ -28,10 +33,10 @@ export default function ProductsDropdown({ onClose }) {
         aria-haspopup="true"
         aria-expanded={open}
         className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-          open ? 'text-white bg-white/10' : 'text-white/60 hover:text-white hover:bg-white/[0.07]'
+          open || isActive ? 'text-white bg-white/10' : 'text-white/60 hover:text-white hover:bg-white/[0.07]'
         }`}
       >
-        {t('nav.products')}
+        {buttonLabel}
         <svg
           className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
           fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
@@ -49,23 +54,34 @@ export default function ProductsDropdown({ onClose }) {
               </p>
             </div>
             <div className="p-2">
-              {PRODUCTS.map((product) => (
-                <Link
-                  key={product.key}
-                  to={product.path}
-                  onClick={() => { setOpen(false); onClose?.() }}
-                  className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/[0.05] transition-colors"
-                >
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-white/80 group-hover:text-white transition-colors truncate">
-                      {t(`products.${product.key}`)}
-                    </p>
-                  </div>
-                  <svg className="w-3.5 h-3.5 text-white/20 ml-auto flex-shrink-0 group-hover:text-white/50 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              ))}
+              {PRODUCTS.map((product) => {
+                const isItemActive = pathname === product.path || pathname.startsWith(product.path + '/')
+                return (
+                  <Link
+                    key={product.key}
+                    to={product.path}
+                    onClick={() => { setOpen(false); onClose?.() }}
+                    className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${
+                      isItemActive
+                        ? 'bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/20'
+                        : 'hover:bg-white/[0.05]'
+                    }`}
+                  >
+                    <div className="min-w-0">
+                      <p className={`text-sm font-semibold transition-colors truncate ${
+                        isItemActive ? 'text-indigo-200' : 'text-white/80 group-hover:text-white'
+                      }`}>
+                        {t(`products.${product.key}`)}
+                      </p>
+                    </div>
+                    <svg className={`w-3.5 h-3.5 ml-auto flex-shrink-0 transition-colors ${
+                      isItemActive ? 'text-indigo-400/70' : 'text-white/20 group-hover:text-white/50'
+                    }`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </div>

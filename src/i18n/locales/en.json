@@ -246,11 +246,23 @@
       "features": ["3D interactive classrooms", "Gamified learning quests", "Virtual field trips", "Collaborative worlds", "AR/VR ready content", "Achievement & badge system"]
     },
     "iptv": {
-      "hero_title": "IP.TV Educational Content",
+      "hero_title": "IP.TV",
       "hero_subtitle": "Broadcast-quality educational streaming delivered anywhere",
       "content_title": "Education Through Broadcast",
       "content_text": "Deliver high-quality educational content through IPTV infrastructure to reach students everywhere — including areas with limited internet connectivity.",
       "features": ["Live & on-demand streaming", "Multi-channel broadcasting", "Low-bandwidth delivery", "Content scheduling", "Analytics & viewership data", "CDN-optimized delivery"]
+    },
+    "conteudo": {
+      "hero_title": "Educational Content",
+      "hero_subtitle": "Partnership with Smile and Learn offering K-12 multimedia content",
+      "content_title": "K-12 Multimedia Learning",
+      "content_text": "In partnership with Smile and Learn, we offer an extensive library of multimedia educational content covering the entire school journey, from kindergarten through high school.",
+      "features": ["Library with 5,000+ activities", "Full K-12 content", "Interactive educational games", "Educational videos and animations", "Multi-language support", "Progress tracking"],
+      "cta_primary": "Get Started",
+      "cta_secondary": "Request Demo",
+      "cta_title": "Access the Largest Educational Library",
+      "cta_text": "Bring rich and engaging content to every student, on any device, with expert K-12 curation.",
+      "cta_button": "Talk to Our Team"
     },
     "about": {
       "hero_title": "About Us",

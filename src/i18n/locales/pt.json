@@ -246,11 +246,23 @@
       "features": ["Salas de aula 3D interativas", "Quests de aprendizado gamificadas", "Excursões virtuais", "Mundos colaborativos", "Conteúdo para AR/VR", "Sistema de conquistas e badges"]
     },
     "iptv": {
-      "hero_title": "IP.TV Conteúdo Educacional",
+      "hero_title": "IP.TV",
       "hero_subtitle": "Streaming educacional com qualidade broadcast entregue em qualquer lugar",
       "content_title": "Educação Através do Broadcast",
       "content_text": "Entregue conteúdo educacional de alta qualidade por meio de infraestrutura IPTV para alcançar alunos em qualquer lugar — inclusive em regiões com conectividade limitada.",
       "features": ["Streaming ao vivo e sob demanda", "Transmissão multicanal", "Entrega com baixa largura de banda", "Agendamento de conteúdo", "Análise e dados de audiência", "Entrega otimizada por CDN"]
+    },
+    "conteudo": {
+      "hero_title": "Conteúdo Educacional",
+      "hero_subtitle": "Parceria com Smile and Learn oferecendo conteúdo multimídia do K-12",
+      "content_title": "Aprendizado Multimídia do K-12",
+      "content_text": "Em parceria com o Smile and Learn, oferecemos uma vasta biblioteca de conteúdo educacional multimídia que cobre toda a jornada escolar, do ensino infantil ao médio.",
+      "features": ["Biblioteca com mais de 5.000 atividades", "Conteúdo para K-12 completo", "Jogos educacionais interativos", "Vídeos e animações pedagógicas", "Suporte a múltiplos idiomas", "Acompanhamento de progresso"],
+      "cta_primary": "Começar Agora",
+      "cta_secondary": "Solicitar Demo",
+      "cta_title": "Acesse o Maior Acervo Educacional",
+      "cta_text": "Leve conteúdo rico e engajante para cada aluno, em qualquer dispositivo, com curadoria especializada K-12.",
+      "cta_button": "Falar com Nossa Equipe"
     },
     "about": {
       "hero_title": "Sobre Nós",

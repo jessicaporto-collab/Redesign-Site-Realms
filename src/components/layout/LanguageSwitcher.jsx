@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import 'flag-icons/css/flag-icons.min.css'
 
 const LANGUAGES = [
-  { code: 'pt', label: 'BR PT', name: 'Português', flagCode: 'br' },
+  { code: 'pt', label: 'PT-BR', name: 'Português', flagCode: 'br' },
   { code: 'en', label: 'EN', name: 'English', flagCode: 'us' },
   { code: 'es', label: 'ES', name: 'Español', flagCode: 'es' },
 ]

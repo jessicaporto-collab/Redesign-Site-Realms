@@ -138,44 +138,68 @@ function useEntrance(ref) {
 }
 
 /* ─────────────────────────────────────────────
+   Badge component
+───────────────────────────────────────────── */
+function Badge({ children }) {
+  return (
+    <p className="reveal flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 mb-4">
+      <span className="w-8 h-px" style={{ background: 'rgba(167,139,250,0.5)' }} />
+      {children}
+    </p>
+  )
+}
+
+/* ─────────────────────────────────────────────
    Data
 ───────────────────────────────────────────── */
 const CAPABILITIES = [
   {
     icon: '💬',
+    tag: 'Chat IA',
     title: 'Conversa Fluida e Natural',
     desc: 'Cada Persona mantém diálogos contextuais de forma contínua, respondendo em linguagem natural como um humano faria.',
     accent: '#3b82f6',
+    image: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=800&q=75&fit=crop',
   },
   {
     icon: '🧠',
+    tag: 'Treinamento',
     title: 'Treinado com Seu Conteúdo',
     desc: 'Você alimenta a Persona com materiais, apostilas e dados da sua instituição. Ela aprende e responde com sua identidade.',
     accent: '#8b5cf6',
+    image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=75&fit=crop',
   },
   {
     icon: '🎭',
+    tag: 'Customização',
     title: 'Personalidade Customizável',
     desc: 'Defina tom, nome, avatar e comportamento. Crie uma Persona que combine com a identidade da sua escola ou curso.',
     accent: '#ec4899',
+    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=75&fit=crop',
   },
   {
     icon: '📚',
+    tag: 'Educação',
     title: 'Assistente de Aula',
     desc: 'Responde dúvidas dos alunos sobre conteúdo didático a qualquer hora, aliviando a carga do professor.',
     accent: '#6366f1',
+    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=75&fit=crop',
   },
   {
     icon: '🗂️',
+    tag: 'Conteúdo',
     title: 'Assistente de Conteúdo',
     desc: 'Guia alunos e professores por materiais, playlists e recursos educacionais de forma interativa e inteligente.',
     accent: '#a855f7',
+    image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&q=75&fit=crop',
   },
   {
     icon: '📊',
+    tag: 'Analytics',
     title: 'Insights e Analytics',
     desc: 'Monitore as interações para descobrir as dúvidas mais frequentes e identificar gaps de aprendizado em tempo real.',
     accent: '#f472b6',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=75&fit=crop',
   },
 ]
 
@@ -516,37 +540,60 @@ export default function RealmsPersonas() {
         <Container>
           <div ref={capRef}>
             <div className="text-center mb-16 lg:mb-20">
-              <span className="reveal section-badge mb-4 block">
-                <span className="w-5 h-px bg-current" aria-hidden="true"></span>
-                {' '}Capacidades
-              </span>
-              <h2 className="reveal delay-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-                Tudo que uma Persona pode fazer
+              <Badge>Capacidades</Badge>
+              <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
+                Tudo que uma{' '}
+                <span
+                  className="text-transparent bg-clip-text"
+                  style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)' }}
+                >
+                  Persona
+                </span>
+                {' '}pode fazer
               </h2>
+              <p className="reveal text-white/45 max-w-2xl mx-auto leading-relaxed">
+                Avatares de IA conversacional treinados com o seu conteúdo. Cada recurso foi
+                pensado para transformar a experiência educacional de alunos e professores.
+              </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {CAPABILITIES.map((cap, i) => (
                 <div
                   key={cap.title}
-                  className={`reveal delay-${(i % 6) + 1} relative bg-white/[0.03] border border-white/[0.07] rounded-2xl p-6 hover:border-white/15 transition-all duration-400 group overflow-hidden`}
+                  className={`reveal delay-${(i % 6) + 1} group relative rounded-3xl overflow-hidden cursor-pointer`}
+                  style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.05)' }}
                 >
-                  {/* Glow on hover */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
-                    style={{
-                      background: `radial-gradient(ellipse 70% 60% at 50% 0%, ${cap.accent}18 0%, transparent 70%)`,
-                    }}
-                    aria-hidden="true"
-                  />
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4 flex-shrink-0"
-                    style={{ background: `${cap.accent}20`, border: `1px solid ${cap.accent}30` }}
-                  >
-                    {cap.icon}
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img
+                      src={cap.image}
+                      alt={cap.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{ background: 'linear-gradient(to top, #0d0d0d 0%, rgba(13,13,13,0.5) 50%, rgba(0,0,0,0.3) 100%)' }}
+                    />
+                    <div
+                      className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold"
+                      style={{
+                        background: 'rgba(13,13,13,0.82)',
+                        color: cap.accent,
+                        border: `1px solid ${cap.accent}55`,
+                        backdropFilter: 'blur(12px)',
+                      }}
+                    >
+                      {cap.icon} {cap.tag}
+                    </div>
                   </div>
-                  <h3 className="text-white font-bold text-base mb-2">{cap.title}</h3>
-                  <p className="text-white/40 text-sm leading-relaxed font-light">{cap.desc}</p>
+                  <div className="p-5 relative">
+                    <h3 className="text-base font-black text-white mb-1.5">{cap.title}</h3>
+                    <p className="text-white/40 text-sm leading-relaxed">{cap.desc}</p>
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-b-3xl"
+                      style={{ boxShadow: `inset 0 0 40px ${cap.accent}18` }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -565,13 +612,20 @@ export default function RealmsPersonas() {
         <Container>
           <div ref={stepsRef}>
             <div className="text-center mb-16">
-              <span className="reveal section-badge mb-4 block">
-                <span className="w-5 h-px bg-current" aria-hidden="true"></span>
-                {' '}Como funciona
-              </span>
-              <h2 className="reveal delay-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-                Em 3 passos simples
+              <Badge>Como funciona</Badge>
+              <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
+                Em{' '}
+                <span
+                  className="text-transparent bg-clip-text"
+                  style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)' }}
+                >
+                  3 passos
+                </span>
+                {' '}simples
               </h2>
+              <p className="reveal text-white/45 max-w-xl mx-auto leading-relaxed">
+                Configure, treine e publique sua Persona em minutos. Sem código, sem complexidade.
+              </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
@@ -647,13 +701,21 @@ export default function RealmsPersonas() {
         <Container>
           <div ref={casesRef}>
             <div className="text-center mb-16">
-              <span className="reveal section-badge mb-4 block">
-                <span className="w-5 h-px bg-current" aria-hidden="true"></span>
-                {' '}Casos de uso
-              </span>
-              <h2 className="reveal delay-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-                Uma Persona para cada contexto
+              <Badge>Casos de uso</Badge>
+              <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
+                Uma{' '}
+                <span
+                  className="text-transparent bg-clip-text"
+                  style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)' }}
+                >
+                  Persona
+                </span>
+                {' '}para cada contexto
               </h2>
+              <p className="reveal text-white/45 max-w-xl mx-auto leading-relaxed">
+                Da sala de aula ao suporte institucional — as Personas se adaptam a qualquer
+                necessidade educacional.
+              </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

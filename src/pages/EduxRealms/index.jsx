@@ -779,12 +779,6 @@ export default function EduxRealms() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #06030d 0%, rgba(6,3,13,0.5) 60%, rgba(0,0,0,0.35) 100%)' }} />
-                <div
-                  className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold"
-                  style={{ background: 'rgba(10,6,30,0.82)', color: '#c4b5fd', backdropFilter: 'blur(12px)', border: '1px solid rgba(167,139,250,0.45)' }}
-                >
-                  {t('eduxrealms_page.platform_vr_label')}
-                </div>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-black text-white mb-2">{t('eduxrealms_page.platform_vr_title')}</h3>
@@ -817,12 +811,6 @@ export default function EduxRealms() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #06030d 0%, rgba(6,3,13,0.5) 60%, rgba(0,0,0,0.35) 100%)' }} />
-                <div
-                  className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold"
-                  style={{ background: 'rgba(6,12,30,0.82)', color: '#93c5fd', backdropFilter: 'blur(12px)', border: '1px solid rgba(96,165,250,0.45)' }}
-                >
-                  {t('eduxrealms_page.platform_pc_label')}
-                </div>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-black text-white mb-2">{t('eduxrealms_page.platform_pc_title')}</h3>
@@ -855,12 +843,6 @@ export default function EduxRealms() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #06030d 0%, rgba(6,3,13,0.5) 60%, rgba(0,0,0,0.35) 100%)' }} />
-                <div
-                  className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold"
-                  style={{ background: 'rgba(4,20,14,0.82)', color: '#6ee7b7', backdropFilter: 'blur(12px)', border: '1px solid rgba(52,211,153,0.45)' }}
-                >
-                  {t('eduxrealms_page.platform_mobile_label')}
-                </div>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-black text-white mb-2">{t('eduxrealms_page.platform_mobile_title')}</h3>

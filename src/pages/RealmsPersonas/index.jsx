@@ -360,7 +360,7 @@ export default function RealmsPersonas() {
               </Link>
               <Link
                 to="/contato"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm text-white/70 border border-white/15 hover:border-white/30 hover:text-white transition-all duration-300"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm text-white/70 border border-white/15 hover:bg-white hover:border-white hover:text-gray-900 transition-all duration-300"
               >
                 {t('personas_page.hero_cta_secondary')}
               </Link>
@@ -746,7 +746,7 @@ export default function RealmsPersonas() {
           aria-hidden="true"
         />
 
-        <Container>
+        <Container className="relative z-20">
           <div className="text-center max-w-2xl mx-auto">
             <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 mb-6">
               <span className="w-5 h-px bg-white/20"></span>

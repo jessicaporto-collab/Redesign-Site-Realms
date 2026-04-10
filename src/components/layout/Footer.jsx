@@ -46,7 +46,7 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-dark-950 text-white/40 border-t border-white/[0.06]">
+    <footer className="bg-dark-950 text-white/40 border-t border-white/[0.06]" data-no-cursor>
       <Container>
         <div className="py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-white/[0.06]">
           <div className="lg:col-span-2">
@@ -98,8 +98,8 @@ export default function Footer() {
         <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/25">
           <p> {year} Realms. {t('footer.rights')}</p>
           <div className="flex items-center gap-5">
-            <a href="#" className="hover:text-white/50 transition-colors">Política de Privacidade</a>
-            <a href="#" className="hover:text-white/50 transition-colors">Termos de Uso</a>
+            <a href="https://realms-static.ip.tv/realms/privacy/privacidade-pt_br.html" target="_blank" rel="noopener noreferrer" className="hover:text-white/50 transition-colors">Política de Privacidade</a>
+            <a href="https://realms-static.ip.tv/realms/terms/termos-pt_br.html" target="_blank" rel="noopener noreferrer" className="hover:text-white/50 transition-colors">Termos de Uso</a>
           </div>
         </div>
       </Container>

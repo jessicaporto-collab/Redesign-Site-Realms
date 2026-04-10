@@ -1,6 +1,9 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import Container from '../../components/ui/Container'
+import img1Persona from './assets/img1-persona.jpg'
+import img2Persona from './assets/img2-persona.png'
 
 /* ─────────────────────────────────────────────
    Mouse dust / particle effect  (canvas-based)
@@ -138,6 +141,53 @@ function useEntrance(ref) {
 }
 
 /* ─────────────────────────────────────────────
+   Full-width banner slides data
+───────────────────────────────────────────── */
+const PERSONA_SLIDES = [
+  {
+    id: 'ia',
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1600&q=80&fit=crop',
+    accent: '#60a5fa',
+    symbol: '✦',
+    title: 'Tutor que aprende\ncom o aluno',
+    subtitle: 'IA Personalizada',
+    desc: 'A persona adapta ritmo, tom e nível de cada resposta ao perfil único de quem aprende.',
+    cta: 'Conhecer Personas',
+    ctaPath: '/contato',
+  },
+  {
+    id: 'identidade',
+    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1600&q=80&fit=crop',
+    accent: '#c084fc',
+    symbol: '◈',
+    title: 'Personas com\npersonalidade própria',
+    subtitle: 'Identidade Visual',
+    desc: 'Nome, avatar e estilo totalmente personalizáveis para reforçar a marca da sua instituição.',
+    cta: 'Ver planos',
+    ctaPath: '/contato',
+  },
+  {
+    id: 'multilingue',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&q=80&fit=crop',
+    accent: '#22d3ee',
+    symbol: '◉',
+    title: 'Comunicação\nsem fronteiras',
+    subtitle: 'Multilíngue',
+    desc: 'Suporte nativo a múltiplos idiomas para cada aluno interagir no idioma em que aprende melhor.',
+    cta: 'Falar com vendas',
+    ctaPath: '/contato',
+  },
+]
+
+const BANNER_TOTAL = PERSONA_SLIDES.length
+// Clone last slide at start, first slide at end — enables seamless infinite right loop
+const LOOPED_SLIDES = [
+  PERSONA_SLIDES[BANNER_TOTAL - 1],
+  ...PERSONA_SLIDES,
+  PERSONA_SLIDES[0],
+]
+
+/* ─────────────────────────────────────────────
    Badge component
 ───────────────────────────────────────────── */
 function Badge({ children }) {
@@ -150,128 +200,89 @@ function Badge({ children }) {
 }
 
 /* ─────────────────────────────────────────────
-   Data
-───────────────────────────────────────────── */
-const CAPABILITIES = [
-  {
-    icon: '💬',
-    tag: 'Chat IA',
-    title: 'Conversa Fluida e Natural',
-    desc: 'Cada Persona mantém diálogos contextuais de forma contínua, respondendo em linguagem natural como um humano faria.',
-    accent: '#3b82f6',
-    image: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=800&q=75&fit=crop',
-  },
-  {
-    icon: '🧠',
-    tag: 'Treinamento',
-    title: 'Treinado com Seu Conteúdo',
-    desc: 'Você alimenta a Persona com materiais, apostilas e dados da sua instituição. Ela aprende e responde com sua identidade.',
-    accent: '#8b5cf6',
-    image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=75&fit=crop',
-  },
-  {
-    icon: '🎭',
-    tag: 'Customização',
-    title: 'Personalidade Customizável',
-    desc: 'Defina tom, nome, avatar e comportamento. Crie uma Persona que combine com a identidade da sua escola ou curso.',
-    accent: '#ec4899',
-    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=75&fit=crop',
-  },
-  {
-    icon: '📚',
-    tag: 'Educação',
-    title: 'Assistente de Aula',
-    desc: 'Responde dúvidas dos alunos sobre conteúdo didático a qualquer hora, aliviando a carga do professor.',
-    accent: '#6366f1',
-    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=75&fit=crop',
-  },
-  {
-    icon: '🗂️',
-    tag: 'Conteúdo',
-    title: 'Assistente de Conteúdo',
-    desc: 'Guia alunos e professores por materiais, playlists e recursos educacionais de forma interativa e inteligente.',
-    accent: '#a855f7',
-    image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&q=75&fit=crop',
-  },
-  {
-    icon: '📊',
-    tag: 'Analytics',
-    title: 'Insights e Analytics',
-    desc: 'Monitore as interações para descobrir as dúvidas mais frequentes e identificar gaps de aprendizado em tempo real.',
-    accent: '#f472b6',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=75&fit=crop',
-  },
-]
-
-const STEPS = [
-  {
-    num: '01',
-    title: 'Crie sua Persona',
-    desc: 'Defina nome, personalidade e o tipo de assistente ideal para sua necessidade.',
-    color: '#3b82f6',
-  },
-  {
-    num: '02',
-    title: 'Treine com seus dados',
-    desc: 'Faça upload de PDFs, vídeos, apostilas e conteúdos. A IA aprende do seu material.',
-    color: '#8b5cf6',
-  },
-  {
-    num: '03',
-    title: 'Publique e interaja',
-    desc: 'Disponibilize para alunos e professores. A Persona já está pronta para conversar.',
-    color: '#ec4899',
-  },
-]
-
-const USE_CASES = [
-  {
-    tag: 'Para Alunos',
-    title: 'Persona Assistente de Aula',
-    desc: 'Disponível 24/7, a Persona responde dúvidas sobre conteúdo, explica conceitos com exemplos e sugere materiais complementares — igual a ter um tutor particular sempre ao lado.',
-    points: [
-      'Tira dúvidas em linguagem natural',
-      'Explica conteúdo com analogias e exemplos',
-      'Sugere exercícios personalizados',
-      'Disponível em qualquer horário',
-    ],
-    gradient: 'from-blue-900/60 to-indigo-900/60',
-    border: 'border-blue-500/20',
-    accent: '#3b82f6',
-    emoji: '🎓',
-  },
-  {
-    tag: 'Para Educadores',
-    title: 'Persona Assistente de Conteúdo',
-    desc: 'Professores e gestores treinam a Persona com seus materiais e ela se torna uma extensão inteligente da equipe, distribuindo conteúdo e orientações de forma automática e escalável.',
-    points: [
-      'Distribui conteúdo de forma inteligente',
-      'Organiza e navega bibliotecas de materiais',
-      'Responde perguntas frequentes automaticamente',
-      'Libera o professor para aulas mais ricas',
-    ],
-    gradient: 'from-violet-900/60 to-purple-900/60',
-    border: 'border-violet-500/20',
-    accent: '#8b5cf6',
-    emoji: '🏫',
-  },
-]
-
-/* ─────────────────────────────────────────────
    Page component
 ───────────────────────────────────────────── */
 export default function RealmsPersonas() {
+  const { t } = useTranslation()
   const canvasRef = useRef(null)
+  const ctaCanvasRef = useRef(null)
   const heroRef = useRef(null)
   const capRef = useRef(null)
   const stepsRef = useRef(null)
   const casesRef = useRef(null)
+  // bannerActive: 1..BANNER_TOTAL are real slides; 0 = clone of last; BANNER_TOTAL+1 = clone of first
+  const [bannerActive, setBannerActive] = useState(1)
+  const [bannerTransition, setBannerTransition] = useState(true)
+  const bannerIntervalRef = useRef(null)
+
+  const bannerNext = useCallback(() => setBannerActive((v) => v + 1), [])
+  const bannerPrev = useCallback(() => setBannerActive((v) => v - 1), [])
+  const bannerResetInterval = useCallback(() => {
+    clearInterval(bannerIntervalRef.current)
+    bannerIntervalRef.current = setInterval(bannerNext, 6000)
+  }, [bannerNext])
+
+  useEffect(() => {
+    bannerResetInterval()
+    return () => clearInterval(bannerIntervalRef.current)
+  }, [bannerResetInterval])
+
+  // Seamless loop: after transition to a clone, silently reset to the real counterpart
+  useEffect(() => {
+    if (bannerActive === LOOPED_SLIDES.length - 1) {
+      const t = setTimeout(() => { setBannerTransition(false); setBannerActive(1) }, 630)
+      return () => clearTimeout(t)
+    }
+    if (bannerActive === 0) {
+      const t = setTimeout(() => { setBannerTransition(false); setBannerActive(BANNER_TOTAL) }, 630)
+      return () => clearTimeout(t)
+    }
+  }, [bannerActive])
+
+  // Re-enable transition one frame after the silent reset
+  useEffect(() => {
+    if (!bannerTransition) {
+      const raf = requestAnimationFrame(() => requestAnimationFrame(() => setBannerTransition(true)))
+      return () => cancelAnimationFrame(raf)
+    }
+  }, [bannerTransition])
+
+
 
   useDustCanvas(canvasRef)
+  useDustCanvas(ctaCanvasRef)
   useEntrance(heroRef)
   useReveal(capRef)
   useReveal(stepsRef)
   useReveal(casesRef)
+
+  const CAPABILITIES = [
+    { icon: '💬', tag: t('personas_page.cap_1_tag'), title: t('personas_page.cap_1_title'), desc: t('personas_page.cap_1_desc'), accent: '#3b82f6', image: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=800&q=75&fit=crop' },
+    { icon: '🧠', tag: t('personas_page.cap_2_tag'), title: t('personas_page.cap_2_title'), desc: t('personas_page.cap_2_desc'), accent: '#8b5cf6', image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=75&fit=crop' },
+    { icon: '🎭', tag: t('personas_page.cap_3_tag'), title: t('personas_page.cap_3_title'), desc: t('personas_page.cap_3_desc'), accent: '#ec4899', image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=75&fit=crop' },
+    { icon: '📚', tag: t('personas_page.cap_4_tag'), title: t('personas_page.cap_4_title'), desc: t('personas_page.cap_4_desc'), accent: '#6366f1', image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=75&fit=crop' },
+    { icon: '🗂️', tag: t('personas_page.cap_5_tag'), title: t('personas_page.cap_5_title'), desc: t('personas_page.cap_5_desc'), accent: '#a855f7', image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&q=75&fit=crop' },
+    { icon: '📊', tag: t('personas_page.cap_6_tag'), title: t('personas_page.cap_6_title'), desc: t('personas_page.cap_6_desc'), accent: '#f472b6', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=75&fit=crop' },
+  ]
+
+  const STEPS = [
+    { num: '01', title: t('personas_page.step_1_title'), desc: t('personas_page.step_1_desc'), color: '#3b82f6' },
+    { num: '02', title: t('personas_page.step_2_title'), desc: t('personas_page.step_2_desc'), color: '#8b5cf6' },
+    { num: '03', title: t('personas_page.step_3_title'), desc: t('personas_page.step_3_desc'), color: '#ec4899' },
+  ]
+
+  const USE_CASES = [
+    {
+      tag: t('personas_page.case_1_tag'), title: t('personas_page.case_1_title'), desc: t('personas_page.case_1_desc'),
+      points: [t('personas_page.case_1_pt1'), t('personas_page.case_1_pt2'), t('personas_page.case_1_pt3'), t('personas_page.case_1_pt4')],
+      gradient: 'from-blue-900/60 to-indigo-900/60', border: 'border-blue-500/20', accent: '#3b82f6', emoji: '🎓',
+    },
+    {
+      tag: t('personas_page.case_2_tag'), title: t('personas_page.case_2_title'), desc: t('personas_page.case_2_desc'),
+      points: [t('personas_page.case_2_pt1'), t('personas_page.case_2_pt2'), t('personas_page.case_2_pt3'), t('personas_page.case_2_pt4')],
+      gradient: 'from-violet-900/60 to-purple-900/60', border: 'border-violet-500/20', accent: '#8b5cf6', emoji: '🏫',
+    },
+  ]
 
   return (
     <div className="bg-[#0a0a0a] min-h-screen">
@@ -321,49 +332,43 @@ export default function RealmsPersonas() {
           <div className="max-w-4xl">
             <p className="hero-item flex items-center gap-3 text-white/40 text-[11px] font-semibold uppercase tracking-[0.25em] mb-7">
               <span className="w-8 h-px bg-white/30" aria-hidden="true"></span>
-              {' '}Realms Products
+              {' '}{t('personas_page.hero_badge')}
             </p>
 
             <h1 className="hero-item text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[0.92] tracking-tight mb-6">
-              Realms
+              {t('personas_page.hero_h1_1')}
               <br />
               <span
                 className="text-transparent bg-clip-text"
-                style={{
-                  backgroundImage:
-                    'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 40%, #ec4899 80%)',
-                }}
+                style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 40%, #ec4899 80%)' }}
               >
-                Personas
+                {t('personas_page.hero_h1_2')}
               </span>
             </h1>
 
             <p className="hero-item text-lg sm:text-xl text-white/55 font-light leading-relaxed mb-10 max-w-xl">
-              Avatares de IA conversacional que você treina com seu próprio conteúdo.
-              Assistentes inteligentes prontos para dialogar com alunos, professores e equipes.
+              {t('personas_page.hero_desc')}
             </p>
 
             <div className="hero-item flex flex-wrap gap-4">
               <Link
                 to="/contato"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm text-white transition-all duration-300 hover:scale-105 hover:brightness-110"
-                style={{
-                  background: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)',
-                }}
+                style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)' }}
               >
-                Criar minha Persona →
+                {t('personas_page.hero_cta_primary')}
               </Link>
               <Link
                 to="/contato"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm text-white/70 border border-white/15 hover:border-white/30 hover:text-white transition-all duration-300"
               >
-                Solicitar Demo
+                {t('personas_page.hero_cta_secondary')}
               </Link>
             </div>
 
             {/* Floating tags */}
             <div className="hero-item flex flex-wrap gap-3 mt-12">
-              {['IA Conversacional', 'Treinável', 'Assistente de Aula', 'Multi-idioma', 'Customizável'].map(
+              {[t('personas_page.hero_tag1'), t('personas_page.hero_tag2'), t('personas_page.hero_tag3'), t('personas_page.hero_tag4'), t('personas_page.hero_tag5')].map(
                 (tag) => (
                   <span
                     key={tag}
@@ -376,126 +381,6 @@ export default function RealmsPersonas() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* ══════════════════════════════════════
-          INTRO — O QUE SÃO PERSONAS
-      ══════════════════════════════════════ */}
-      <section className="bg-[#0a0a0a] py-24 lg:py-32 relative overflow-hidden">
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-white/8 to-transparent"
-          aria-hidden="true"
-        />
-        {/* Glow blob */}
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            width: '600px',
-            height: '600px',
-            right: '-100px',
-            top: '-100px',
-            background:
-              'radial-gradient(ellipse 60% 60% at 70% 30%, rgba(139,92,246,0.12) 0%, transparent 70%)',
-          }}
-          aria-hidden="true"
-        />
-
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            {/* Left */}
-            <div ref={capRef}>
-              <span className="reveal section-badge mb-6 block">
-                <span className="w-5 h-px bg-current" aria-hidden="true"></span>
-                {' '}Conversação inteligente
-              </span>
-              <h2 className="reveal delay-2 text-4xl sm:text-5xl font-extrabold text-white leading-[1.06] mb-6 tracking-tight">
-                Avatares que conversam,{' '}
-                <span
-                  className="text-transparent bg-clip-text"
-                  style={{
-                    backgroundImage: 'linear-gradient(135deg, #8b5cf6, #ec4899)',
-                  }}
-                >
-                  aprendem
-                </span>{' '}
-                e evoluem
-              </h2>
-              <p className="reveal delay-3 text-white/45 text-base leading-relaxed mb-5 font-light">
-                Realms Personas são assistentes de IA conversacional com personalidade própria. Cada Persona pode ser treinada com o conteúdo da sua instituição — apostilas, vídeos, documentos e materiais de aula — e passa a responder perguntas como um especialista humano.
-              </p>
-              <p className="reveal delay-4 text-white/45 text-base leading-relaxed mb-10 font-light">
-                Diferente de chatbots genéricos, as Personas carregam sua identidade, seu contexto e sua pedagogia. O resultado: conversas fluidas, respostas precisas e alunos mais engajados em qualquer hora do dia.
-              </p>
-              <div className="reveal delay-5 flex flex-wrap gap-4">
-                <Link
-                  to="/contato"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm text-white border border-white/15 hover:border-white/30 hover:text-white transition-all duration-300"
-                >
-                  Saiba mais →
-                </Link>
-              </div>
-            </div>
-
-            {/* Right — avatar visual */}
-            <div className="relative flex items-center justify-center">
-              <div
-                className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full flex items-center justify-center"
-                style={{
-                  background:
-                    'radial-gradient(ellipse at center, rgba(139,92,246,0.25) 0%, rgba(59,130,246,0.1) 50%, transparent 70%)',
-                  boxShadow: '0 0 80px 20px rgba(139,92,246,0.15)',
-                }}
-              >
-                {/* Orbit ring 1 */}
-                <div
-                  className="absolute inset-4 rounded-full border border-white/[0.07]"
-                  style={{ animation: 'spin 14s linear infinite' }}
-                  aria-hidden="true"
-                />
-                {/* Orbit ring 2 */}
-                <div
-                  className="absolute inset-12 rounded-full border border-white/[0.05]"
-                  style={{ animation: 'spin 22s linear infinite reverse' }}
-                  aria-hidden="true"
-                />
-
-                {/* Center avatar */}
-                <div
-                  className="relative z-10 w-32 h-32 rounded-full flex items-center justify-center text-6xl select-none"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(99,60,255,0.3), rgba(236,72,153,0.3))',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    boxShadow: '0 0 40px rgba(139,92,246,0.3)',
-                  }}
-                >
-                  🤖
-                </div>
-
-                {/* Floating chat bubble 1 */}
-                <div
-                  className="absolute -right-4 top-12 bg-[#111] border border-white/10 rounded-2xl rounded-tl-none px-4 py-3 max-w-[180px]"
-                  style={{ animation: 'floatY 4s ease-in-out infinite' }}
-                  aria-hidden="true"
-                >
-                  <p className="text-[11px] text-white/60 leading-relaxed">
-                    "Explique fotossíntese para mim de forma simples."
-                  </p>
-                </div>
-
-                {/* Floating chat bubble 2 */}
-                <div
-                  className="absolute -left-4 bottom-16 bg-[#111] border border-violet-500/20 rounded-2xl rounded-tr-none px-4 py-3 max-w-[180px]"
-                  style={{ animation: 'floatY 5s ease-in-out infinite 1s' }}
-                  aria-hidden="true"
-                >
-                  <p className="text-[11px] text-violet-300/80 leading-relaxed">
-                    "Claro! Fotossíntese é o processo pelo qual plantas convertem luz solar em energia..."
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
       </section>
 
       {/* ══════════════════════════════════════
@@ -540,20 +425,19 @@ export default function RealmsPersonas() {
         <Container>
           <div ref={capRef}>
             <div className="text-center mb-16 lg:mb-20">
-              <Badge>Capacidades</Badge>
+              <Badge>{t('personas_page.capabilities_badge')}</Badge>
               <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
-                Tudo que uma{' '}
+                {t('personas_page.capabilities_h2_1')}{' '}
                 <span
                   className="text-transparent bg-clip-text"
                   style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)' }}
                 >
-                  Persona
+                  {t('personas_page.capabilities_h2_2')}
                 </span>
-                {' '}pode fazer
+                {' '}{t('personas_page.capabilities_h2_3')}
               </h2>
               <p className="reveal text-white/45 max-w-2xl mx-auto leading-relaxed">
-                Avatares de IA conversacional treinados com o seu conteúdo. Cada recurso foi
-                pensado para transformar a experiência educacional de alunos e professores.
+                {t('personas_page.capabilities_desc')}
               </p>
             </div>
 
@@ -612,19 +496,19 @@ export default function RealmsPersonas() {
         <Container>
           <div ref={stepsRef}>
             <div className="text-center mb-16">
-              <Badge>Como funciona</Badge>
+              <Badge>{t('personas_page.how_badge')}</Badge>
               <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
-                Em{' '}
+                {t('personas_page.how_h2_1')}{' '}
                 <span
                   className="text-transparent bg-clip-text"
                   style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)' }}
                 >
-                  3 passos
+                  {t('personas_page.how_h2_2')}
                 </span>
-                {' '}simples
+                {' '}{t('personas_page.how_h2_3')}
               </h2>
               <p className="reveal text-white/45 max-w-xl mx-auto leading-relaxed">
-                Configure, treine e publique sua Persona em minutos. Sem código, sem complexidade.
+                {t('personas_page.how_desc')}
               </p>
             </div>
 
@@ -669,118 +553,185 @@ export default function RealmsPersonas() {
       </section>
 
       {/* ══════════════════════════════════════
-          USE CASES
+          CARDS – FALE COM O PERSONA
       ══════════════════════════════════════ */}
-      <section className="bg-[#0d0d0d] py-24 lg:py-32 relative overflow-hidden">
-        {/* Gradient blobs */}
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            width: '800px',
-            height: '800px',
-            left: '-200px',
-            top: 0,
-            background:
-              'radial-gradient(ellipse 50% 50% at 20% 50%, rgba(59,130,246,0.1) 0%, transparent 70%)',
-          }}
-          aria-hidden="true"
-        />
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            width: '800px',
-            height: '800px',
-            right: '-200px',
-            bottom: 0,
-            background:
-              'radial-gradient(ellipse 50% 50% at 80% 50%, rgba(139,92,246,0.1) 0%, transparent 70%)',
-          }}
-          aria-hidden="true"
-        />
-
-        <Container>
-          <div ref={casesRef}>
-            <div className="text-center mb-16">
-              <Badge>Casos de uso</Badge>
-              <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
-                Uma{' '}
-                <span
-                  className="text-transparent bg-clip-text"
-                  style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)' }}
-                >
-                  Persona
-                </span>
-                {' '}para cada contexto
-              </h2>
-              <p className="reveal text-white/45 max-w-xl mx-auto leading-relaxed">
-                Da sala de aula ao suporte institucional — as Personas se adaptam a qualquer
-                necessidade educacional.
-              </p>
+      <section className="bg-[#0a0a0a] py-6">
+        <div ref={casesRef} className="px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {/* Card 1 – Fale com o Persona */}
+            <div className="reveal delay-2 group rounded-3xl overflow-hidden bg-white/5 transition-colors duration-300">
+              <div className="overflow-hidden rounded-t-3xl">
+                <img
+                  src={img1Persona}
+                  alt="Fale com o Persona"
+                  className="w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="px-8 py-7">
+                <h3 className="text-white font-extrabold text-2xl mb-2">
+                  {t('personas_page.card_talk_title')}
+                </h3>
+                <p className="text-white/45 text-sm leading-relaxed font-light">
+                  {t('personas_page.card_talk_desc')}
+                </p>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {USE_CASES.map((uc, i) => (
-                <div
-                  key={uc.title}
-                  className={`reveal delay-${i + 2} relative rounded-3xl p-8 lg:p-10 overflow-hidden border ${uc.border}`}
-                  style={{
-                    background: `linear-gradient(135deg, rgba(13,13,13,0.9), rgba(13,13,13,0.95))`,
-                  }}
-                >
-                  {/* Bg gradient overlay */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${uc.gradient} pointer-events-none`}
-                    aria-hidden="true"
-                  />
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-6">
-                      <span className="text-4xl">{uc.emoji}</span>
-                      <span
-                        className="px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider"
-                        style={{
-                          background: `${uc.accent}20`,
-                          color: uc.accent,
-                          border: `1px solid ${uc.accent}30`,
-                        }}
-                      >
-                        {uc.tag}
-                      </span>
-                    </div>
-                    <h3 className="text-white font-extrabold text-2xl mb-4">{uc.title}</h3>
-                    <p className="text-white/45 text-sm leading-relaxed mb-7 font-light">{uc.desc}</p>
-                    <ul className="space-y-3">
-                      {uc.points.map((pt) => (
-                        <li key={pt} className="flex items-start gap-3">
-                          <div
-                            className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                            style={{ background: `${uc.accent}25`, border: `1px solid ${uc.accent}40` }}
-                          >
-                            <svg
-                              className="w-2.5 h-2.5"
-                              fill="none"
-                              stroke={uc.accent}
-                              strokeWidth="3"
-                              viewBox="0 0 12 12"
-                            >
-                              <polyline points="1.5,6 4.5,9 10.5,3" />
-                            </svg>
-                          </div>
-                          <span className="text-white/60 text-sm font-light">{pt}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
+            {/* Card 2 – Use onde quiser */}
+            <div className="reveal delay-3 group rounded-3xl overflow-hidden bg-white/5 transition-colors duration-300">
+              <div className="overflow-hidden rounded-t-3xl">
+                <img
+                  src={img2Persona}
+                  alt="Use onde quiser"
+                  className="w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="px-8 py-7">
+                <h3 className="text-white font-extrabold text-2xl mb-2">
+                  {t('personas_page.card_anywhere_title')}
+                </h3>
+                <p className="text-white/45 text-sm leading-relaxed font-light">
+                  {t('personas_page.card_anywhere_desc')}
+                </p>
+              </div>
             </div>
           </div>
-        </Container>
+        </div>
       </section>
+
+      {/* ══════════════════════════════════════
+          FULL-WIDTH BANNER CAROUSEL
+      ══════════════════════════════════════ */}
+      <section className="bg-[#0a0a0a] relative overflow-hidden" style={{ height: '520px' }}>
+        {/* Sliding track */}
+        <div
+          style={{
+            display: 'flex',
+            height: '100%',
+            gap: '12px',
+            transform: `translateX(calc(7.5vw - ${bannerActive} * (85vw + 12px)))`,
+            transition: bannerTransition ? 'transform 600ms cubic-bezier(0.25, 1, 0.5, 1)' : 'none',
+            willChange: 'transform',
+          }}
+        >
+          {LOOPED_SLIDES.map((slide, i) => (
+            <div
+              key={`${slide.id}-${i}`}
+              className="flex-shrink-0 relative overflow-hidden"
+              style={{
+                width: '85vw',
+                height: '100%',
+                borderRadius: '16px',
+                opacity: i === bannerActive ? 1 : 0.45,
+                cursor: i === bannerActive ? 'default' : 'pointer',
+                transition: 'opacity 600ms ease',
+              }}
+            >
+              {/* Background image */}
+              <img
+                src={slide.image}
+                alt={slide.subtitle}
+                className="absolute inset-0 w-full h-full object-cover object-center"
+              />
+              {/* Solid dark overlay for legibility */}
+              <div className="absolute inset-0 bg-black/50" />
+
+              {/* Content */}
+              <div className="relative z-10 h-full flex flex-col justify-end pb-12 px-10 lg:px-14">
+                {/* Symbol */}
+                <span className="text-2xl mb-4 font-bold" style={{ color: slide.accent }} aria-hidden="true">
+                  {slide.symbol}
+                </span>
+                {/* Subtitle tag */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full border"
+                    style={{ color: slide.accent, borderColor: `${slide.accent}35`, background: `${slide.accent}12` }}
+                  >
+                    {slide.subtitle}
+                  </span>
+                </div>
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.0] tracking-tight mb-3 max-w-2xl">
+                  {slide.title.split('\n').map((line) => (
+                    <span key={line}>{line}<br /></span>
+                  ))}
+                </h2>
+                <p className="text-white/50 text-base leading-relaxed mb-8 max-w-lg font-light">
+                  {slide.desc}
+                </p>
+
+                {/* CTA + indicators — só no slide ativo */}
+                {i === bannerActive && (
+                  <div className="flex items-center gap-6 flex-wrap">
+                    <Link
+                      to={slide.ctaPath}
+                      className="inline-flex items-center gap-2 text-white text-sm font-semibold border border-white/30 rounded-full px-6 py-3 hover:bg-white hover:text-gray-900 transition-all duration-200"
+                    >
+                      {slide.cta}
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </Link>
+                    <div className="flex gap-2" role="tablist" aria-label="Banner carousel">
+                      {PERSONA_SLIDES.map((s, di) => (
+                        <button
+                          key={s.id}
+                          role="tab"
+                          aria-selected={di === (bannerActive - 1 + BANNER_TOTAL) % BANNER_TOTAL}
+                          onClick={() => { setBannerActive(di + 1); bannerResetInterval() }}
+                          className="rounded-full transition-all duration-300"
+                          style={{
+                            width: di === (bannerActive - 1 + BANNER_TOTAL) % BANNER_TOTAL ? '24px' : '6px',
+                            height: '6px',
+                            background: di === (bannerActive - 1 + BANNER_TOTAL) % BANNER_TOTAL ? '#fff' : 'rgba(255,255,255,0.35)',
+                            border: 'none',
+                            padding: 0,
+                            cursor: 'pointer',
+                          }}
+                          aria-label={`Slide ${di + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Prev arrow */}
+        <button
+          onClick={() => { bannerPrev(); bannerResetInterval() }}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-black/70 transition-all"
+          aria-label="Slide anterior"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        {/* Next arrow */}
+        <button
+          onClick={() => { bannerNext(); bannerResetInterval() }}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-black/70 transition-all"
+          aria-label="Próximo slide"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </section>
+
+
 
       {/* ══════════════════════════════════════
           CTA
       ══════════════════════════════════════ */}
       <section className="bg-[#0a0a0a] py-24 lg:py-32 relative overflow-hidden">
+        {/* Mouse dust canvas */}
+        <canvas
+          ref={ctaCanvasRef}
+          className="absolute inset-0 w-full h-full pointer-events-none z-10"
+        />
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-px bg-gradient-to-r from-transparent via-white/8 to-transparent"
           aria-hidden="true"
@@ -799,37 +750,20 @@ export default function RealmsPersonas() {
           <div className="text-center max-w-2xl mx-auto">
             <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 mb-6">
               <span className="w-5 h-px bg-white/20"></span>
-              {' '}Comece agora
+              {' '}{t('personas_page.cta_badge')}
             </span>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tight">
-              Sua Persona está a{' '}
-              <span
-                className="text-transparent bg-clip-text"
-                style={{
-                  backgroundImage: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)',
-                }}
-              >
-                um clique
-              </span>
+              {t('personas_page.cta_h2')}
             </h2>
             <p className="text-white/40 text-lg mb-10 font-light leading-relaxed">
-              Junte-se a milhares de instituições que já usam Realms Personas para transformar a experiência de aprendizado.
+              {t('personas_page.cta_desc')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 to="/contato"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm text-white transition-all duration-300 hover:scale-105 hover:brightness-110"
-                style={{
-                  background: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)',
-                }}
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm text-white border border-white/25 hover:bg-white hover:text-gray-900 transition-all duration-300"
               >
-                Criar minha Persona gratuitamente →
-              </Link>
-              <Link
-                to="/contato"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm text-white/60 border border-white/12 hover:border-white/25 hover:text-white transition-all duration-300"
-              >
-                Falar com especialista
+                {t('personas_page.cta_secondary')}
               </Link>
             </div>
           </div>

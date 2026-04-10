@@ -23,6 +23,67 @@ function useReveal(ref) {
   }, [])
 }
 
+function useParticles(containerId) {
+  useEffect(() => {
+    const PARTICLES_CONFIG = {
+      particles: {
+        number: { value: 160, density: { enable: true, value_area: 800 } },
+        color: { value: '#ffffff' },
+        shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+        opacity: { value: 0.42, random: true, anim: { enable: true, speed: 0.9, opacity_min: 0, sync: false } },
+        size: { value: 3, random: true, anim: { enable: false, speed: 4, size_min: 0.3, sync: false } },
+        line_linked: { enable: false },
+        move: { enable: true, speed: 1, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false },
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: { enable: true, mode: 'bubble' },
+          onclick: { enable: true, mode: 'repulse' },
+          resize: true,
+        },
+        modes: {
+          bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+          repulse: { distance: 400, duration: 0.4 },
+        },
+      },
+      retina_detect: true,
+    }
+
+    const destroyByContainerId = () => {
+      if (!globalThis.pJSDom || globalThis.pJSDom.length === 0) return
+      globalThis.pJSDom = globalThis.pJSDom.filter((dom) => {
+        const parentId = dom?.pJS?.canvas?.el?.parentElement?.id
+        if (parentId === containerId) {
+          dom.pJS.fn.vendors.destroypJS()
+          return false
+        }
+        return true
+      })
+    }
+
+    const init = () => {
+      if (globalThis.particlesJS) {
+        destroyByContainerId()
+        globalThis.particlesJS(containerId, PARTICLES_CONFIG)
+      }
+    }
+
+    if (globalThis.particlesJS) {
+      init()
+      return () => destroyByContainerId()
+    }
+
+    const script = document.createElement('script')
+    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'
+    script.async = true
+    script.onload = init
+    document.body.appendChild(script)
+
+    return () => destroyByContainerId()
+  }, [containerId])
+}
+
 // ─────────────────────────────────────────────────────────────────
 //  Tech Particles Background (canvas)
 // ─────────────────────────────────────────────────────────────────
@@ -243,38 +304,29 @@ function HeroSection() {
         ref={contentRef}
         className="relative z-10 w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-24"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-14 lg:gap-20 items-center">
-          {/* Left: text */}
-          <div className="max-w-3xl">
-            <p className="hero-item flex items-center gap-3 text-white/40 text-[11px] font-semibold uppercase tracking-[0.25em] mb-7">
+        <div className="flex flex-col items-center gap-12 lg:gap-14">
+          {/* Text */}
+          <div className="max-w-3xl text-center">
+            <p className="hero-item flex justify-center items-center gap-3 text-white/40 text-[11px] font-semibold uppercase tracking-[0.25em] mb-7">
               <span className="w-8 h-px bg-white/35" aria-hidden="true" />
               {t('about_page.hero_tagline')}
+              <span className="w-8 h-px bg-white/35" aria-hidden="true" />
             </p>
 
             <h1 className="hero-item text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[0.92] tracking-tight mb-6">
-              {t('about_page.hero_line1')}
-              <br />
+              {t('about_page.hero_line1')}{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400">
                 {t('about_page.hero_line2')}
               </span>
             </h1>
 
-            <p className="hero-item text-base sm:text-lg text-white/45 leading-relaxed max-w-2xl mb-10 font-light">
+            <p className="hero-item text-base sm:text-lg text-white/45 leading-relaxed max-w-2xl mx-auto mb-2 font-light">
               {t('about_page.hero_description')}
             </p>
-
-            <div className="hero-item flex flex-wrap gap-4">
-              <Button to="/contato" size="lg" variant="primary">
-                {t('about_page.hero_cta_contact')}
-              </Button>
-              <Button to="/" size="lg" variant="outline-white">
-                {t('about_page.hero_cta_products')}
-              </Button>
-            </div>
           </div>
 
-          {/* Right: metrics */}
-          <div className="hero-item hidden lg:grid grid-cols-2 gap-4 min-w-[340px]">
+          {/* Metrics */}
+          <div className="hero-item w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { value: 20,  suffix: '+',  label: t('about.years') },
               { value: 9,   suffix: 'M+', label: t('about.students') },
@@ -283,12 +335,12 @@ function HeroSection() {
             ].map(({ value, suffix, label }) => (
               <div
                 key={label}
-                className="card-dark p-6 text-center hover:-translate-y-0.5 transition-transform duration-300"
+                className="about-metric-card p-6 text-center hover:-translate-y-1"
               >
-                <div className="text-3xl font-extrabold text-white tabular-nums leading-none mb-2">
+                <div className="text-3xl font-extrabold text-white tabular-nums leading-none mb-2 drop-shadow-[0_2px_12px_rgba(56,189,248,0.2)]">
                   <AnimatedCounter to={value} suffix={suffix} duration={1800} />
                 </div>
-                <p className="text-xs text-white/35 font-light leading-snug">{label}</p>
+                <p className="text-xs text-slate-200/80 font-light leading-snug">{label}</p>
               </div>
             ))}
           </div>
@@ -398,7 +450,9 @@ const MILESTONES = [
 function TimelineSection() {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
+  const particlesId = 'about-timeline-particles'
   useReveal(sectionRef)
+  useParticles(particlesId)
 
   return (
     <section id="timeline" className="py-24 lg:py-32 relative overflow-hidden" style={{ background: '#0d0d0d' }}>
@@ -414,15 +468,36 @@ function TimelineSection() {
         aria-hidden="true"
       />
       <div
+        className="absolute -top-20 left-1/2 -translate-x-1/2 w-[900px] h-[260px] rounded-full blur-3xl pointer-events-none stats-blob-1"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(96,165,250,0.20) 0%, rgba(96,165,250,0) 70%)' }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute top-32 -left-28 w-[360px] h-[360px] rounded-full blur-[110px] pointer-events-none stats-blob-2"
+        style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.16) 0%, rgba(56,189,248,0) 70%)' }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute bottom-16 -right-24 w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none stats-blob-3"
+        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(59,130,246,0) 72%)' }}
+        aria-hidden="true"
+      />
+      <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'radial-gradient(circle, rgba(96,165,250,0.35) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-          opacity: 0.06,
+          backgroundImage: 'radial-gradient(circle, rgba(96,165,250,0.42) 1px, transparent 1px)',
+          backgroundSize: '56px 56px',
+          opacity: 0.11,
         }}
         aria-hidden="true"
       />
-      <Container>
+      <div
+        id={particlesId}
+        className="absolute inset-0 pointer-events-none"
+        style={{ zIndex: 0, opacity: 0.62 }}
+        aria-hidden="true"
+      />
+      <Container className="relative z-10">
         <div ref={sectionRef}>
           <div className="text-center mb-16">
             <span className="reveal section-badge mb-4 block">
@@ -441,12 +516,12 @@ function TimelineSection() {
           <div className="relative max-w-4xl mx-auto">
             {/* Vertical line */}
             <div
-              className="absolute left-4 lg:left-1/2 lg:-translate-x-1/2 top-0 bottom-0 w-px"
+              className="absolute z-10 left-4 lg:left-1/2 lg:-translate-x-1/2 top-0 bottom-0 w-px"
               style={{ background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.25) 8%, rgba(255,255,255,0.25) 92%, transparent 100%)' }}
               aria-hidden="true"
             />
 
-            <div className="space-y-8">
+            <div className="relative z-10 space-y-8">
               {MILESTONES.map((m, i) => (
                 <div
                   key={m.year}
@@ -685,7 +760,7 @@ function CTAFinalSection() {
           </span>
           <h2 className="reveal delay-2 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.0] tracking-tight mb-6">
             {t('about_page.cta_line1')}
-            <br />
+            {' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400">
               {t('about_page.cta_line2')}
             </span>
@@ -693,12 +768,9 @@ function CTAFinalSection() {
           <p className="reveal delay-3 text-white/40 text-lg leading-relaxed mb-10 font-light">
             {t('about_page.cta_sub')}
           </p>
-          <div className="reveal delay-4 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button to="/contato" size="lg" variant="primary">
+          <div className="reveal delay-4 flex justify-center">
+            <Button to="/contato" size="lg" variant="outline-white">
               {t('about_page.cta_contact')}
-            </Button>
-            <Button to="/" size="lg" variant="outline-white">
-              {t('about_page.cta_home')}
             </Button>
           </div>
         </div>
@@ -717,7 +789,6 @@ export default function SobreNos() {
       <MissionSection />
       <TimelineSection />
       <ValuesSection />
-      <TeamSection />
       <CTAFinalSection />
     </>
   )

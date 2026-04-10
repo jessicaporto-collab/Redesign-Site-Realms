@@ -4,12 +4,12 @@ import AnimatedCounter from '../../../components/ui/AnimatedCounter'
 import Container from '../../../components/ui/Container'
 
 const STATS = [
-  { to: 10000, suffix: '+',  labelKey: 'stats.classrooms_label', display: '10.000' },
-  { to: 98,    suffix: 'M+', labelKey: 'stats.tasks_label' },
-  { to: 400,   suffix: 'K+', labelKey: 'stats.users_label' },
-  { to: 9,     suffix: 'M+', labelKey: 'stats.students_label' },
-  { to: 350,   suffix: 'K+', labelKey: 'stats.teachers_label' },
-  { to: 14,    suffix: 'M+', labelKey: 'stats.exams_label' },
+  { to: 10000, prefix: '+', suffix: '',  labelKey: 'stats.classrooms_label', display: '10.000' },
+  { to: 98,    prefix: '+', suffix: 'M', labelKey: 'stats.tasks_label' },
+  { to: 400,   prefix: '+', suffix: 'K', labelKey: 'stats.users_label' },
+  { to: 9,     prefix: '+', suffix: 'M', labelKey: 'stats.students_label' },
+  { to: 350,   prefix: '+', suffix: 'K', labelKey: 'stats.teachers_label' },
+  { to: 14,    prefix: '+', suffix: 'M', labelKey: 'stats.exams_label' },
 ]
 
 function useReveal(ref) {
@@ -107,7 +107,7 @@ export default function StatsSection() {
                 className={`reveal delay-${Math.min(i + 1, 6)} bg-[#0d0d0d] hover:bg-[#131313] transition-colors duration-300 p-8 lg:p-10 text-center group cursor-default`}
               >
                 <div className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-white mb-2 tabular-nums leading-none group-hover:text-blue-300 transition-colors duration-300">
-                  <AnimatedCounter to={stat.to} suffix={stat.suffix} duration={2000} />
+                  <AnimatedCounter to={stat.to} prefix={stat.prefix} suffix={stat.suffix} duration={2000} />
                 </div>
                 <p className="text-xs sm:text-sm text-white/35 font-light leading-snug">
                   {t(stat.labelKey)}

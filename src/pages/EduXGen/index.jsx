@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import Button from '../../components/ui/Button'
 import Container from '../../components/ui/Container'
 import AnimatedCounter from '../../components/ui/AnimatedCounter'
@@ -25,6 +26,7 @@ function useReveal(ref) {
 
 // ── Hero ───────────────────────────────────────────────────────────────────
 function HeroSection() {
+  const { t } = useTranslation()
   const parallaxRef = useRef(null)
   const contentRef = useRef(null)
 
@@ -98,46 +100,45 @@ function HeroSection() {
           <div>
             <p className="hero-item flex items-center gap-3 text-white/40 text-[11px] font-semibold uppercase tracking-[0.25em] mb-7">
               <span className="w-8 h-px bg-white/30" aria-hidden="true" />
-              Realms Products
+              {t('eduxgen_page.hero_badge')}
             </p>
 
             <div className="hero-item flex items-center gap-4 mb-6">
               <div className="w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/20 flex items-center justify-center text-3xl">
                 🤖
               </div>
-              <span className="text-blue-400/80 text-sm font-semibold tracking-wide">EduXGen.ai</span>
+              <span className="text-blue-400/80 text-sm font-semibold tracking-wide">{t('eduxgen_page.hero_product')}</span>
             </div>
 
             <h1 className="hero-item text-5xl sm:text-6xl lg:text-[4.25rem] font-extrabold text-white leading-[0.95] tracking-tight mb-6">
-              Crie aulas,
+              {t('eduxgen_page.hero_h1_1')}
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-violet-400">
-                tarefas e provas
+                {t('eduxgen_page.hero_h1_2')}
               </span>
               <br />
-              com IA
+              {t('eduxgen_page.hero_h1_3')}
             </h1>
 
             <p className="hero-item text-white/45 text-lg leading-relaxed max-w-xl mb-10 font-light">
-              A plataforma que transforma sua ideia em conteúdo educacional completo em segundos — para
-              qualquer nível de ensino, disciplina e objetivo pedagógico.
+              {t('eduxgen_page.hero_desc')}
             </p>
 
             <div className="hero-item flex flex-wrap gap-4">
               <Button to="/contato" size="lg" variant="primary">
-                Começar Grátis
+                {t('eduxgen_page.hero_cta_primary')}
               </Button>
               <Button to="/contato" size="lg" variant="outline-white">
-                Ver Demo
+                {t('eduxgen_page.hero_cta_secondary')}
               </Button>
             </div>
 
             {/* Quick stats */}
             <div className="hero-item flex flex-wrap gap-8 mt-12 pt-8 border-t border-white/[0.07]">
               {[
-                { value: '2M+', label: 'conteúdos gerados' },
-                { value: '50K+', label: 'educadores ativos' },
-                { value: '< 5s', label: 'por plano de aula' },
+                { value: t('eduxgen_page.hero_stat1_value'), label: t('eduxgen_page.hero_stat1_label') },
+                { value: t('eduxgen_page.hero_stat2_value'), label: t('eduxgen_page.hero_stat2_label') },
+                { value: t('eduxgen_page.hero_stat3_value'), label: t('eduxgen_page.hero_stat3_label') },
               ].map(({ value, label }) => (
                 <div key={label}>
                   <p className="text-white text-xl font-extrabold leading-none">{value}</p>
@@ -170,7 +171,7 @@ function HeroSection() {
                     className="w-2 h-2 rounded-full bg-green-400"
                     style={{ animation: 'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite' }}
                   />
-                  <span className="text-green-400/70 text-xs font-mono">IA gerando conteúdo…</span>
+                  <span className="text-green-400/70 text-xs font-mono">{t('eduxgen_page.hero_ai_status')}</span>
                 </div>
                 <div className="space-y-2">
                   {[
@@ -193,11 +194,11 @@ function HeroSection() {
 
             {/* Floating badges */}
             <div className="absolute -top-4 -right-4 bg-violet-600 rounded-2xl px-4 py-2 shadow-2xl">
-              <p className="text-white text-xs font-bold">AI-Powered</p>
+              <p className="text-white text-xs font-bold">{t('eduxgen_page.hero_chip1')}</p>
             </div>
             <div className="absolute -bottom-5 -left-4 bg-[#111] border border-white/10 rounded-2xl px-4 py-3 shadow-2xl">
-              <p className="text-white text-sm font-extrabold">5 segundos</p>
-              <p className="text-white/35 text-xs font-light">para uma aula completa</p>
+              <p className="text-white text-sm font-extrabold">{t('eduxgen_page.hero_chip2_seconds')}</p>
+              <p className="text-white/35 text-xs font-light">{t('eduxgen_page.hero_chip2_label')}</p>
             </div>
           </div>
         </div>
@@ -210,48 +211,19 @@ function HeroSection() {
 }
 
 // ── Features ───────────────────────────────────────────────────────────────
-const FEATURES = [
-  {
-    icon: '📚',
-    title: 'Planos de Aula',
-    desc: 'Gere planos completos com objetivos, metodologia, recursos e avaliação alinhados à BNCC em segundos.',
-    accent: 'border-blue-500/20 bg-blue-600/10 text-blue-400',
-  },
-  {
-    icon: '📝',
-    title: 'Banco de Questões',
-    desc: 'Crie exercícios, questões dissertativas e de múltipla escolha em qualquer nível de dificuldade.',
-    accent: 'border-violet-500/20 bg-violet-600/10 text-violet-400',
-  },
-  {
-    icon: '✅',
-    title: 'Avaliações & Simulados',
-    desc: 'Provas personalizadas com gabarito automático, rubrica de correção e análise de desempenho.',
-    accent: 'border-emerald-500/20 bg-emerald-600/10 text-emerald-400',
-  },
-  {
-    icon: '🎯',
-    title: 'Tarefas & Atividades',
-    desc: 'Atividades de fixação, projetos e desafios adaptados ao perfil e ao ritmo da turma.',
-    accent: 'border-amber-500/20 bg-amber-600/10 text-amber-400',
-  },
-  {
-    icon: '📊',
-    title: 'Planos de Estudo',
-    desc: 'Cronogramas personalizados baseados em objetivos pedagógicos, prazos e lacunas de aprendizado.',
-    accent: 'border-sky-500/20 bg-sky-600/10 text-sky-400',
-  },
-  {
-    icon: '🌐',
-    title: 'Multilíngue',
-    desc: 'Conteúdo gerado em português, inglês e espanhol com adaptações culturais automáticas.',
-    accent: 'border-indigo-500/20 bg-indigo-600/10 text-indigo-400',
-  },
-]
-
 function FeaturesSection() {
   const sectionRef = useRef(null)
+  const { t } = useTranslation()
   useReveal(sectionRef)
+
+  const FEATURES = [
+    { icon: '📚', title: t('eduxgen_page.feature_1_title'), desc: t('eduxgen_page.feature_1_desc'), accent: 'border-blue-500/20 bg-blue-600/10 text-blue-400' },
+    { icon: '📝', title: t('eduxgen_page.feature_2_title'), desc: t('eduxgen_page.feature_2_desc'), accent: 'border-violet-500/20 bg-violet-600/10 text-violet-400' },
+    { icon: '✅', title: t('eduxgen_page.feature_3_title'), desc: t('eduxgen_page.feature_3_desc'), accent: 'border-emerald-500/20 bg-emerald-600/10 text-emerald-400' },
+    { icon: '🎯', title: t('eduxgen_page.feature_4_title'), desc: t('eduxgen_page.feature_4_desc'), accent: 'border-amber-500/20 bg-amber-600/10 text-amber-400' },
+    { icon: '📊', title: t('eduxgen_page.feature_5_title'), desc: t('eduxgen_page.feature_5_desc'), accent: 'border-sky-500/20 bg-sky-600/10 text-sky-400' },
+    { icon: '🌐', title: t('eduxgen_page.feature_6_title'), desc: t('eduxgen_page.feature_6_desc'), accent: 'border-indigo-500/20 bg-indigo-600/10 text-indigo-400' },
+  ]
 
   return (
     <section className="bg-[#0a0a0a] py-24 lg:py-32 relative">
@@ -265,17 +237,16 @@ function FeaturesSection() {
           <div className="text-center mb-16">
             <span className="reveal section-badge mb-4 block">
               <span className="w-5 h-px bg-current" aria-hidden="true" />
-              O que a IA cria para você
+              {t('eduxgen_page.features_badge')}
             </span>
             <h2 className="reveal delay-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight max-w-3xl mx-auto">
-              Tudo que você precisa,&nbsp;
+              {t('eduxgen_page.features_h2_1')}&nbsp;
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
-                gerado em segundos
+                {t('eduxgen_page.features_h2_2')}
               </span>
             </h2>
             <p className="reveal delay-3 text-white/40 mt-5 max-w-xl mx-auto font-light leading-relaxed">
-              Do ensino infantil ao ensino superior, o EduXGen.ai adapta conteúdo ao nível, disciplina
-              e objetivo de cada educador.
+              {t('eduxgen_page.features_desc')}
             </p>
           </div>
 
@@ -302,30 +273,16 @@ function FeaturesSection() {
 }
 
 // ── How It Works ───────────────────────────────────────────────────────────
-const STEPS = [
-  {
-    n: '01',
-    icon: '✍️',
-    title: 'Descreva a necessidade',
-    desc: 'Digite o tema, nível de ensino, disciplina e tipo de conteúdo. Nossa IA entende linguagem natural.',
-  },
-  {
-    n: '02',
-    icon: '⚡',
-    title: 'IA gera o conteúdo',
-    desc: 'Em segundos, você recebe material completo, estruturado e alinhado às diretrizes curriculares.',
-  },
-  {
-    n: '03',
-    icon: '🚀',
-    title: 'Personalize e exporte',
-    desc: 'Edite, ajuste o tom, insira sua marca e exporte em PDF, Word ou integre direto ao seu LMS.',
-  },
-]
-
 function HowItWorksSection() {
   const sectionRef = useRef(null)
+  const { t } = useTranslation()
   useReveal(sectionRef)
+
+  const STEPS = [
+    { n: '01', icon: '✍️', title: t('eduxgen_page.step_1_title'), desc: t('eduxgen_page.step_1_desc') },
+    { n: '02', icon: '⚡', title: t('eduxgen_page.step_2_title'), desc: t('eduxgen_page.step_2_desc') },
+    { n: '03', icon: '🚀', title: t('eduxgen_page.step_3_title'), desc: t('eduxgen_page.step_3_desc') },
+  ]
 
   return (
     <section className="bg-[#07070f] py-24 lg:py-32 relative overflow-hidden">
@@ -348,10 +305,10 @@ function HowItWorksSection() {
           <div className="text-center mb-16">
             <span className="reveal section-badge mb-4 block">
               <span className="w-5 h-px bg-current" aria-hidden="true" />
-              Como funciona
+              {t('eduxgen_page.how_badge')}
             </span>
             <h2 className="reveal delay-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-              Simples assim
+              {t('eduxgen_page.how_h2')}
             </h2>
           </div>
 
@@ -405,52 +362,18 @@ function HowItWorksSection() {
 }
 
 // ── Teaching Levels ────────────────────────────────────────────────────────
-const LEVELS = [
-  {
-    emoji: '🧒',
-    title: 'Educação Infantil',
-    age: '0–5 anos',
-    tags: ['Histórias interativas', 'Atividades lúdicas', 'Jogos pedagógicos'],
-    gradient: 'from-yellow-600/15 to-orange-600/8',
-    border: 'border-yellow-500/15',
-  },
-  {
-    emoji: '📖',
-    title: 'Ensino Fundamental',
-    age: '6–14 anos',
-    tags: ['Planos de aula', 'Exercícios BNCC', 'Avaliações diagnósticas'],
-    gradient: 'from-blue-600/15 to-blue-800/8',
-    border: 'border-blue-500/15',
-  },
-  {
-    emoji: '🎓',
-    title: 'Ensino Médio',
-    age: '15–17 anos',
-    tags: ['Simulados ENEM', 'Redações', 'Projetos interdisciplinares'],
-    gradient: 'from-violet-600/15 to-violet-800/8',
-    border: 'border-violet-500/15',
-  },
-  {
-    emoji: '🏛️',
-    title: 'Ensino Superior',
-    age: 'Graduação & Pós',
-    tags: ['Estudos de caso', 'Rubricas acadêmicas', 'Planos de ensino'],
-    gradient: 'from-emerald-600/15 to-emerald-800/8',
-    border: 'border-emerald-500/15',
-  },
-  {
-    emoji: '💼',
-    title: 'Corporativo & Técnico',
-    age: 'Treinamento profissional',
-    tags: ['Trilhas LMS', 'Certificações T&D', 'Onboarding automatizado'],
-    gradient: 'from-indigo-600/15 to-indigo-800/8',
-    border: 'border-indigo-500/15',
-  },
-]
-
 function LevelsSection() {
   const sectionRef = useRef(null)
+  const { t } = useTranslation()
   useReveal(sectionRef)
+
+  const LEVELS = [
+    { emoji: '🧒', title: t('eduxgen_page.level_1_title'), age: t('eduxgen_page.level_1_age'), tags: [t('eduxgen_page.level_1_tag1'), t('eduxgen_page.level_1_tag2'), t('eduxgen_page.level_1_tag3')], gradient: 'from-yellow-600/15 to-orange-600/8', border: 'border-yellow-500/15' },
+    { emoji: '📖', title: t('eduxgen_page.level_2_title'), age: t('eduxgen_page.level_2_age'), tags: [t('eduxgen_page.level_2_tag1'), t('eduxgen_page.level_2_tag2'), t('eduxgen_page.level_2_tag3')], gradient: 'from-blue-600/15 to-blue-800/8', border: 'border-blue-500/15' },
+    { emoji: '🎓', title: t('eduxgen_page.level_3_title'), age: t('eduxgen_page.level_3_age'), tags: [t('eduxgen_page.level_3_tag1'), t('eduxgen_page.level_3_tag2'), t('eduxgen_page.level_3_tag3')], gradient: 'from-violet-600/15 to-violet-800/8', border: 'border-violet-500/15' },
+    { emoji: '🏛️', title: t('eduxgen_page.level_4_title'), age: t('eduxgen_page.level_4_age'), tags: [t('eduxgen_page.level_4_tag1'), t('eduxgen_page.level_4_tag2'), t('eduxgen_page.level_4_tag3')], gradient: 'from-emerald-600/15 to-emerald-800/8', border: 'border-emerald-500/15' },
+    { emoji: '💼', title: t('eduxgen_page.level_5_title'), age: t('eduxgen_page.level_5_age'), tags: [t('eduxgen_page.level_5_tag1'), t('eduxgen_page.level_5_tag2'), t('eduxgen_page.level_5_tag3')], gradient: 'from-indigo-600/15 to-indigo-800/8', border: 'border-indigo-500/15' },
+  ]
 
   return (
     <section className="bg-[#0a0a0a] py-24 lg:py-32 relative">
@@ -465,20 +388,19 @@ function LevelsSection() {
           <div className="lg:sticky lg:top-28">
             <span className="reveal section-badge mb-6 block">
               <span className="w-5 h-px bg-current" aria-hidden="true" />
-              Para qualquer nível
+              {t('eduxgen_page.levels_badge')}
             </span>
             <h2 className="reveal delay-2 text-4xl sm:text-5xl font-extrabold text-white leading-[1.05] mb-6 tracking-tight">
-              Do Infantil
+              {t('eduxgen_page.levels_h2_1')}
               <br />
-              ao Corporativo
+              {t('eduxgen_page.levels_h2_2')}
             </h2>
             <p className="reveal delay-3 text-white/40 leading-relaxed mb-10 font-light">
-              Nossa IA adapta automaticamente a linguagem, a profundidade e o formato do conteúdo de
-              acordo com o nível de ensino, sem nenhuma configuração técnica.
+              {t('eduxgen_page.levels_desc')}
             </p>
             <div className="reveal delay-4">
               <Button to="/contato" size="lg" variant="outline-white">
-                Solicitar Demo &nbsp;→
+                {t('eduxgen_page.levels_cta')}
               </Button>
             </div>
           </div>
@@ -521,18 +443,19 @@ function LevelsSection() {
 }
 
 // ── Stats ──────────────────────────────────────────────────────────────────
-const STATS = [
-  { to: 2, suffix: 'M+', label: 'Conteúdos gerados' },
-  { to: 50, suffix: 'K+', label: 'Educadores ativos' },
-  { to: 98, suffix: '%', label: 'Satisfação dos usuários' },
-  { to: 120, suffix: '+', label: 'Tipos de conteúdo' },
-  { to: 3, suffix: '+', label: 'Idiomas suportados' },
-  { to: 5, suffix: 'seg', label: 'Para gerar um plano completo' },
-]
-
 function StatsSection() {
   const sectionRef = useRef(null)
+  const { t } = useTranslation()
   useReveal(sectionRef)
+
+  const STATS = [
+    { to: 2, suffix: 'M+', label: t('eduxgen_page.stat_1_label') },
+    { to: 50, suffix: 'K+', label: t('eduxgen_page.stat_2_label') },
+    { to: 98, suffix: '%', label: t('eduxgen_page.stat_3_label') },
+    { to: 120, suffix: '+', label: t('eduxgen_page.stat_4_label') },
+    { to: 3, suffix: '+', label: t('eduxgen_page.stat_5_label') },
+    { to: 5, suffix: 'seg', label: t('eduxgen_page.stat_6_label') },
+  ]
 
   return (
     <section id="eduxgen-stats" className="bg-[#0d0d0d] py-20 lg:py-28 relative overflow-hidden">
@@ -572,10 +495,10 @@ function StatsSection() {
           <div className="text-center mb-20 lg:mb-24">
             <span className="reveal section-badge mb-4 block">
               <span className="w-5 h-px bg-current" aria-hidden="true" />
-              EduXGen em números
+              {t('eduxgen_page.stats_badge')}
             </span>
             <h2 className="reveal delay-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-              Resultados reais
+              {t('eduxgen_page.stats_h2')}
             </h2>
           </div>
 
@@ -599,39 +522,16 @@ function StatsSection() {
 }
 
 // ── Testimonials ───────────────────────────────────────────────────────────
-const TESTIMONIALS = [
-  {
-    quote:
-      'Em 5 minutos crio avaliações completas alinhadas ao currículo. É como ter um assistente pedagógico sempre disponível. Revolucionou minha prática.',
-    author: 'Prof. Carlos Mendes',
-    role: 'Coordenador de Ensino',
-    org: 'Rede Municipal RJ',
-    initials: 'CM',
-    accent: 'bg-blue-600',
-  },
-  {
-    quote:
-      'O EduXGen me economiza pelo menos 8 horas por semana. Consigo focar no que realmente importa: ensinar e interagir com meus alunos.',
-    author: 'Profa. Ana Beatriz',
-    role: 'Professora de Ciências',
-    org: 'Colégio Estadual MG',
-    initials: 'AB',
-    accent: 'bg-violet-600',
-  },
-  {
-    quote:
-      'Implementamos o EduXGen em toda a rede e a padronização do conteúdo melhorou muito. Os professores adoram a facilidade de uso.',
-    author: 'Marcos Oliveira',
-    role: 'Diretor Pedagógico',
-    org: 'Secretaria de Educação SP',
-    initials: 'MO',
-    accent: 'bg-emerald-600',
-  },
-]
-
 function TestimonialsSection() {
   const sectionRef = useRef(null)
+  const { t } = useTranslation()
   useReveal(sectionRef)
+
+  const TESTIMONIALS = [
+    { quote: t('eduxgen_page.testimonial_1_quote'), author: 'Prof. Carlos Mendes', role: t('eduxgen_page.testimonial_1_role'), org: 'Rede Municipal RJ', initials: 'CM', accent: 'bg-blue-600' },
+    { quote: t('eduxgen_page.testimonial_2_quote'), author: 'Profa. Ana Beatriz', role: t('eduxgen_page.testimonial_2_role'), org: 'Colégio Estadual MG', initials: 'AB', accent: 'bg-violet-600' },
+    { quote: t('eduxgen_page.testimonial_3_quote'), author: 'Marcos Oliveira', role: t('eduxgen_page.testimonial_3_role'), org: 'Secretaria de Educação SP', initials: 'MO', accent: 'bg-emerald-600' },
+  ]
 
   return (
     <section className="bg-[#090909] py-20 lg:py-28">
@@ -640,10 +540,10 @@ function TestimonialsSection() {
           <div className="text-center mb-14">
             <span className="reveal section-badge mb-4 block">
               <span className="w-5 h-px bg-current" aria-hidden="true" />
-              Depoimentos
+              {t('eduxgen_page.testimonials_badge')}
             </span>
             <h2 className="reveal delay-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-              Quem usa, aprova
+              {t('eduxgen_page.testimonials_h2')}
             </h2>
           </div>
 
@@ -697,6 +597,7 @@ function TestimonialsSection() {
 // ── CTA ────────────────────────────────────────────────────────────────────
 function CTASection() {
   const sectionRef = useRef(null)
+  const { t } = useTranslation()
   useReveal(sectionRef)
 
   useEffect(() => {
@@ -781,28 +682,27 @@ function CTASection() {
         <div ref={sectionRef} className="relative z-10 text-center max-w-3xl mx-auto">
           <span className="reveal section-badge mb-6 block justify-center">
             <span className="w-5 h-px bg-current" aria-hidden="true" />
-            Comece hoje mesmo
+            {t('eduxgen_page.cta_badge')}
           </span>
 
           <h2 className="reveal delay-2 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6">
-            Revolucione sua
+            {t('eduxgen_page.cta_h2_1')}
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">
-              criação de conteúdo
+              {t('eduxgen_page.cta_h2_2')}
             </span>
           </h2>
 
           <p className="reveal delay-3 text-white/40 text-lg mb-10 leading-relaxed font-light max-w-xl mx-auto">
-            Junte-se a mais de 50.000 educadores que já automatizaram a criação de conteúdo
-            educacional com inteligência artificial.
+            {t('eduxgen_page.cta_desc')}
           </p>
 
           <div className="reveal delay-4 flex flex-wrap gap-4 justify-center">
             <Button to="/contato" size="xl" variant="white">
-              Começar Grátis
+              {t('eduxgen_page.cta_primary')}
             </Button>
             <Button to="/contato" size="xl" variant="outline-white">
-              Agendar Demo
+              {t('eduxgen_page.cta_secondary')}
             </Button>
           </div>
         </div>

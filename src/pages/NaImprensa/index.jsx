@@ -2,6 +2,66 @@ import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import Button from '../../components/ui/Button'
 import Container from '../../components/ui/Container'
+import fundoHero from '../../assets/na-imprensa/fundo na imprensa.jpg'
+import logoRealms from '../../assets/na-imprensa/logo realms – branco.png'
+
+function useParticles(containerId) {
+  useEffect(() => {
+    const PARTICLES_CONFIG = {
+      particles: {
+        number: { value: 160, density: { enable: true, value_area: 800 } },
+        color: { value: '#ffffff' },
+        shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+        opacity: { value: 0.6, random: true, anim: { enable: true, speed: 1, opacity_min: 0, sync: false } },
+        size: { value: 3, random: true, anim: { enable: false, speed: 4, size_min: 0.3, sync: false } },
+        line_linked: { enable: false },
+        move: { enable: true, speed: 1, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false },
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: { enable: true, mode: 'bubble' },
+          onclick: { enable: true, mode: 'repulse' },
+          resize: true,
+        },
+        modes: {
+          bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+          repulse: { distance: 400, duration: 0.4 },
+        },
+      },
+      retina_detect: true,
+    }
+
+    const init = () => {
+      if (window.particlesJS) {
+        window.particlesJS(containerId, PARTICLES_CONFIG)
+      }
+    }
+
+    if (window.particlesJS) {
+      init()
+      return () => {
+        if (window.pJSDom && window.pJSDom.length > 0) {
+          window.pJSDom.forEach((dom) => dom.pJS.fn.vendors.destroypJS())
+          window.pJSDom = []
+        }
+      }
+    }
+
+    const script = document.createElement('script')
+    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'
+    script.async = true
+    script.onload = init
+    document.body.appendChild(script)
+
+    return () => {
+      if (window.pJSDom && window.pJSDom.length > 0) {
+        window.pJSDom.forEach((dom) => dom.pJS.fn.vendors.destroypJS())
+        window.pJSDom = []
+      }
+    }
+  }, [containerId])
+}
 
 function useReveal(ref) {
   useEffect(() => {
@@ -249,75 +309,42 @@ function ImgPlaceholder({ colorClass, className = '' }) {
 // ─────────────────────────────────────────────────────────────────
 function HeroSection() {
   const { t } = useTranslation()
-  const contentRef = useRef(null)
-
-  useEffect(() => {
-    const items = contentRef.current?.querySelectorAll('.hero-item')
-    if (!items) return
-    items.forEach((el, i) => {
-      el.style.opacity = '0'
-      el.style.transform = 'translateY(28px)'
-      const delay = 300 + i * 130
-      const timer = setTimeout(() => {
-        el.style.transition =
-          'opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1)'
-        el.style.opacity = '1'
-        el.style.transform = 'translateY(0)'
-      }, delay)
-      return () => clearTimeout(timer)
-    })
-  }, [])
+  useParticles('press-hero-particles')
 
   return (
     <section
       id="press-hero"
-      className="relative min-h-[75vh] w-full overflow-hidden flex items-center bg-[#0a0a0a]"
+      className="relative w-full overflow-hidden flex items-center justify-center"
+      style={{ minHeight: '75vh', maxHeight: '75vh' }}
     >
+      {/* Partículas */}
+      <div id="press-hero-particles" className="absolute inset-0 z-10" />
+
+      {/* Fundo */}
+      <img
+        src={fundoHero}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      {/* Overlay escuro */}
+      <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
+      {/* Fade inferior */}
       <div
-        className="absolute inset-0 opacity-[0.025]"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
+        className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none"
         aria-hidden="true"
       />
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(124,58,237,0.12)_0%,transparent_70%)] pointer-events-none"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none"
-        aria-hidden="true"
-      />
-      <div
-        ref={contentRef}
-        className="relative z-10 w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20"
-      >
-        <div className="max-w-4xl">
-          <p className="hero-item flex items-center gap-3 text-white/40 text-[11px] font-semibold uppercase tracking-[0.25em] mb-7">
-            <span className="w-8 h-px bg-white/35" aria-hidden="true" />
-            {t('press_page.hero_tagline')}
-          </p>
-          <h1 className="hero-item text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[0.92] tracking-tight mb-6">
-            {t('press_page.hero_line1')}
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-violet-300 to-blue-400">
-              {t('press_page.hero_line2')}
-            </span>
-          </h1>
-          <p className="hero-item text-base sm:text-lg text-white/45 leading-relaxed max-w-2xl mb-10 font-light">
-            {t('press_page.hero_description')}
-          </p>
-          <div className="hero-item flex flex-wrap gap-4">
-            <Button to="/contato" size="lg" variant="primary">
-              {t('press_page.hero_cta_contact')}
-            </Button>
-            <Button href="#" size="lg" variant="outline-white">
-              {t('press_page.hero_cta_kit')}
-            </Button>
-          </div>
-        </div>
+
+      {/* Conteúdo centralizado */}
+      <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 pt-20 pb-16">
+        <img
+          src={logoRealms}
+          alt="Realms ip.tv"
+          className="w-72 sm:w-96 md:w-[480px] lg:w-[560px] max-w-full object-contain mb-2 drop-shadow-2xl"
+        />
+        <p className="text-white text-2xl sm:text-3xl md:text-4xl font-black tracking-widest uppercase">
+          {t('press_page.hero_tagline', 'Na Mídia')}
+        </p>
       </div>
     </section>
   )
@@ -381,7 +408,7 @@ function NewsSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 items-start">
+          <div className="grid grid-cols-1 gap-8 items-start">
             {/* Articles */}
             <div className="space-y-4">
               {PRESS_ITEMS.map((item, i) => (
@@ -422,51 +449,6 @@ function NewsSection() {
                 </article>
               ))}
             </div>
-
-            {/* Sidebar */}
-            <div className="reveal delay-3 space-y-5 lg:sticky lg:top-28">
-              <div className="card-dark p-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-violet-800 flex items-center justify-center mb-4">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h3 className="font-bold text-white mb-2">{t('pages.press.press_contact')}</h3>
-                <p className="text-sm text-white/40 leading-relaxed mb-5 font-light">
-                  {t('press_page.contact_desc')}
-                </p>
-                <Button to="/contato" size="sm" variant="outline-white" className="w-full justify-center">
-                  {t('nav.contact')}
-                </Button>
-              </div>
-
-              <div className="card-dark p-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center mb-4">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                </div>
-                <h3 className="font-bold text-white mb-2">{t('pages.press.download_kit')}</h3>
-                <p className="text-sm text-white/40 leading-relaxed mb-5 font-light">
-                  {t('press_page.kit_desc')}
-                </p>
-                <Button href="#" size="sm" variant="outline-white" className="w-full justify-center">
-                  {t('press_page.kit_btn')}
-                </Button>
-              </div>
-
-              <div className="card-dark p-6">
-                <h3 className="font-bold text-white mb-4">{t('press_page.awards_title')}</h3>
-                <ul className="space-y-3">
-                  {AWARDS.map((a) => (
-                    <li key={a.label} className="flex items-center gap-3 text-sm text-white/45 font-light">
-                      <span className="text-base">{a.icon}</span>
-                      {a.label}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </Container>
@@ -477,39 +459,6 @@ function NewsSection() {
 // ─────────────────────────────────────────────────────────────────
 //  Stats bar
 // ─────────────────────────────────────────────────────────────────
-function StatsBarSection() {
-  const { t } = useTranslation()
-  const sectionRef = useRef(null)
-  useReveal(sectionRef)
-
-  return (
-    <section className="bg-[#0d0d0d] py-16 relative overflow-hidden">
-      <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_50%,rgba(124,58,237,0.06)_0%,transparent_70%)] pointer-events-none"
-        aria-hidden="true"
-      />
-      <Container>
-        <div
-          ref={sectionRef}
-          className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-white/[0.06] border border-white/[0.06] rounded-2xl overflow-hidden"
-        >
-          {STATS.map((s, i) => (
-            <div
-              key={s.labelKey}
-              className={`reveal delay-${i + 1} bg-[#0d0d0d] hover:bg-[#131313] transition-colors duration-300 p-8 text-center group cursor-default`}
-            >
-              <div className="text-3xl sm:text-4xl font-extrabold text-white mb-2 tabular-nums leading-none group-hover:text-violet-300 transition-colors duration-300">
-                {s.value}
-              </div>
-              <p className="text-xs text-white/35 font-light leading-snug">{t(s.labelKey)}</p>
-            </div>
-          ))}
-        </div>
-      </Container>
-    </section>
-  )
-}
-
 // ─────────────────────────────────────────────────────────────────
 //  CTA Final
 // ─────────────────────────────────────────────────────────────────
@@ -519,18 +468,30 @@ function CTAFinalSection() {
   useReveal(sectionRef)
 
   return (
-    <section id="press-cta" className="bg-[#0a0a0a] py-24 lg:py-32 relative overflow-hidden">
+    <section id="press-cta" className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Fundo */}
+      <img
+        src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=1920&q=80"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      {/* Overlay escuro */}
+      <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+      {/* Gradiente de baixo para cima */}
+      <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-black via-black/70 via-40% to-transparent pointer-events-none" aria-hidden="true" />
+      {/* Glow roxo */}
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(124,58,237,0.09)_0%,transparent_70%)] pointer-events-none"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(124,58,237,0.18)_0%,transparent_70%)] pointer-events-none"
         aria-hidden="true"
       />
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-white/8 to-transparent"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
         aria-hidden="true"
       />
       <Container>
         <div ref={sectionRef} className="text-center max-w-3xl mx-auto">
-          <span className="reveal section-badge mb-6 justify-center block">
+          <span className="reveal section-badge mb-6 justify-center block text-white/80">
             <span className="w-5 h-px bg-current" aria-hidden="true" />
             {t('press_page.cta_badge')}
           </span>
@@ -541,15 +502,12 @@ function CTAFinalSection() {
               {t('press_page.cta_line2')}
             </span>
           </h2>
-          <p className="reveal delay-3 text-white/40 text-lg leading-relaxed mb-10 font-light">
+          <p className="reveal delay-3 text-white/80 text-lg leading-relaxed mb-10 font-light drop-shadow-md">
             {t('press_page.cta_sub')}
           </p>
           <div className="reveal delay-4 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button to="/contato" size="lg" variant="primary">
+            <Button to="/contato" size="lg" variant="outline-white">
               {t('press_page.cta_contact')}
-            </Button>
-            <Button to="/sobre-nos" size="lg" variant="outline-white">
-              {t('press_page.cta_about')}
             </Button>
           </div>
         </div>
@@ -678,7 +636,6 @@ export default function NaImprensa() {
       <OutrasMaterialsSection />
       <UltimasNoticiasSection />
       <NewsSection />
-      <StatsBarSection />
       <CTAFinalSection />
     </>
   )

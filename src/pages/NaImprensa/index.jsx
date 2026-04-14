@@ -12,6 +12,12 @@ import imgGiraldez from '../../assets/na-imprensa/Eduardo Giraldez fala sobre a 
 import imgPlataformaIA from '../../assets/na-imprensa/Plataforma de IA ajuda professores a criar aulas e vídeoaulas.png'
 import imgNovaPlataforma from '../../assets/na-imprensa/Nova plataforma chega para melhorar rotina do professor.jpg'
 import imgProfessorAliado from '../../assets/na-imprensa/Professor ganha forte aliado tecnológico, em sala de aula com a tecnologia.png'
+import imgMetaverso from '../../assets/na-imprensa/Metaverso na educação cariocas criam sistema que leva alunos para estudar em um ambiente totalmente digital.webp'
+import imgTecnologiaBR from '../../assets/na-imprensa/Tecnologia brasileira leva conhecimento a regiões isoladas.png'
+import imgCidadeCearense from '../../assets/na-imprensa/Cidade cearense participa de experiência de inclusão do metaverso.jpeg'
+import imgJorgeBarbosa from '../../assets/na-imprensa/Jorge Barbosa l Mais um dia Feliz 49.jpg'
+import imgRioEmPauta from '../../assets/na-imprensa/rio em pauta.png'
+import imgTrabalhoHibrido from '../../assets/na-imprensa/trabalho hibrido ganha forca.jpg'
 
 function useParticles(containerId) {
   useEffect(() => {
@@ -119,39 +125,63 @@ const DESTAQUES = [
 const OUTRAS_MATERIAS = [
   {
     id: 1,
-    imgColor: 'bg-blue-200',
-    title: 'Metaverso na educação:',
-    date: '10 de maio de 2023',
+    imgColor: 'bg-teal-300',
+    imgUrl: imgJorgeBarbosa,
+    title: 'Jorge Barbosa l Mais um dia Feliz #49',
+    date: '1 de dez. de 2023',
     excerpt:
-      'Parem as máquinas! Ou melhor, liguem as máquinas. A educação digital, pela Internet, já é uma realidade para muitas pessoas...',
-    link: '#',
+      'Jorge Barbosa, o visionário CTO da empresa IPTV. Neste episódio visionário, Jorge compartilha histórias instigantes que exploram…',
+    link: 'https://www.youtube.com/watch?v=Hvn8Dz4v2EI',
   },
   {
     id: 2,
-    imgColor: 'bg-yellow-300',
-    title: 'Tecnologia brasileira leva conhecimento a regiões isoladas',
-    date: 'Há 1 ano',
+    imgColor: 'bg-green-300',
+    imgUrl: imgCidadeCearense,
+    title: 'Cidade cearense participa de experiência de inclusão do metaverso na educação básica',
+    date: '19 de set. de 2023',
     excerpt:
-      'O sistema une professores que vivem em cidades com mais estrutura e alunos de locais que vão do interior da Amazônia aos rincões da África.',
-    link: '#',
+      'A plataforma que será usada é resultado de uma aliança internacional com o aval do Instituto Federal do Amazonas e das Universidades Federais do Cariri e do Maranhão.',
+    link: 'https://www.opovo.com.br/noticias/ceara/porteiras/2023/09/19/cidade-cearense-participa-de-experiencia-de-inclusao-do-metaverso-na-educacao-basica.html',
   },
   {
     id: 3,
-    imgColor: 'bg-green-300',
-    title: 'Cariri, participa da experiência pioneira...',
-    date: '16:54 | 19/09/2023',
+    imgColor: 'bg-purple-300',
+    imgUrl: imgRioEmPauta,
+    title: 'Metaverso e educação com Eduardo Giraldez',
+    date: '11 de mai. de 2023',
     excerpt:
-      'plataforma que será usada é resultado de uma aliança internacional com o aval do Instituto Federal do Amazonas e das Universidades Federais do Cariri e do Maranhão.',
-    link: '#',
+      'Entrevista com o presidente da IPTV, Eduardo Giraldez, que fala sobre o metaverso educacional. Ouça agora no link abaixo!',
+    link: 'https://www.rj.gov.br/radioroquettepinto/node/462',
   },
   {
     id: 4,
-    imgColor: 'bg-teal-300',
-    title: 'Porteiras participa de experiência de inclusão do metaverso...',
-    date: 'Quarta-feira, 20 de Setembro de 2023',
+    imgColor: 'bg-blue-200',
+    imgUrl: imgMetaverso,
+    title: 'Metaverso na educação: cariocas criam sistema...',
+    date: '10 de mai. de 2023',
     excerpt:
-      'A plataforma que será usada é resultado de uma aliança internacional com o aval do Instituto Federal do Amazonas',
-    link: '#',
+      'Parem as máquinas! Ou melhor, liguem as máquinas. A educação digital, pela Internet, já é uma realidade para muitas pessoas...',
+    link: 'https://diariodorio.com/metaverso-na-educacao-cariocas-criam-sistema-que-leva-alunos-para-estudar-em-um-ambiente-totalmente-digital/',
+  },
+  {
+    id: 5,
+    imgColor: 'bg-yellow-300',
+    imgUrl: imgTecnologiaBR,
+    title: 'Tecnologia brasileira leva conhecimento a regiões isoladas',
+    date: '13 de ago. de 2022',
+    excerpt:
+      'O sistema une professores que vivem em cidades com mais estrutura e alunos de locais que vão do interior da Amazônia aos rincões da África.',
+    link: 'https://www.youtube.com/watch?v=UvVEQFZW02k',
+  },
+  {
+    id: 6,
+    imgColor: 'bg-orange-300',
+    imgUrl: imgTrabalhoHibrido,
+    title: 'Trabalho híbrido ganha força e vira tendência entre profissionais de tecnologia',
+    date: '11 de out. de 2021',
+    excerpt:
+      'No Brasil, a demanda por colaboradores “home office também cresceu, principalmente entre os profissionais com ensino superior…',
+    link: 'https://correiodobrasil.com.br//a/trabalho-hibrido-ganha-forca-vira-tendencia-profissionais-tecnologia',
   },
 ]
 
@@ -438,7 +468,15 @@ function OutrasMaterialsSection() {
             <article key={item.id} className="flex gap-5 p-5 hover:bg-white/[0.02] transition-colors duration-200">
               {/* thumbnail */}
               <div className="flex-shrink-0 w-36 h-24 overflow-hidden rounded-xl">
-                <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl h-24" />
+                {item.imgUrl ? (
+                  <img
+                    src={item.imgUrl}
+                    alt={item.title}
+                    className="rounded-xl w-full h-full object-cover"
+                  />
+                ) : (
+                  <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl h-24" />
+                )}
               </div>
               {/* content */}
               <div className="flex flex-col justify-between min-w-0">

@@ -4,6 +4,14 @@ import Button from '../../components/ui/Button'
 import Container from '../../components/ui/Container'
 import fundoHero from '../../assets/na-imprensa/fundo na imprensa.jpg'
 import logoRealms from '../../assets/na-imprensa/logo realms – branco.png'
+import imgCerc from '../../assets/na-imprensa/Eduardo Giráldez no Evento Anual do Grupo Cerc de Ensino.png'
+import imgCGI from '../../assets/na-imprensa/Liderança Visionária na Discussão sobre Soberania Digital no CGI.br.jpg'
+import imgEduxGen from '../../assets/na-imprensa/Estamos entusiasmados em compartilhar nosso mais recente vídeo sobre o EduxGen.jpg'
+import imgBett from '../../assets/na-imprensa/Convite interativo para minhas palestras na Bett Nordeste 4 e 5 de setembro de 2024.jpg'
+import imgGiraldez from '../../assets/na-imprensa/Eduardo Giraldez fala sobre a inovadora plataforma de inteligência artificial para professores.png'
+import imgPlataformaIA from '../../assets/na-imprensa/Plataforma de IA ajuda professores a criar aulas e vídeoaulas.png'
+import imgNovaPlataforma from '../../assets/na-imprensa/Nova plataforma chega para melhorar rotina do professor.jpg'
+import imgProfessorAliado from '../../assets/na-imprensa/Professor ganha forte aliado tecnológico, em sala de aula com a tecnologia.png'
 
 function useParticles(containerId) {
   useEffect(() => {
@@ -90,20 +98,21 @@ const DESTAQUES = [
   {
     id: 1,
     imgColor: 'bg-slate-800',
+    imgUrl: imgBett,
     title: 'Convite interativo para minhas palestras na Bett Nordeste 4 e 5 de setembro de 2024:',
     excerpt:
       'Acompanhe nossas participações em eventos para ficar por dentro de todos os nossos lançamentos. Com a mais nova ferramenta Eduxgen.AI o professor ganhará um aliado para ajudar nas demandas de ensino. Nossa ferramenta será um grande aliado nessa nova era da educação.',
-    link: '#',
+    link: 'https://www.linkedin.com/posts/eduardo-giraldez-6140374b_convite-interativo-para-minhas-palestras-activity-7220166818064121858-OCpx/?utm_source=combined_share_message&utm_medium=member_android',
   },
   {
     id: 2,
     imgColor: 'bg-slate-400',
-    imgUrl: null,
+    imgUrl: imgGiraldez,
     source: 'https://www.ultimahoraonline.com.br/noticia/eduardo-giraldezfala-sobre-a-inovadora-plataforma-de-inteligencia-artificial-para-professores',
     title: 'Eduardo Giraldez fala sobre a inovadora plataforma de inteligência artificial para professores',
     excerpt:
       'Estamos no Golfe Olímpico, onde está acontecendo um grande evento do cinturão de turismo. Hoje, tivemos o privilégio de conversar com Eduardo Giraldez, que recentemente deu uma palestra sobre inteligência artificial...',
-    link: '#',
+    link: 'https://www.ultimahoraonline.com.br/noticia/eduardo-giraldezfala-sobre-a-inovadora-plataforma-de-inteligencia-artificial-para-professores',
   },
 ]
 
@@ -150,56 +159,50 @@ const ULTIMAS_NOTICIAS = [
   {
     id: 1,
     imgColor: 'bg-slate-600',
-    title: 'Eduardo Giráldez no Evento Anual do Grupo Cerc de Ensino',
-    excerpt:
-      'Tivemos o prazer de assistir nosso Chairman, iluminar o evento anual do Grupo Cerc de Ensino com sua palestra inspiradora sobre a transformação da educação através da inteligência artificial. Eduardo abordou um tema vital: a utilização da IA como um assistente...',
-    link: '#',
-    cta: 'Leia Mais',
+    imgUrl: imgCerc,
+    titleKey: 'press_page.ultimas_n1_title',
+    excerptKey: 'press_page.ultimas_n1_excerpt',
+    link: 'https://www.linkedin.com/posts/realms-education_grupocercdeensino-educaaexaeto-inteligaeanciaartificial-activity-7218734719671115776-6DX-/?utm_source=share&utm_medium=member_desktop',
   },
   {
     id: 2,
     imgColor: 'bg-blue-700',
-    title: 'Liderança Visionária na Discussão sobre Soberania Digital no CGI.br',
-    excerpt:
-      'Em sua apresentação, Eduardo enfatizou a importância de abordar a tecnologia com cautela, especialmente em relação ao uso da inteligência artificial na educação. Ele destacou os desafios enfrentados pelos professores e a necessidade de ferramentas que apoiem sua produtividade, sem comprometer seu papel insubstituível...',
-    link: '#',
-    cta: 'Saiba Mais',
+    imgUrl: imgCGI,
+    titleKey: 'press_page.ultimas_n2_title',
+    excerptKey: 'press_page.ultimas_n2_excerpt',
+    link: 'https://www.youtube.com/watch?v=7GyYrLsQvhc',
   },
   {
     id: 3,
     imgColor: 'bg-gray-900',
-    title: 'Estamos entusiasmados em compartilhar nosso mais recente vídeo sobre o EduxGen.AI',
-    excerpt:
-      'No vídeo, exploramos: Funcionalidades Chave: Como o EduxGen.AI otimiza o gerenciamento de tarefas e avaliações, economizando tempo valioso para os professores. Benefícios para Professores e Alunos: Demonstramos como nossa tecnologia apoia...',
-    link: '#',
-    cta: 'Saiba Mais',
+    imgUrl: imgEduxGen,
+    titleKey: 'press_page.ultimas_n3_title',
+    excerptKey: 'press_page.ultimas_n3_excerpt',
+    link: 'https://www.youtube.com/watch?v=EzRpdjtN-cs',
   },
   {
     id: 4,
     imgColor: 'bg-sky-200',
-    title: 'Realms na Vanguarda da Educação Digital nas Escolas Públicas',
-    excerpt:
-      'Parceria inovadora leva tecnologia de ponta para estudantes de regiões remotas do Brasil, transformando a experiência de aprendizado com recursos digitais acessíveis...',
-    link: '#',
-    cta: 'Leia Mais',
+    imgUrl: imgPlataformaIA,
+    titleKey: 'press_page.ultimas_n4_title',
+    excerptKey: 'press_page.ultimas_n4_excerpt',
+    link: 'https://d24am.com/tecnologia/plataforma-de-ia-ajuda-professores-a-criar-aulas-e-videoaulas-saiba-mais/',
   },
   {
     id: 5,
     imgColor: 'bg-indigo-200',
-    title: 'Professores Ganham Aliado Poderoso com a IA da Realms',
-    excerpt:
-      'A plataforma EduxGen.AI está revolucionando a forma como professores planejam aulas e avaliam alunos, reduzindo em até 40% o tempo gasto em tarefas administrativas...',
-    link: '#',
-    cta: 'Leia Mais',
+    imgUrl: imgNovaPlataforma,
+    titleKey: 'press_page.ultimas_n5_title',
+    excerptKey: 'press_page.ultimas_n5_excerpt',
+    link: 'https://jornaldobelem.com.br/noticia/40098/nova-plataforma-chega-para-melhorar-rotina-do-professor',
   },
   {
     id: 6,
     imgColor: 'bg-blue-100',
-    title: 'Realms Expande Presença Internacional com Parceiros Educacionais',
-    excerpt:
-      'A empresa fecha acordos estratégicos com instituições de ensino em países da América Latina e África, levando soluções educacionais inovadoras para além das fronteiras do Brasil...',
-    link: '#',
-    cta: 'Leia Mais',
+    imgUrl: imgProfessorAliado,
+    titleKey: 'press_page.ultimas_n6_title',
+    excerptKey: 'press_page.ultimas_n6_excerpt',
+    link: 'https://www.correiodobrasil.com.br/a/professor-ganha-forte-aliado-tecnologico-sala-aula',
   },
 ]
 
@@ -394,12 +397,16 @@ function DestaquesSection() {
             <article key={item.id} className="flex flex-col">
               {/* image */}
               <div className="w-full aspect-[16/9] overflow-hidden rounded-xl mb-4">
-                <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl" />
+                {item.imgUrl ? (
+                  <img
+                    src={item.imgUrl}
+                    alt={item.title}
+                    className="rounded-xl w-full h-full object-cover"
+                  />
+                ) : (
+                  <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl" />
+                )}
               </div>
-              {/* source URL for second card */}
-              {item.source && (
-                <p className="text-xs text-white/30 break-all mb-2">{item.source}</p>
-              )}
               <h3 className="text-lg font-bold text-white leading-snug mb-2">{item.title}</h3>
               <p className="text-sm text-white/50 leading-relaxed mb-3">{item.excerpt}</p>
               <a
@@ -459,25 +466,34 @@ function OutrasMaterialsSection() {
 //  Últimas notícias
 // ─────────────────────────────────────────────────────────────────
 function UltimasNoticiasSection() {
+  const { t } = useTranslation()
   return (
     <section className="bg-[#0d0d0d] py-14 border-t border-white/[0.05]">
       <Container>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-white text-center mb-10">
-          Últimas notícias
+          {t('press_page.ultimas_heading')}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {ULTIMAS_NOTICIAS.map((item) => (
             <article key={item.id} className="flex flex-col group cursor-pointer">
               <div className="w-full aspect-video overflow-hidden rounded-xl mb-4">
-                <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl h-full" />
+                {item.imgUrl ? (
+                  <img
+                    src={item.imgUrl}
+                    alt={t(item.titleKey)}
+                    className="rounded-xl h-full w-full object-cover"
+                  />
+                ) : (
+                  <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl h-full" />
+                )}
               </div>
-              <h3 className="text-base font-bold text-white leading-snug mb-2 group-hover:text-violet-300 transition-colors duration-200">{item.title}</h3>
-              <p className="text-sm text-white/50 leading-relaxed mb-3 line-clamp-4">{item.excerpt}</p>
+              <h3 className="text-base font-bold text-white leading-snug mb-2 group-hover:text-violet-300 transition-colors duration-200">{t(item.titleKey)}</h3>
+              <p className="text-sm text-white/50 leading-relaxed mb-3 line-clamp-4">{t(item.excerptKey)}</p>
               <a
                 href={item.link}
                 className="mt-auto text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors"
               >
-                {item.cta}
+                {t('press_page.ultimas_cta')}
               </a>
             </article>
           ))}

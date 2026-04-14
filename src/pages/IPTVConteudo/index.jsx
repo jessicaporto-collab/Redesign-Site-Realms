@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import Container from '../../components/ui/Container'
+import Button from '../../components/ui/Button'
 import heroImg from '../../assets/iptv/img1-iptv.jpg'
 import webinarImg from '../../assets/iptv/img2-iptv.jpg'
 
@@ -419,6 +420,9 @@ export default function IPTVConteudo() {
               <span key={pill} className="px-4 py-2 rounded-full text-sm font-medium text-white/60 border border-white/10" style={{ background: 'rgba(255,255,255,0.04)' }}>{pill}</span>
             ))}
           </div>
+          <Button to="/contato" size="xl" variant="outline-white" className="reveal">
+            Solicitar Demo
+          </Button>
         </Container>
       </section>
     </div>

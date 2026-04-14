@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import Container from '../../components/ui/Container'
+import Button from '../../components/ui/Button'
+
 import musicGalaxy from './assets/music-galaxy.mp3'
 import GlobeViz from './GlobeViz'
 import img1EduxRealms from './assets/img1-eduxRealms.jpeg'
@@ -970,6 +972,10 @@ export default function EduxRealms() {
           <p className="reveal text-white/45 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
             {t('eduxrealms_page.cta_desc')}
           </p>
+
+          <Button to="/contato" size="xl" variant="outline-white" className="reveal">
+            Solicitar Demo
+          </Button>
 
         </Container>
       </section>

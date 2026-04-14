@@ -1,6 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Container from '../../components/ui/Container'
+import img1Myclass from '../../assets/myclass/img1-myclass.png'
+import imgTrilha from '../../assets/myclass/img-trilha.jpg'
 
 /* ---------------------------------------------
    Unsplash images (free / no copyright)
@@ -18,8 +20,6 @@ const IMG = {
     'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=700&q=80&fit=crop',
   learning:
     'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&q=80&fit=crop',
-  nebula:
-    'https://images.unsplash.com/photo-1484600899469-230e8d1d59c0?w=1600&q=60&fit=crop',
   teacher:
     'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=75&fit=crop',
   students:
@@ -27,6 +27,101 @@ const IMG = {
   quiz:
     'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=75&fit=crop',
 }
+
+/* -- feature metadata (static, outside component) -- */
+const FEAT_META = [
+  {
+    id: 'f1', accent: '#7c3aed', bg: '#f5f3ff', tKey: 'feat_1',
+    icon: (c) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M5.636 18.364a9 9 0 1 0 12.728 0" />
+        <path d="M8.464 15.536a5 5 0 1 0 7.072 0" />
+        <circle cx="12" cy="12" r="1" fill={c} />
+      </svg>
+    ),
+  },
+  {
+    id: 'f2', accent: '#a855f7', bg: '#faf5ff', tKey: 'feat_2',
+    icon: (c) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="3" y="11" width="18" height="10" rx="2" />
+        <path d="M9 11V7a3 3 0 0 1 6 0v4" />
+        <circle cx="9" cy="16" r="1" fill={c} stroke="none" />
+        <circle cx="15" cy="16" r="1" fill={c} stroke="none" />
+        <path d="M12 7v1m-3-1h6" />
+      </svg>
+    ),
+  },
+  {
+    id: 'f3', accent: '#3b82f6', bg: '#eff6ff', tKey: 'feat_3',
+    icon: (c) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M3 3v18h18" />
+        <path d="M7 16l4-6 4 4 4-6" />
+      </svg>
+    ),
+  },
+  {
+    id: 'f4', accent: '#ec4899', bg: '#fdf2f8', tKey: 'feat_4',
+    icon: (c) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="9" y1="13" x2="15" y2="13" />
+        <line x1="9" y1="17" x2="12" y2="17" />
+      </svg>
+    ),
+  },
+  {
+    id: 'f5', accent: '#f59e0b', bg: '#fffbeb', tKey: 'feat_5',
+    icon: (c) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    ),
+  },
+  {
+    id: 'f6', accent: '#10b981', bg: '#ecfdf5', tKey: 'feat_6',
+    icon: (c) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+      </svg>
+    ),
+  },
+  {
+    id: 'f7', accent: '#7c3aed', bg: '#f5f3ff', tKey: 'feat_7',
+    icon: (c) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="3" y="4" width="18" height="18" rx="2" />
+        <line x1="16" y1="2" x2="16" y2="6" />
+        <line x1="8" y1="2" x2="8" y2="6" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+        <rect x="7" y="14" width="3" height="3" rx="0.5" fill={c} stroke="none" />
+      </svg>
+    ),
+  },
+  {
+    id: 'f8', accent: '#3b82f6', bg: '#eff6ff', tKey: 'feat_8',
+    icon: (c) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+      </svg>
+    ),
+  },
+  {
+    id: 'f9', accent: '#059669', bg: '#ecfdf5', tKey: 'feat_9',
+    icon: (c) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="3" y="11" width="18" height="11" rx="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </svg>
+    ),
+  },
+]
 
 /* -- scroll reveal -- */
 function useReveal() {
@@ -41,183 +136,12 @@ function useReveal() {
   }, [])
 }
 
-/* ─────────────────────────────────────────────
-   STARFIELD – canvas com estrelas piscando
-───────────────────────────────────────────── */
-function StarField() {
-  const canvasRef = useRef(null)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    let raf
-
-    const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = document.documentElement.scrollHeight
-    }
-    resize()
-    window.addEventListener('resize', resize)
-
-    const STAR_COLORS = ['rgba(167,139,250,', 'rgba(96,165,250,', 'rgba(255,255,255,']
-    const pickStarColor = () => {
-      const r = Math.random()
-      if (r > 0.85) return STAR_COLORS[0]
-      if (r > 0.7) return STAR_COLORS[1]
-      return STAR_COLORS[2]
-    }
-    const STAR_COUNT = 320
-    const stars = Array.from({ length: STAR_COUNT }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.6 + 0.2,
-      base: Math.random() * 0.7 + 0.15,
-      speed: Math.random() * 0.012 + 0.003,
-      phase: Math.random() * Math.PI * 2,
-      color: pickStarColor(),
-    }))
-
-    const dust = Array.from({ length: 28 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      rx: Math.random() * 180 + 60,
-      ry: Math.random() * 40 + 12,
-      angle: Math.random() * Math.PI,
-      alpha: Math.random() * 0.035 + 0.008,
-      color: Math.random() > 0.5 ? '139,92,246' : '96,165,250',
-    }))
-
-    let t = 0
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      dust.forEach((d) => {
-        ctx.save()
-        ctx.translate(d.x, d.y)
-        ctx.rotate(d.angle)
-        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, d.rx)
-        g.addColorStop(0, `rgba(${d.color},${d.alpha})`)
-        g.addColorStop(1, `rgba(${d.color},0)`)
-        ctx.scale(1, d.ry / d.rx)
-        ctx.beginPath()
-        ctx.arc(0, 0, d.rx, 0, Math.PI * 2)
-        ctx.fillStyle = g
-        ctx.fill()
-        ctx.restore()
-      })
-
-      stars.forEach((s) => {
-        const alpha = s.base + Math.sin(t * s.speed * 60 + s.phase) * (s.base * 0.7)
-        ctx.beginPath()
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
-        ctx.fillStyle = `${s.color}${alpha.toFixed(3)})`
-        ctx.fill()
-
-        if (s.r > 1.2) {
-          ctx.strokeStyle = `${s.color}${(alpha * 0.5).toFixed(3)})`
-          ctx.lineWidth = 0.5
-          ctx.beginPath()
-          ctx.moveTo(s.x - s.r * 2.5, s.y)
-          ctx.lineTo(s.x + s.r * 2.5, s.y)
-          ctx.moveTo(s.x, s.y - s.r * 2.5)
-          ctx.lineTo(s.x, s.y + s.r * 2.5)
-          ctx.stroke()
-        }
-      })
-
-      t += 0.016
-      raf = requestAnimationFrame(draw)
-    }
-    draw()
-
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 0,
-        opacity: 0.85,
-      }}
-    />
-  )
-}
-
-/* ─────────────────────────────────────────────
-   FLOATING NEBULA – orbs animados flutuando
-───────────────────────────────────────────── */
-function FloatingNebula() {
-  return (
-    <div
-      aria-hidden="true"
-      style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 1, overflow: 'hidden' }}
-    >
-      <div style={{
-        position: 'absolute', top: '8%', right: '5%',
-        width: 500, height: 500, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(139,92,246,0.09) 0%, transparent 70%)',
-        animation: 'nebulaFloat1 18s ease-in-out infinite',
-        filter: 'blur(2px)',
-      }} />
-      <div style={{
-        position: 'absolute', bottom: '15%', left: '3%',
-        width: 420, height: 420, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%)',
-        animation: 'nebulaFloat2 22s ease-in-out infinite',
-        filter: 'blur(2px)',
-      }} />
-      <div style={{
-        position: 'absolute', top: '40%', left: '45%',
-        width: 300, height: 300, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(167,139,250,0.055) 0%, transparent 70%)',
-        animation: 'nebulaFloat3 26s ease-in-out infinite',
-        filter: 'blur(2px)',
-      }} />
-      <div style={{
-        position: 'absolute', top: '65%', right: '20%',
-        width: 340, height: 180, borderRadius: '50%',
-        background: 'radial-gradient(ellipse, rgba(168,85,247,0.05) 0%, transparent 70%)',
-        animation: 'nebulaFloat1 30s ease-in-out infinite reverse',
-        filter: 'blur(2px)',
-        transform: 'rotate(-20deg)',
-      }} />
-
-      <style>{`
-        @keyframes nebulaFloat1 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(30px, -40px) scale(1.08); }
-          66% { transform: translate(-20px, 25px) scale(0.95); }
-        }
-        @keyframes nebulaFloat2 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          40% { transform: translate(40px, 30px) scale(1.1); }
-          70% { transform: translate(-30px, -20px) scale(0.92); }
-        }
-        @keyframes nebulaFloat3 {
-          0%, 100% { transform: translate(-50%, -50%) scale(1); }
-          50% { transform: translate(calc(-50% + 50px), calc(-50% - 35px)) scale(1.15); }
-        }
-      `}</style>
-    </div>
-  )
-}
-
 /* -- check icon -- */
-function Check({ color = '#a78bfa' }) {
+function Check({ color = '#7c3aed' }) {
   return (
     <div
       className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5"
-      style={{ background: `${color}20`, border: `1px solid ${color}60` }}
+      style={{ background: `${color}18`, border: `1px solid ${color}50` }}
     >
       <svg className="w-3 h-3" style={{ color }} fill="currentColor" viewBox="0 0 20 20">
         <path
@@ -230,38 +154,139 @@ function Check({ color = '#a78bfa' }) {
   )
 }
 
+/* -- blob animado com ondas seno independentes (movimento orgânico) -- */
+function AnimatedBlob({ style }) {
+  const ref = useRef(null)
+  // Parâmetros gerados uma vez por instância (fase e frequência únicas)
+  const p = useRef({
+    ax: 90 + Math.random() * 140,
+    ay: 90 + Math.random() * 140,
+    fx: 0.00025 + Math.random() * 0.00020,
+    fy: 0.00025 + Math.random() * 0.00020,
+    px: Math.random() * Math.PI * 2,
+    py: Math.random() * Math.PI * 2,
+    fsx: 0.00015 + Math.random() * 0.00012,
+    fsy: 0.00013 + Math.random() * 0.00010,
+    psx: Math.random() * Math.PI * 2,
+    psy: Math.random() * Math.PI * 2,
+  })
+
+  useEffect(() => {
+    let raf
+    const tick = (t) => {
+      if (!ref.current) return
+      const { ax, ay, fx, fy, px, py, fsx, fsy, psx, psy } = p.current
+      // Duas ondas somadas em cada eixo = trajetória nunca se repete exatamente
+      const x = ax * Math.sin(fx * t + px) + (ax * 0.4) * Math.sin(fx * 2.3 * t + px + 1.1)
+      const y = ay * Math.sin(fy * t + py) + (ay * 0.4) * Math.sin(fy * 1.7 * t + py + 2.3)
+      const sx = 1 + 0.12 * Math.sin(fsx * t + psx)
+      const sy = 1 + 0.10 * Math.sin(fsy * t + psy)
+      ref.current.style.transform = `translate(${x}px, ${y}px) scale(${sx}, ${sy})`
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [])
+
+  return <div ref={ref} style={{ willChange: 'transform', ...style }} />
+}
+
 /* -- section divider -- */
 function SectionDivider() {
   return (
-    <div aria-hidden="true" style={{ position: 'relative', zIndex: 10, height: 2, overflow: 'hidden' }}>
-      <style>{`
-        @keyframes dividerSweep {
-          0%   { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-      `}</style>
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%)',
-      }} />
-      <div style={{
-        position: 'absolute', top: 0, left: 0,
-        width: '100%', height: '100%',
-        background: 'linear-gradient(90deg, transparent 0%, rgba(167,139,250,0.55) 20%, rgba(96,165,250,0.45) 45%, rgba(168,85,247,0.4) 65%, rgba(139,92,246,0.45) 85%, transparent 100%)',
-        animation: 'dividerSweep 7s linear infinite',
-        filter: 'drop-shadow(0 0 4px rgba(167,139,250,0.5)) drop-shadow(0 0 10px rgba(96,165,250,0.3))',
-      }} />
-    </div>
+    <div aria-hidden="true" style={{ height: 1, background: '#e5e7eb' }} />
   )
 }
 
 /* -- section badge -- */
 function Badge({ children }) {
   return (
-    <p className="reveal flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 mb-4">
-      <span className="w-8 h-px" style={{ background: 'rgba(167,139,250,0.5)' }} />
+    <p className="reveal flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] mb-4" style={{ color: '#7c3aed' }}>
+      <span className="w-8 h-px" style={{ background: '#7c3aed' }} />
       {children}
+      <span className="w-8 h-px" style={{ background: '#7c3aed' }} />
     </p>
+  )
+}
+
+/* -- intro image grid com gaveta individual -- */
+const INTRO_IMGS = [
+  { src: IMG.collaboration, alt: 'Colaboração', titleKey: 'intro_img1_title', descKey: 'intro_img1_desc', accent: '#7c3aed' },
+  { src: IMG.teacher, alt: 'Professor', titleKey: 'intro_img2_title', descKey: 'intro_img2_desc', accent: '#ec4899' },
+  { src: IMG.students, alt: 'Alunos', titleKey: 'intro_img3_title', descKey: 'intro_img3_desc', accent: '#3b82f6' },
+]
+
+function IntroImageGrid({ t }) {
+  const [hovered, setHovered] = useState(null)
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {INTRO_IMGS.map((item, i) => {
+        const open = hovered === i
+        return (
+          <div
+            key={item.alt}
+            className="reveal cursor-default"
+            style={{ position: 'relative' }}
+            onMouseEnter={() => setHovered(i)}
+            onMouseLeave={() => setHovered(null)}
+          >
+            {/* Imagem + Gaveta dentro do mesmo container */}
+            <div style={{
+              borderRadius: '16px',
+              overflow: 'hidden',
+              position: 'relative',
+              boxShadow: open
+                ? `0 8px 32px ${item.accent}35`
+                : '0 4px 24px rgba(0,0,0,0.08)',
+              transition: 'box-shadow 0.4s ease',
+            }}>
+              <img
+                src={item.src}
+                alt={item.alt}
+                className="w-full aspect-[4/3] object-cover block"
+                style={{
+                  transition: 'transform 0.6s ease, filter 0.4s ease',
+                  transform: open ? 'scale(1.06)' : 'scale(1)',
+                  filter: open ? 'brightness(0.75)' : 'brightness(1)',
+                }}
+              />
+
+              {/* Gaveta — desliza de baixo para cima, dentro da imagem */}
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                overflow: 'hidden',
+                maxHeight: open ? '160px' : '0px',
+                transition: 'max-height 0.45s cubic-bezier(0.4,0,0.2,1)',
+              }}>
+                <div style={{
+                  background: `linear-gradient(to top, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.88) 100%)`,
+                  padding: '16px 20px 18px',
+                  borderLeft: `3px solid ${item.accent}`,
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <div style={{
+                      width: '6px', height: '6px', borderRadius: '50%',
+                      background: item.accent,
+                      flexShrink: 0,
+                      boxShadow: `0 0 6px ${item.accent}80`,
+                    }} />
+                    <h4 style={{ color: '#111827', fontWeight: 800, fontSize: '1.05rem', margin: 0 }}>
+                      {t(`myclass_page.${item.titleKey}`)}
+                    </h4>
+                  </div>
+                  <p style={{ color: '#6b7280', fontSize: '0.92rem', lineHeight: 1.6, margin: 0, paddingLeft: '14px' }}>
+                    {t(`myclass_page.${item.descKey}`)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })}
+    </div>
   )
 }
 
@@ -269,113 +294,273 @@ function Badge({ children }) {
 export default function MyClass() {
   const { t } = useTranslation()
   useReveal()
+  const [trilhaOpen, setTrilhaOpen] = useState(false)
 
   return (
-    <div style={{ background: '#020207', color: 'white', position: 'relative' }}>
-      {/* ── Efeitos globais de fundo ── */}
-      <StarField />
-      <FloatingNebula />
+    <div style={{ background: '#ffffff', color: '#111827', position: 'relative' }}>
 
       {/* ═══════════════════════════════
           HERO
       ═══════════════════════════════ */}
       <section
-        className="relative min-h-screen flex items-center overflow-hidden pt-24"
-        style={{ background: 'radial-gradient(ellipse at 65% 45%, #0e0520 0%, #07030f 40%, #020207 70%)' }}
+        className="relative flex items-start justify-center overflow-hidden pt-32"
+        style={{ paddingBottom: '120px' }}
       >
-        {/* Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div
-            className="absolute inset-0 opacity-20"
-            style={{ backgroundImage: `url(${IMG.heroClassroom})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-          />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, #020207 35%, rgba(2,2,7,0.5) 65%, transparent 100%)' }} />
-          <div className="absolute top-16 right-16 w-[520px] h-[520px] rounded-full blur-[130px]" style={{ background: 'rgba(139,92,246,0.22)' }} />
-          <div className="absolute bottom-16 left-1/3 w-[380px] h-[380px] rounded-full blur-[100px]" style={{ background: 'rgba(168,85,247,0.12)' }} />
-          <div className="absolute top-1/2 right-1/4 w-[280px] h-[280px] rounded-full blur-[80px]" style={{ background: 'rgba(167,139,250,0.09)' }} />
+        {/* Blobs coloridos de fundo */}
+        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden' }}>
+          {/* Camada base — gradiente de textura granulada via SVG */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")`,
+            opacity: 0.5,
+          }} />
+
+          {/* Roxo grande — top left */}
+          <AnimatedBlob style={{
+            position: 'absolute', top: '-160px', left: '-180px',
+            width: '850px', height: '850px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(139,92,246,0.32) 0%, transparent 70%)',
+            filter: 'blur(50px)',
+          }} />
+          {/* Azul ciano — top right */}
+          <AnimatedBlob style={{
+            position: 'absolute', top: '-100px', right: '-140px',
+            width: '720px', height: '720px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(56,189,248,0.28) 0%, transparent 70%)',
+            filter: 'blur(50px)',
+          }} />
+          {/* Rosa choque — top center */}
+          <AnimatedBlob style={{
+            position: 'absolute', top: '-40px', left: '25%',
+            width: '560px', height: '500px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(244,114,182,0.26) 0%, transparent 72%)',
+            filter: 'blur(45px)',
+          }} />
+          {/* Violeta médio — centro esquerda */}
+          <AnimatedBlob style={{
+            position: 'absolute', top: '32%', left: '2%',
+            width: '580px', height: '580px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(168,85,247,0.28) 0%, transparent 70%)',
+            filter: 'blur(50px)',
+          }} />
+          {/* Azul royal — centro direita */}
+          <AnimatedBlob style={{
+            position: 'absolute', top: '22%', right: '4%',
+            width: '620px', height: '620px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(99,102,241,0.28) 0%, transparent 70%)',
+            filter: 'blur(50px)',
+          }} />
+          {/* Laranja suave — centro */}
+          <AnimatedBlob style={{
+            position: 'absolute', top: '38%', left: '34%',
+            width: '500px', height: '420px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(251,146,60,0.22) 0%, transparent 72%)',
+            filter: 'blur(40px)',
+          }} />
+          {/* Verde água — bottom center */}
+          <AnimatedBlob style={{
+            position: 'absolute', bottom: '-60px', left: '22%',
+            width: '680px', height: '520px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(52,211,153,0.26) 0%, transparent 70%)',
+            filter: 'blur(45px)',
+          }} />
+          {/* Índigo — bottom left */}
+          <AnimatedBlob style={{
+            position: 'absolute', bottom: '-100px', left: '-120px',
+            width: '560px', height: '560px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(99,102,241,0.28) 0%, transparent 70%)',
+            filter: 'blur(45px)',
+          }} />
+          {/* Rosa claro — bottom right */}
+          <AnimatedBlob style={{
+            position: 'absolute', bottom: '-80px', right: '-100px',
+            width: '540px', height: '540px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(236,72,153,0.25) 0%, transparent 70%)',
+            filter: 'blur(45px)',
+          }} />
+          {/* Overlay branco suave para não saturar demais */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'rgba(255,255,255,0.22)',
+          }} />
         </div>
+        <Container className="relative z-10">
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16">
+            {/* Pill badge */}
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-8"
+              style={{ background: 'rgba(124,58,237,0.08)', borderColor: 'rgba(124,58,237,0.3)' }}
+            >
+              <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#7c3aed' }} />
+              <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: '#7c3aed' }}>
+                {t('myclass_page.hero_badge')}
+              </span>
+            </div>
 
-        <Container className="relative z-10 py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* -- Left -- */}
-            <div>
-              {/* Pill badge */}
-              <div
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-8"
-                style={{ background: 'rgba(139,92,246,0.12)', borderColor: 'rgba(139,92,246,0.35)' }}
+            <h1 className="text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] mb-6" style={{ color: '#111827' }}>
+              {t('myclass_page.hero_h1_1')}{' '}
+              <span
+                className="text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #3b82f6 100%)' }}
               >
-                <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
-                <span className="text-violet-300 text-xs font-semibold uppercase tracking-widest">
-                  {t('myclass_page.hero_badge')}
-                </span>
+                {t('myclass_page.hero_h1_2')}
+              </span>
+              <br />
+              {t('myclass_page.hero_h1_3')}
+            </h1>
+
+            <p className="text-lg leading-relaxed mb-0 max-w-2xl" style={{ color: '#6b7280' }}>
+              O MyClass é uma solução completa de gestão de sala de aula e aprendizagem colaborativa. Centralize turmas, materiais, avaliações e comunicação em um único ambiente inteligente.
+            </p>
+          </div>
+
+          {/* Hero image — aparece saindo de baixo da seção */}
+          <div
+            className="relative mx-auto"
+            style={{ maxWidth: '1100px' }}
+          >
+            <div
+              className="relative rounded-2xl overflow-hidden"
+              style={{
+                border: '1px solid rgba(0,0,0,0.08)',
+                boxShadow: '0 20px 60px rgba(0,0,0,0.18), 0 6px 20px rgba(0,0,0,0.1)',
+              }}
+            >
+              <img
+                src={img1Myclass}
+                alt="MyClass plataforma"
+                className="w-full object-cover object-top"
+                style={{ display: 'block', maxHeight: '520px' }}
+              />
+              {/* Gradiente embaixo dando a sensação de "cortado" */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: '140px',
+                  background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.95) 100%)',
+                  pointerEvents: 'none',
+                }}
+              />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ═══════════════════════════════
+          O QUE É MYCLASS
+      ═══════════════════════════════ */}
+      <section className="py-28 relative" style={{ background: '#ffffff', marginTop: '-160px', paddingTop: '60px', position: 'relative', zIndex: 10 }}>
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div
+            className="absolute top-0 right-0 w-[600px] h-[500px] rounded-full blur-[160px]"
+            style={{ background: 'rgba(124,58,237,0.04)' }}
+          />
+        </div>
+        <Container>
+          {/* Título e descrição centralizados */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <p className="reveal flex items-center justify-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] mb-4" style={{ color: '#7c3aed' }}>
+              <span className="flex-1 h-px" style={{ background: '#7c3aed', maxWidth: '60px' }} />
+              {t('myclass_page.intro_badge')}
+              <span className="flex-1 h-px" style={{ background: '#7c3aed', maxWidth: '60px' }} />
+            </p>
+            <h2 className="reveal text-4xl lg:text-5xl font-black mb-6 leading-tight" style={{ color: '#111827' }}>
+              {t('myclass_page.intro_h2_1')}{' '}
+              <span
+                className="text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}
+              >
+                {t('myclass_page.intro_h2_2')}
+              </span>
+            </h2>
+            <p className="reveal text-base leading-relaxed" style={{ color: '#6b7280' }}>
+              {t('myclass_page.intro_p2')}
+            </p>
+          </div>
+
+          {/* Grid de 3 imagens */}
+          <IntroImageGrid t={t} />
+        </Container>
+      </section>
+
+      <SectionDivider />
+
+      {/* ═══════════════════════════════
+          FUNCIONALIDADES PARA PROFESSORES & ALUNOS
+      ═══════════════════════════════ */}
+      <section className="py-28" style={{ background: '#ffffff' }}>
+        <Container>
+          <div className="text-center mb-16">
+            <Badge>{t('myclass_page.users_badge')}</Badge>
+            <h2 className="reveal text-4xl lg:text-5xl font-black mb-4" style={{ color: '#111827' }}>
+              {t('myclass_page.users_h2_1')}<br />
+              <span
+                className="text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg, #7c3aed, #3b82f6)' }}
+              >
+                {t('myclass_page.users_h2_2')}
+              </span>
+            </h2>
+            <p className="reveal max-w-2xl mx-auto leading-relaxed" style={{ color: '#6b7280' }}>
+              {t('myclass_page.users_desc')}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Professores */}
+            <div
+              className="reveal relative rounded-3xl overflow-hidden border"
+              style={{ background: '#ffffff', borderColor: '#e5e7eb', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}
+            >
+              <div className="relative aspect-[16/9] overflow-hidden">
+                <img src={IMG.teacher} alt="Professor usando MyClass" className="w-full h-full object-cover" />
               </div>
-
-              <h1 className="text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[0.9] mb-6">
-                {t('myclass_page.hero_h1_1')}{' '}
-                <span
-                  className="text-transparent bg-clip-text"
-                  style={{ backgroundImage: 'linear-gradient(135deg, #a78bfa 0%, #c084fc 50%, #60a5fa 100%)' }}
-                >
-                  {t('myclass_page.hero_h1_2')}
-                </span>
-                <br />
-                {t('myclass_page.hero_h1_3')}
-              </h1>
-
-              <p className="text-white/55 text-lg leading-relaxed mb-10 max-w-xl">
-                {t('myclass_page.hero_desc')}
-              </p>
-
-              {/* Available on */}
-              <div className="flex items-center gap-3 flex-wrap">
-                <span className="text-white/30 text-xs uppercase tracking-widest font-semibold">
-                  {t('myclass_page.hero_available_label')}
-                </span>
-                {[t('myclass_page.hero_platform_1'), t('myclass_page.hero_platform_2'), t('myclass_page.hero_platform_3')].map((mode) => (
-                  <span
-                    key={mode}
-                    className="px-3 py-1.5 rounded-full text-xs font-medium text-white/65 border border-white/10"
-                    style={{ background: 'rgba(255,255,255,0.04)' }}
-                  >
-                    {mode}
-                  </span>
-                ))}
+              <div className="p-8">
+                <h3 className="text-3xl font-black mb-4" style={{ color: '#111827' }}>{t('myclass_page.teacher_title')}</h3>
+                <ul className="space-y-3">
+                  {[
+                    t('myclass_page.teacher_feat_1'),
+                    t('myclass_page.teacher_feat_2'),
+                    t('myclass_page.teacher_feat_3'),
+                    t('myclass_page.teacher_feat_4'),
+                    t('myclass_page.teacher_feat_5'),
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <Check color="#7c3aed" />
+                      <span className="text-base" style={{ color: '#4b5563' }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            {/* -- Right: classroom image -- */}
-            <div className="relative hidden lg:flex items-center justify-center">
-              <div
-                className="relative rounded-3xl overflow-hidden w-full aspect-[4/5]"
-                style={{ boxShadow: '0 0 100px rgba(139,92,246,0.35), 0 0 40px rgba(168,85,247,0.2)' }}
-              >
-                <img
-                  src={IMG.liveClass}
-                  alt="Aula ao vivo MyClass"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(2,2,7,0.7) 0%, transparent 60%)' }} />
+            {/* Alunos */}
+            <div
+              className="reveal relative rounded-3xl overflow-hidden border"
+              style={{ background: '#ffffff', borderColor: '#e5e7eb', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}
+            >
+              <div className="relative aspect-[16/9] overflow-hidden">
+                <img src={IMG.students} alt="Alunos usando MyClass" className="w-full h-full object-cover" />
               </div>
-
-              {/* Floating chip · top right */}
-              <div
-                className="absolute -top-4 -right-6 rounded-2xl px-5 py-3 border border-white/10"
-                style={{ background: 'rgba(8,8,28,0.92)', backdropFilter: 'blur(20px)' }}
-              >
-                <p className="text-sm font-bold text-white">{t('myclass_page.hero_chip1_title')}</p>
-                <p className="text-xs text-white/40">{t('myclass_page.hero_chip1_sub')}</p>
-              </div>
-
-              {/* Floating chip · bottom left */}
-              <div
-                className="absolute -bottom-4 -left-6 rounded-2xl px-5 py-3 border border-violet-500/20"
-                style={{ background: 'rgba(8,8,28,0.92)', backdropFilter: 'blur(20px)' }}
-              >
-                <div className="flex items-center gap-2 mb-0.5">
-                  <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
-                  <p className="text-sm font-bold text-white">{t('myclass_page.hero_chip2_title')}</p>
-                </div>
-                <p className="text-xs text-white/40">{t('myclass_page.hero_chip2_sub')}</p>
+              <div className="p-8">
+                <h3 className="text-3xl font-black mb-4" style={{ color: '#111827' }}>{t('myclass_page.student_title')}</h3>
+                <ul className="space-y-3">
+                  {[
+                    t('myclass_page.student_feat_1'),
+                    t('myclass_page.student_feat_2'),
+                    t('myclass_page.student_feat_3'),
+                    t('myclass_page.student_feat_4'),
+                    t('myclass_page.student_feat_5'),
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <Check color="#3b82f6" />
+                      <span className="text-base" style={{ color: '#4b5563' }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -385,88 +570,397 @@ export default function MyClass() {
       <SectionDivider />
 
       {/* ═══════════════════════════════
-          O QUE É MYCLASS
+          FEATURES CAROUSEL
       ═══════════════════════════════ */}
-      <section className="py-28 relative" style={{ background: '#020207' }}>
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute top-0 right-0 w-[600px] h-[500px] rounded-full blur-[160px]"
-            style={{ background: 'rgba(139,92,246,0.07)' }}
-          />
-        </div>
+      <section
+        className="py-14 relative overflow-hidden"
+        style={{ background: '#f9fafb' }}
+      >
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            {/* Image */}
-            <div className="reveal relative">
-              <div
-                className="rounded-3xl overflow-hidden"
-                style={{ boxShadow: '0 0 70px rgba(139,92,246,0.22)' }}
+          <div className="text-center mb-10">
+            <Badge>{t('myclass_page.features_badge')}</Badge>
+            <h2 className="reveal text-4xl lg:text-5xl font-black mb-4" style={{ color: '#111827' }}>
+              {t('myclass_page.features_h2_1')}{' '}
+              <span
+                className="text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}
               >
-                <img
-                  src={IMG.collaboration}
-                  alt="Colaboração em sala de aula com MyClass"
-                  className="w-full aspect-[4/3] object-cover"
-                />
-              </div>
-              {/* Chip · bottom right */}
+                {t('myclass_page.features_h2_2')}
+              </span>
+            </h2>
+            <p className="reveal max-w-xl mx-auto" style={{ color: '#6b7280' }}>
+              {t('myclass_page.features_desc')}
+            </p>
+          </div>
+        </Container>
+
+        {/* Carrossel infinito — full width */}
+        <div
+          className="overflow-hidden"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to right, transparent 0px, black 100px, black calc(100% - 100px), transparent 100%)',
+            maskImage: 'linear-gradient(to right, transparent 0px, black 100px, black calc(100% - 100px), transparent 100%)',
+          }}
+        >
+          <div className="marquee-track" style={{ gap: '20px', paddingBlock: '8px' }}>
+            {[
+              ...FEAT_META.map((m) => ({ ...m, uid: m.id })),
+              ...FEAT_META.map((m) => ({ ...m, uid: `${m.id}b` })),
+            ].map((feat) => (
               <div
-                className="absolute -bottom-6 -right-6 rounded-2xl p-4 border border-white/10"
-                style={{ background: 'rgba(8,8,28,0.95)', backdropFilter: 'blur(20px)', boxShadow: '0 20px 60px rgba(0,0,0,0.5)' }}
+                key={feat.uid}
+                className="flex-shrink-0 rounded-2xl p-6 border"
+                style={{
+                  width: '260px',
+                  background: '#ffffff',
+                  borderColor: '#e5e7eb',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
+                }}
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background: 'rgba(139,92,246,0.2)' }}>📡</div>
-                  <div>
-                    <p className="text-white font-bold text-sm">Aulas ao Vivo</p>
-                    <p className="text-white/40 text-xs">Interação em tempo real</p>
-                  </div>
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                  style={{ background: feat.bg, border: `1px solid ${feat.accent}25` }}
+                >
+                  {feat.icon(feat.accent)}
                 </div>
+                <h4 className="font-bold mb-2 text-sm leading-snug" style={{ color: '#111827' }}>
+                  {t(`myclass_page.${feat.tKey}_title`)}
+                </h4>
+                <p className="text-xs leading-relaxed" style={{ color: '#9ca3af' }}>
+                  {t(`myclass_page.${feat.tKey}_desc`)}
+                </p>
               </div>
-              {/* Chip · top left */}
-              <div
-                className="absolute -top-6 -left-6 rounded-2xl p-4 border border-white/10"
-                style={{ background: 'rgba(8,8,28,0.95)', backdropFilter: 'blur(20px)', boxShadow: '0 20px 60px rgba(0,0,0,0.5)' }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background: 'rgba(167,139,250,0.2)' }}>👩‍🏫</div>
-                  <div>
-                    <p className="text-white font-bold text-sm">Gestão Completa</p>
-                    <p className="text-white/40 text-xs">Turmas · Alunos · Conteúdo</p>
-                  </div>
-                </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════
+          BANNER TRILHA
+      ═══════════════════════════════ */}
+      <section style={{ padding: '0 12px' }}>
+        <div style={{ maxWidth: '1600px', margin: '0 auto' }}>
+          <div
+            className="reveal relative overflow-hidden"
+            style={{ borderRadius: '20px', background: '#0b0622' }}
+          >
+            {/* Imagem de fundo */}
+            <img
+              src={imgTrilha}
+              alt="Trilha MyClass"
+              className="absolute top-0 bottom-0 right-0 h-full w-full md:w-[82%] object-cover"
+              style={{ objectPosition: '90% 74%' }}
+            />
+
+            {/* Overlay mobile: escurece tudo para legibilidade */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 md:hidden"
+              style={{ background: 'rgba(12,8,38,0.78)', pointerEvents: 'none' }}
+            />
+
+            {/* Gradiente desktop: esq → dir */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 hidden md:block"
+              style={{
+                background: 'linear-gradient(90deg, rgba(12,8,38,1) 0%, rgba(12,8,38,1) 20%, rgba(12,8,38,0.5) 35%, rgba(12,8,38,0.3) 55%, rgba(12,8,38,0.1) 68%, transparent 80%)',
+                pointerEvents: 'none',
+              }}
+            />
+
+            {/* Conteúdo de texto */}
+            <div className="relative z-10 flex flex-col justify-center px-6 py-14 md:py-0 md:absolute md:inset-y-0 md:left-0 md:w-[42%] md:px-14">
+              <div style={{ marginBottom: '16px' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L2 9l10 13L22 9z" stroke="#a78bfa" strokeWidth="1.8" strokeLinejoin="round" />
+                  <path d="M2 9h20" stroke="#a78bfa" strokeWidth="1.8" />
+                </svg>
+              </div>
+
+              {/* Pill */}
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
+                <span style={{
+                  fontSize: '11px', fontWeight: 700, letterSpacing: '0.14em',
+                  padding: '5px 14px', borderRadius: '999px',
+                  border: '1px solid rgba(167,139,250,0.45)',
+                  color: '#c4b5fd',
+                }}>
+                  TRILHA DE APRENDIZAGEM
+                </span>
+              </div>
+
+              {/* Título */}
+              <h2 className="text-4xl md:text-[3.4rem]" style={{ fontWeight: 900, lineHeight: 1.05, color: '#ffffff', marginBottom: '20px' }}>
+                Aprender virou<br />
+                <span style={{ color: '#a78bfa' }}>um jogo de verdade</span>
+              </h2>
+
+              {/* Descrição */}
+              <p style={{
+                fontSize: '1rem', color: 'rgba(255,255,255,0.60)',
+                lineHeight: 1.75, marginBottom: '36px',
+              }}>
+                O MyClass agora conta com trilhas educacionais gamificadas, que transformam o aprendizado em uma experiência interativa e envolvente.
+              </p>
+
+              {/* CTA */}
+              <div>
+                <button
+                  onClick={() => setTrilhaOpen(true)}
+                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-white/35 bg-transparent text-white text-[0.95rem] font-semibold cursor-pointer transition-all duration-200 hover:bg-white hover:text-gray-900"
+                >
+                  Explorar Trilhas
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                </button>
               </div>
             </div>
 
-            {/* Text */}
+            {/* Espaçador invisível para manter altura no desktop */}
+            <div className="hidden md:block pointer-events-none" style={{ height: '538px' }} aria-hidden="true" />
+          </div>
+        </div>
+      </section>
+
+      {/* Lightbox — imagem da trilha */}
+      {trilhaOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Imagem da Trilha de Aprendizagem"
+          onClick={() => setTrilhaOpen(false)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            background: 'rgba(0,0,0,0.85)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '16px',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{ position: 'relative', maxWidth: '960px', width: '100%' }}
+          >
+            <img
+              src={imgTrilha}
+              alt="Trilha de Aprendizagem MyClass"
+              style={{ width: '100%', borderRadius: '16px', display: 'block', boxShadow: '0 24px 80px rgba(0,0,0,0.6)' }}
+            />
+            <button
+              onClick={() => setTrilhaOpen(false)}
+              aria-label="Fechar"
+              style={{
+                position: 'absolute', top: '-14px', right: '-14px',
+                width: '36px', height: '36px', borderRadius: '50%',
+                background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                backdropFilter: 'blur(8px)', padding: 0,
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round">
+                <line x1="1" y1="1" x2="13" y2="13" />
+                <line x1="13" y1="1" x2="1" y2="13" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ═══════════════════════════════
+          GESTÃO ESCOLAR COMPLETA
+      ═══════════════════════════════ */}
+      <section className="py-28" style={{ background: '#ffffff' }}>
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Conteúdo */}
             <div>
-              <Badge>{t('myclass_page.intro_badge')}</Badge>
-              <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-6 leading-tight">
-                {t('myclass_page.intro_h2_1')}{' '}
+              <Badge>{t('myclass_page.management_badge')}</Badge>
+              <h2 className="reveal text-4xl lg:text-5xl font-black mb-6 leading-tight" style={{ color: '#111827' }}>
+                {t('myclass_page.management_h2_1')}{' '}
                 <span
                   className="text-transparent bg-clip-text"
-                  style={{ backgroundImage: 'linear-gradient(135deg, #a78bfa, #c084fc)' }}
+                  style={{ backgroundImage: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}
                 >
-                  {t('myclass_page.intro_h2_2')}
+                  {t('myclass_page.management_h2_2')}
                 </span>
               </h2>
-              <p className="reveal text-white/55 text-lg leading-relaxed mb-4">
-                {t('myclass_page.intro_p1')}
+              <p className="reveal text-base leading-relaxed mb-8" style={{ color: '#6b7280' }}>
+                {t('myclass_page.management_desc')}
               </p>
-              <p className="reveal text-white/40 text-base leading-relaxed mb-10">
-                {t('myclass_page.intro_p2')}
-              </p>
-
-              <ul className="reveal space-y-3 mb-10">
+              <ul className="space-y-4">
                 {[
-                  t('myclass_page.intro_feat_1'),
-                  t('myclass_page.intro_feat_2'),
-                  t('myclass_page.intro_feat_3'),
-                  t('myclass_page.intro_feat_4'),
-                  t('myclass_page.intro_feat_5'),
-                  t('myclass_page.intro_feat_6'),
-                ].map((feat) => (
-                  <li key={feat} className="flex items-start gap-3">
-                    <Check />
-                    <span className="text-white/65 text-sm">{feat}</span>
+                  t('myclass_page.management_feat_1'),
+                  t('myclass_page.management_feat_2'),
+                  t('myclass_page.management_feat_3'),
+                  t('myclass_page.management_feat_4'),
+                  t('myclass_page.management_feat_5'),
+                ].map((item) => (
+                  <li key={item} className="reveal flex items-start gap-3">
+                    <Check color="#7c3aed" />
+                    <span className="text-base" style={{ color: '#4b5563' }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Visual */}
+            <div className="reveal relative">
+              <div
+                className="relative rounded-3xl overflow-hidden"
+                style={{
+                  border: '1px solid rgba(0,0,0,0.07)',
+                  boxShadow: '0 20px 60px rgba(124,58,237,0.12), 0 4px 20px rgba(0,0,0,0.08)',
+                }}
+              >
+                <img
+                  src={IMG.learning}
+                  alt="Gestão Escolar MyClass"
+                  className="w-full aspect-[4/3] object-cover block"
+                />
+                {/* stat pill */}
+                <div
+                  style={{
+                    position: 'absolute', bottom: '20px', left: '20px',
+                    background: 'rgba(255,255,255,0.95)',
+                    borderRadius: '14px',
+                    padding: '12px 18px',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.10)',
+                    display: 'flex', alignItems: 'center', gap: '12px',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '36px', height: '36px', borderRadius: '10px',
+                      background: 'rgba(124,58,237,0.1)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 600, margin: 0 }}>USUÁRIOS ATIVOS</p>
+                    <p style={{ fontSize: '1.05rem', color: '#111827', fontWeight: 900, margin: 0 }}>9M+ Alunos</p>
+                  </div>
+                </div>
+              </div>
+              {/* Decoração */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: 'absolute', top: '-24px', right: '-24px',
+                  width: '180px', height: '180px', borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%)',
+                  filter: 'blur(30px)',
+                  zIndex: -1,
+                }}
+              />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <SectionDivider />
+
+      {/* ═══════════════════════════════
+          ANALYTICS & BI
+      ═══════════════════════════════ */}
+      <section className="py-28" style={{ background: '#f9fafb' }}>
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Visual — imagem do dashboard à esquerda */}
+            <div className="reveal relative order-last lg:order-first">
+              <div
+                className="relative rounded-3xl overflow-hidden"
+                style={{
+                  border: '1px solid rgba(0,0,0,0.07)',
+                  boxShadow: '0 20px 60px rgba(59,130,246,0.12), 0 4px 20px rgba(0,0,0,0.08)',
+                }}
+              >
+                <img
+                  src={img1Myclass}
+                  alt="Analytics e BI MyClass"
+                  className="w-full object-cover object-top block"
+                  style={{ maxHeight: '420px' }}
+                />
+                {/* Gradiente sutil embaixo */}
+                <div
+                  style={{
+                    position: 'absolute', bottom: 0, left: 0, right: 0, height: '80px',
+                    background: 'linear-gradient(to bottom, transparent, rgba(249,250,251,0.9))',
+                    pointerEvents: 'none',
+                  }}
+                />
+                {/* peak stat pill */}
+                <div
+                  style={{
+                    position: 'absolute', bottom: '16px', right: '16px',
+                    background: 'rgba(255,255,255,0.96)',
+                    borderRadius: '14px',
+                    padding: '10px 16px',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.10)',
+                    display: 'flex', alignItems: 'center', gap: '10px',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '32px', height: '32px', borderRadius: '8px',
+                      background: 'rgba(59,130,246,0.1)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                      <path d="M3 3v18h18" />
+                      <path d="M7 16l4-6 4 4 4-6" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: '0.65rem', color: '#9ca3af', fontWeight: 600, margin: 0, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Pico simultâneo</p>
+                    <p style={{ fontSize: '1rem', color: '#111827', fontWeight: 900, margin: 0 }}>400K+ usuários</p>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-hidden="true"
+                style={{
+                  position: 'absolute', bottom: '-24px', left: '-24px',
+                  width: '200px', height: '200px', borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(59,130,246,0.14) 0%, transparent 70%)',
+                  filter: 'blur(35px)',
+                  zIndex: -1,
+                }}
+              />
+            </div>
+
+            {/* Conteúdo */}
+            <div>
+              <Badge>{t('myclass_page.analytics_badge')}</Badge>
+              <h2 className="reveal text-4xl lg:text-5xl font-black mb-6 leading-tight" style={{ color: '#111827' }}>
+                {t('myclass_page.analytics_h2_1')}{' '}
+                <span
+                  className="text-transparent bg-clip-text"
+                  style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6, #7c3aed)' }}
+                >
+                  {t('myclass_page.analytics_h2_2')}
+                </span>
+              </h2>
+              <p className="reveal text-base leading-relaxed mb-8" style={{ color: '#6b7280' }}>
+                {t('myclass_page.analytics_desc')}
+              </p>
+              <ul className="space-y-4">
+                {[
+                  { text: t('myclass_page.analytics_feat_1'), color: '#3b82f6' },
+                  { text: t('myclass_page.analytics_feat_2'), color: '#7c3aed' },
+                  { text: t('myclass_page.analytics_feat_3'), color: '#3b82f6' },
+                  { text: t('myclass_page.analytics_feat_4'), color: '#7c3aed' },
+                ].map(({ text, color }) => (
+                  <li key={text} className="reveal flex items-start gap-3">
+                    <Check color={color} />
+                    <span className="text-base" style={{ color: '#4b5563' }}>{text}</span>
                   </li>
                 ))}
               </ul>
@@ -482,27 +976,21 @@ export default function MyClass() {
       ═══════════════════════════════ */}
       <section
         className="py-28 relative overflow-hidden"
-        style={{ background: 'linear-gradient(180deg, #020207 0%, #06030d 50%, #020207 100%)' }}
+        style={{ background: '#f9fafb' }}
       >
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] rounded-full blur-[160px]"
-            style={{ background: 'rgba(139,92,246,0.09)' }}
-          />
-        </div>
         <Container>
           <div className="text-center mb-16">
             <Badge>{t('myclass_page.platforms_badge')}</Badge>
-            <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
+            <h2 className="reveal text-4xl lg:text-5xl font-black mb-4" style={{ color: '#111827' }}>
               {t('myclass_page.platforms_h2_1')}{' '}
               <span
                 className="text-transparent bg-clip-text"
-                style={{ backgroundImage: 'linear-gradient(135deg, #a78bfa, #c084fc)' }}
+                style={{ backgroundImage: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}
               >
                 {t('myclass_page.platforms_h2_2')}
               </span>
             </h2>
-            <p className="reveal text-white/45 max-w-xl mx-auto leading-relaxed">
+            <p className="reveal max-w-xl mx-auto leading-relaxed" style={{ color: '#6b7280' }}>
               {t('myclass_page.platforms_desc')}
             </p>
           </div>
@@ -511,7 +999,7 @@ export default function MyClass() {
             {/* Dashboard */}
             <div
               className="reveal relative rounded-3xl overflow-hidden border group"
-              style={{ background: 'rgba(139,92,246,0.05)', borderColor: 'rgba(139,92,246,0.2)' }}
+              style={{ background: '#ffffff', borderColor: '#e5e7eb', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
@@ -519,31 +1007,18 @@ export default function MyClass() {
                   alt="Dashboard Web MyClass"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #06030d 0%, rgba(6,3,13,0.5) 60%, rgba(0,0,0,0.35) 100%)' }} />
-                <div
-                  className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold"
-                  style={{ background: 'rgba(10,6,30,0.82)', color: '#c4b5fd', backdropFilter: 'blur(12px)', border: '1px solid rgba(167,139,250,0.45)' }}
-                >
-                  {t('myclass_page.platform_web_label')}
-                </div>
               </div>
               <div className="p-6">
-                <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-4"
-                  style={{ background: 'rgba(139,92,246,0.15)', border: '1px solid rgba(167,139,250,0.25)' }}
-                >
-                  🖥️
-                </div>
-                <h3 className="text-xl font-black text-white mb-2">{t('myclass_page.platform_web_title')}</h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-4">
+                <h3 className="text-xl font-black mb-2" style={{ color: '#111827' }}>{t('myclass_page.platform_web_title')}</h3>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: '#6b7280' }}>
                   {t('myclass_page.platform_web_desc')}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {['Chrome', 'Firefox', 'Safari', 'Edge'].map((d) => (
                     <span
                       key={d}
-                      className="text-xs px-2.5 py-1 rounded-lg text-white/50 border border-white/10"
-                      style={{ background: 'rgba(255,255,255,0.03)' }}
+                      className="text-xs px-2.5 py-1 rounded-lg border"
+                      style={{ background: '#f3f4f6', borderColor: '#e5e7eb', color: '#374151' }}
                     >
                       {d}
                     </span>
@@ -555,7 +1030,7 @@ export default function MyClass() {
             {/* Live Classes */}
             <div
               className="reveal relative rounded-3xl overflow-hidden border group"
-              style={{ background: 'rgba(168,85,247,0.05)', borderColor: 'rgba(168,85,247,0.2)' }}
+              style={{ background: '#ffffff', borderColor: '#e5e7eb', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
@@ -563,31 +1038,18 @@ export default function MyClass() {
                   alt="Aulas ao vivo"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #06030d 0%, rgba(6,3,13,0.5) 60%, rgba(0,0,0,0.35) 100%)' }} />
-                <div
-                  className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold"
-                  style={{ background: 'rgba(20,6,30,0.82)', color: '#e879f9', backdropFilter: 'blur(12px)', border: '1px solid rgba(232,121,249,0.45)' }}
-                >
-                  {t('myclass_page.platform_live_label')}
-                </div>
               </div>
               <div className="p-6">
-                <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-4"
-                  style={{ background: 'rgba(168,85,247,0.15)', border: '1px solid rgba(232,121,249,0.25)' }}
-                >
-                  🎥
-                </div>
-                <h3 className="text-xl font-black text-white mb-2">{t('myclass_page.platform_live_title')}</h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-4">
+                <h3 className="text-xl font-black mb-2" style={{ color: '#111827' }}>{t('myclass_page.platform_live_title')}</h3>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: '#6b7280' }}>
                   {t('myclass_page.platform_live_desc')}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {['Vídeo HD', 'Quadro Branco', 'Gravação', 'Chat'].map((d) => (
                     <span
                       key={d}
-                      className="text-xs px-2.5 py-1 rounded-lg text-white/50 border border-white/10"
-                      style={{ background: 'rgba(255,255,255,0.03)' }}
+                      className="text-xs px-2.5 py-1 rounded-lg border"
+                      style={{ background: '#f3f4f6', borderColor: '#e5e7eb', color: '#374151' }}
                     >
                       {d}
                     </span>
@@ -599,7 +1061,7 @@ export default function MyClass() {
             {/* Mobile */}
             <div
               className="reveal relative rounded-3xl overflow-hidden border group"
-              style={{ background: 'rgba(96,165,250,0.05)', borderColor: 'rgba(96,165,250,0.2)' }}
+              style={{ background: '#ffffff', borderColor: '#e5e7eb', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
@@ -607,31 +1069,18 @@ export default function MyClass() {
                   alt="App Mobile MyClass"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #06030d 0%, rgba(6,3,13,0.5) 60%, rgba(0,0,0,0.35) 100%)' }} />
-                <div
-                  className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold"
-                  style={{ background: 'rgba(4,12,30,0.82)', color: '#93c5fd', backdropFilter: 'blur(12px)', border: '1px solid rgba(96,165,250,0.45)' }}
-                >
-                  {t('myclass_page.platform_mobile_label')}
-                </div>
               </div>
               <div className="p-6">
-                <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-4"
-                  style={{ background: 'rgba(96,165,250,0.15)', border: '1px solid rgba(96,165,250,0.25)' }}
-                >
-                  📱
-                </div>
-                <h3 className="text-xl font-black text-white mb-2">{t('myclass_page.platform_mobile_title')}</h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-4">
+                <h3 className="text-xl font-black mb-2" style={{ color: '#111827' }}>{t('myclass_page.platform_mobile_title')}</h3>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: '#6b7280' }}>
                   {t('myclass_page.platform_mobile_desc')}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {['iOS', 'Android', 'Notificações', 'Offline'].map((d) => (
                     <span
                       key={d}
-                      className="text-xs px-2.5 py-1 rounded-lg text-white/50 border border-white/10"
-                      style={{ background: 'rgba(255,255,255,0.03)' }}
+                      className="text-xs px-2.5 py-1 rounded-lg border"
+                      style={{ background: '#f3f4f6', borderColor: '#e5e7eb', color: '#374151' }}
                     >
                       {d}
                     </span>
@@ -646,202 +1095,46 @@ export default function MyClass() {
       <SectionDivider />
 
       {/* ═══════════════════════════════
-          FUNCIONALIDADES PARA PROFESSORES & ALUNOS
-      ═══════════════════════════════ */}
-      <section className="py-28" style={{ background: '#020207' }}>
-        <Container>
-          <div className="text-center mb-16">
-            <Badge>{t('myclass_page.users_badge')}</Badge>
-            <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
-              {t('myclass_page.users_h2_1')}{' '}
-              <span
-                className="text-transparent bg-clip-text"
-                style={{ backgroundImage: 'linear-gradient(135deg, #f472b6, #a78bfa, #60a5fa)' }}
-              >
-                {t('myclass_page.users_h2_2')}
-              </span>
-            </h2>
-            <p className="reveal text-white/45 max-w-2xl mx-auto leading-relaxed">
-              {t('myclass_page.users_desc')}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Professores */}
-            <div
-              className="reveal relative rounded-3xl overflow-hidden border"
-              style={{ background: 'rgba(139,92,246,0.04)', borderColor: 'rgba(139,92,246,0.18)' }}
-            >
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <img src={IMG.teacher} alt="Professor usando MyClass" className="w-full h-full object-cover" />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #06030d 0%, rgba(6,3,13,0.4) 60%, rgba(0,0,0,0.2) 100%)' }} />
-                <div
-                  className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold"
-                  style={{ background: 'rgba(10,6,30,0.82)', color: '#c4b5fd', backdropFilter: 'blur(12px)', border: '1px solid rgba(167,139,250,0.45)' }}
-                >
-                  {t('myclass_page.teacher_label')}
-                </div>
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-black text-white mb-4">{t('myclass_page.teacher_title')}</h3>
-                <ul className="space-y-3">
-                  {[
-                    t('myclass_page.teacher_feat_1'),
-                    t('myclass_page.teacher_feat_2'),
-                    t('myclass_page.teacher_feat_3'),
-                    t('myclass_page.teacher_feat_4'),
-                    t('myclass_page.teacher_feat_5'),
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <Check color="#a78bfa" />
-                      <span className="text-white/60 text-sm">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* Alunos */}
-            <div
-              className="reveal relative rounded-3xl overflow-hidden border"
-              style={{ background: 'rgba(96,165,250,0.04)', borderColor: 'rgba(96,165,250,0.18)' }}
-            >
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <img src={IMG.students} alt="Alunos usando MyClass" className="w-full h-full object-cover" />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #06030d 0%, rgba(6,3,13,0.4) 60%, rgba(0,0,0,0.2) 100%)' }} />
-                <div
-                  className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold"
-                  style={{ background: 'rgba(6,12,30,0.82)', color: '#93c5fd', backdropFilter: 'blur(12px)', border: '1px solid rgba(96,165,250,0.45)' }}
-                >
-                  {t('myclass_page.student_label')}
-                </div>
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-black text-white mb-4">{t('myclass_page.student_title')}</h3>
-                <ul className="space-y-3">
-                  {[
-                    t('myclass_page.student_feat_1'),
-                    t('myclass_page.student_feat_2'),
-                    t('myclass_page.student_feat_3'),
-                    t('myclass_page.student_feat_4'),
-                    t('myclass_page.student_feat_5'),
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <Check color="#60a5fa" />
-                      <span className="text-white/60 text-sm">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <SectionDivider />
-
-      {/* ═══════════════════════════════
-          FEATURES GRID
-      ═══════════════════════════════ */}
-      <section
-        className="py-28 relative overflow-hidden"
-        style={{ background: 'linear-gradient(180deg, #020207 0%, #06030d 50%, #020207 100%)' }}
-      >
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute bottom-0 left-1/4 w-[700px] h-[300px] rounded-full blur-[130px]"
-            style={{ background: 'rgba(139,92,246,0.08)' }}
-          />
-        </div>
-        <Container>
-          <div className="text-center mb-16">
-            <Badge>{t('myclass_page.features_badge')}</Badge>
-            <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
-              {t('myclass_page.features_h2_1')}{' '}
-              <span
-                className="text-transparent bg-clip-text"
-                style={{ backgroundImage: 'linear-gradient(135deg, #a78bfa, #c084fc)' }}
-              >
-                {t('myclass_page.features_h2_2')}
-              </span>
-            </h2>
-            <p className="reveal text-white/45 max-w-xl mx-auto">
-              {t('myclass_page.features_desc')}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { icon: '📡', title: t('myclass_page.feat_1_title'), desc: t('myclass_page.feat_1_desc'), glow: '#a78bfa' },
-              { icon: '🤖', title: t('myclass_page.feat_2_title'), desc: t('myclass_page.feat_2_desc'), glow: '#c084fc' },
-              { icon: '📊', title: t('myclass_page.feat_3_title'), desc: t('myclass_page.feat_3_desc'), glow: '#60a5fa' },
-              { icon: '📝', title: t('myclass_page.feat_4_title'), desc: t('myclass_page.feat_4_desc'), glow: '#f472b6' },
-              { icon: '👥', title: t('myclass_page.feat_5_title'), desc: t('myclass_page.feat_5_desc'), glow: '#f59e0b' },
-              { icon: '🔔', title: t('myclass_page.feat_6_title'), desc: t('myclass_page.feat_6_desc'), glow: '#10b981' },
-              { icon: '📅', title: t('myclass_page.feat_7_title'), desc: t('myclass_page.feat_7_desc'), glow: '#a78bfa' },
-              { icon: '📁', title: t('myclass_page.feat_8_title'), desc: t('myclass_page.feat_8_desc'), glow: '#60a5fa' },
-              { icon: '🔒', title: t('myclass_page.feat_9_title'), desc: t('myclass_page.feat_9_desc'), glow: '#34d399' },
-            ].map((feat) => (
-              <div
-                key={feat.title}
-                className="reveal group relative rounded-2xl p-6 overflow-hidden"
-                style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}
-              >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4"
-                  style={{ background: `${feat.glow}18`, border: `1px solid ${feat.glow}30` }}
-                >
-                  {feat.icon}
-                </div>
-                <h4 className="text-white font-bold mb-2 text-sm leading-snug">{feat.title}</h4>
-                <p className="text-white/40 text-xs leading-relaxed">{feat.desc}</p>
-                <div
-                  className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: `${feat.glow}30` }}
-                />
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <SectionDivider />
-
-      {/* ═══════════════════════════════
           CTA FINAL
       ═══════════════════════════════ */}
       <section
         className="py-32 relative overflow-hidden"
-        style={{ background: 'linear-gradient(180deg, #020207 0%, #06030d 50%, #020207 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #f5f3ff 0%, #ede9fe 40%, #f0f9ff 100%)' }}
       >
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-15"
-            style={{ backgroundImage: `url(${IMG.nebula})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: 'linear-gradient(180deg, #020207 0%, rgba(2,2,7,0.65) 50%, #020207 100%)' }}
-          />
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[600px] rounded-full blur-[160px]"
-            style={{ background: 'rgba(139,92,246,0.13)' }}
-          />
-        </div>
         <Container className="relative z-10 text-center">
           <Badge>{t('myclass_page.cta_badge')}</Badge>
-          <h2 className="reveal text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
+          <h2 className="reveal text-5xl lg:text-6xl font-black mb-6 leading-tight" style={{ color: '#111827' }}>
             {t('myclass_page.cta_h2_1')}{' '}
             <span
               className="text-transparent bg-clip-text"
-              style={{ backgroundImage: 'linear-gradient(135deg, #f472b6, #a78bfa, #c084fc)' }}
+              style={{ backgroundImage: 'linear-gradient(135deg, #7c3aed, #a855f7, #3b82f6)' }}
             >
               {t('myclass_page.cta_h2_2')}
             </span>
           </h2>
-          <p className="reveal text-white/45 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="reveal text-lg max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: '#6b7280' }}>
             {t('myclass_page.cta_desc')}
           </p>
+          <a
+            href="/contato"
+            className="reveal group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg border-2 transition-all duration-300 hover:scale-105 active:scale-95"
+            style={{
+              borderColor: '#7c3aed',
+              color: '#7c3aed',
+              background: 'transparent',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = '#7c3aed'
+              e.currentTarget.style.color = '#fff'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'transparent'
+              e.currentTarget.style.color = '#7c3aed'
+            }}
+          >
+            {t('myclass_page.cta_button')}
+            <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+          </a>
         </Container>
       </section>
     </div>

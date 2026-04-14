@@ -203,63 +203,6 @@ const ULTIMAS_NOTICIAS = [
   },
 ]
 
-const PRESS_ITEMS = [
-  {
-    outlet: 'Forbes Brasil',
-    date: 'Mar 2026',
-    readTime: '4 min',
-    titleKey: 'press_page.item1_title',
-    tag: 'Feature',
-    gradient: 'from-blue-900 to-blue-700',
-    tagClass: 'bg-blue-500/15 text-blue-300 border-blue-500/20',
-  },
-  {
-    outlet: 'TechCrunch',
-    date: 'Fev 2026',
-    readTime: '3 min',
-    titleKey: 'press_page.item2_title',
-    tag: 'Funding',
-    gradient: 'from-emerald-900 to-emerald-700',
-    tagClass: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/20',
-  },
-  {
-    outlet: 'G1 Educação',
-    date: 'Jan 2026',
-    readTime: '5 min',
-    titleKey: 'press_page.item3_title',
-    tag: 'Growth',
-    gradient: 'from-violet-900 to-violet-700',
-    tagClass: 'bg-violet-500/15 text-violet-300 border-violet-500/20',
-  },
-  {
-    outlet: 'Valor Econômico',
-    date: 'Dez 2025',
-    readTime: '4 min',
-    titleKey: 'press_page.item4_title',
-    tag: 'Partnership',
-    gradient: 'from-orange-900 to-orange-700',
-    tagClass: 'bg-orange-500/15 text-orange-300 border-orange-500/20',
-  },
-  {
-    outlet: 'MIT Technology Review',
-    date: 'Out 2025',
-    readTime: '6 min',
-    titleKey: 'press_page.item5_title',
-    tag: 'Innovation',
-    gradient: 'from-cyan-900 to-cyan-700',
-    tagClass: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/20',
-  },
-  {
-    outlet: 'Folha de S.Paulo',
-    date: 'Set 2025',
-    readTime: '3 min',
-    titleKey: 'press_page.item6_title',
-    tag: 'Social Impact',
-    gradient: 'from-rose-900 to-rose-700',
-    tagClass: 'bg-rose-500/15 text-rose-300 border-rose-500/20',
-  },
-]
-
 const AWARDS = [
   { icon: '🏆', label: 'EdTech Award 2024' },
   { icon: '⭐', label: 'Prêmio BETT Brasil' },
@@ -379,86 +322,6 @@ function BrandsSection() {
   )
 }
 
-// ─────────────────────────────────────────────────────────────────
-//  News grid + sidebar (dark)
-// ─────────────────────────────────────────────────────────────────
-function NewsSection() {
-  const { t } = useTranslation()
-  const sectionRef = useRef(null)
-  useReveal(sectionRef)
-
-  return (
-    <section id="news" className="bg-[#0a0a0a] py-24 lg:py-32 relative overflow-hidden">
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-white/8 to-transparent"
-        aria-hidden="true"
-      />
-      <Container>
-        <div ref={sectionRef}>
-          <div className="text-center mb-14">
-            <span className="reveal section-badge mb-4 block">
-              <span className="w-5 h-px bg-current" aria-hidden="true" />
-              {t('press_page.news_badge')}
-            </span>
-            <h2 className="reveal delay-2 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-              {t('press_page.news_heading')}
-            </h2>
-            <p className="reveal delay-3 text-white/40 mt-4 max-w-xl mx-auto font-light">
-              {t('press_page.news_sub')}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-8 items-start">
-            {/* Articles */}
-            <div className="space-y-4">
-              {PRESS_ITEMS.map((item, i) => (
-                <article
-                  key={item.titleKey}
-                  className={`reveal delay-${Math.min(i + 1, 6)} group flex items-start gap-5 card-dark p-5 hover:-translate-y-0.5 hover:border-white/10 transition-all duration-300 cursor-pointer`}
-                >
-                  <div
-                    className={`bg-gradient-to-br ${item.gradient} w-20 h-[60px] rounded-xl flex-shrink-0`}
-                    aria-hidden="true"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 text-[10px] text-white/28 font-semibold mb-1.5 uppercase tracking-[0.15em]">
-                      <span className="text-white/50">{item.outlet}</span>
-                      <span aria-hidden="true">·</span>
-                      <span>{item.date}</span>
-                      <span aria-hidden="true">·</span>
-                      <span>{item.readTime} read</span>
-                      <span
-                        className={`ml-auto border text-[9px] px-2 py-0.5 rounded-full font-semibold uppercase tracking-widest ${item.tagClass}`}
-                      >
-                        {item.tag}
-                      </span>
-                    </div>
-                    <h3 className="text-sm font-semibold text-white leading-snug group-hover:text-violet-300 transition-colors duration-200">
-                      {t(item.titleKey)}
-                    </h3>
-                  </div>
-                  <svg
-                    className="w-4 h-4 text-white/20 flex-shrink-0 mt-1 group-hover:text-white/50 transition-colors duration-200"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-                  </svg>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </Container>
-    </section>
-  )
-}
-
-// ─────────────────────────────────────────────────────────────────
-//  Stats bar
-// ─────────────────────────────────────────────────────────────────
 // ─────────────────────────────────────────────────────────────────
 //  CTA Final
 // ─────────────────────────────────────────────────────────────────
@@ -633,9 +496,8 @@ export default function NaImprensa() {
       <HeroSection />
       <BrandsSection />
       <DestaquesSection />
-      <OutrasMaterialsSection />
       <UltimasNoticiasSection />
-      <NewsSection />
+      <OutrasMaterialsSection />
       <CTAFinalSection />
     </>
   )

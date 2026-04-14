@@ -75,17 +75,17 @@ export default function AboutSection() {
           {/* ── Right: key metrics ── */}
           <div className="border-l border-white/[0.07] pl-10 lg:pl-16 divide-y divide-white/[0.05]">
             {[
-              { value: '20', desc: t('about.years'),    suffix: '+', delay: 3 },
-              { value: '9',  desc: t('about.students'), suffix: 'M+', delay: 4 },
-              { value: '350',desc: t('about.teachers'), suffix: 'K+', delay: 5 },
-              { value: '98', desc: t('about.tasks'),    suffix: 'M+', delay: 6 },
-            ].map(({ value, desc, suffix, delay }) => (
+              { value: '20', desc: t('about.years'),    prefix: '+', suffix: '',  delay: 3 },
+              { value: '9',  desc: t('about.students'), prefix: '+', suffix: 'M', delay: 4 },
+              { value: '350',desc: t('about.teachers'), prefix: '+', suffix: 'K', delay: 5 },
+              { value: '98', desc: t('about.tasks'),    prefix: '+', suffix: 'M', delay: 6 },
+            ].map(({ value, desc, prefix = '', suffix, delay }) => (
               <div
                 key={value}
                 className={`reveal delay-${delay} py-7 first:pt-0 last:pb-0 flex items-center gap-6`}
               >
                 <span className="text-4xl lg:text-5xl font-extrabold text-white leading-none whitespace-nowrap tabular-nums">
-                  {value}{suffix}
+                  {prefix}{value}{suffix}
                 </span>
                 <p className="text-sm text-white/35 leading-snug self-center max-w-[180px] font-light">
                   {desc}

@@ -475,19 +475,20 @@ function UltimasNoticiasSection() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {ULTIMAS_NOTICIAS.map((item) => (
-            <article key={item.id} className="flex flex-col group cursor-pointer">
+            <article key={item.id} className="flex flex-col">
               <div className="w-full aspect-video overflow-hidden rounded-xl mb-4">
                 {item.imgUrl ? (
                   <img
                     src={item.imgUrl}
                     alt={t(item.titleKey)}
                     className="rounded-xl h-full w-full object-cover"
+                    style={item.id === 2 ? { objectPosition: 'center 50%', marginTop: '4px' } : undefined}
                   />
                 ) : (
                   <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl h-full" />
                 )}
               </div>
-              <h3 className="text-base font-bold text-white leading-snug mb-2 group-hover:text-violet-300 transition-colors duration-200">{t(item.titleKey)}</h3>
+              <h3 className="text-base font-bold text-white leading-snug mb-2">{t(item.titleKey)}</h3>
               <p className="text-sm text-white/50 leading-relaxed mb-3 line-clamp-4">{t(item.excerptKey)}</p>
               <a
                 href={item.link}

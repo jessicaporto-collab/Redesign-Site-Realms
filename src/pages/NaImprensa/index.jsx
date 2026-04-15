@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+﻿import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import Button from '../../components/ui/Button'
 import Container from '../../components/ui/Container'
@@ -105,9 +105,8 @@ const DESTAQUES = [
     id: 1,
     imgColor: 'bg-slate-800',
     imgUrl: imgBett,
-    title: 'Convite interativo para minhas palestras na Bett Nordeste 4 e 5 de setembro de 2024:',
-    excerpt:
-      'Acompanhe nossas participações em eventos para ficar por dentro de todos os nossos lançamentos. Com a mais nova ferramenta Eduxgen.AI o professor ganhará um aliado para ajudar nas demandas de ensino. Nossa ferramenta será um grande aliado nessa nova era da educação.',
+    titleKey: 'press_page.destaques_1_title',
+    excerptKey: 'press_page.destaques_1_excerpt',
     link: 'https://www.linkedin.com/posts/eduardo-giraldez-6140374b_convite-interativo-para-minhas-palestras-activity-7220166818064121858-OCpx/?utm_source=combined_share_message&utm_medium=member_android',
   },
   {
@@ -115,9 +114,8 @@ const DESTAQUES = [
     imgColor: 'bg-slate-400',
     imgUrl: imgGiraldez,
     source: 'https://www.ultimahoraonline.com.br/noticia/eduardo-giraldezfala-sobre-a-inovadora-plataforma-de-inteligencia-artificial-para-professores',
-    title: 'Eduardo Giraldez fala sobre a inovadora plataforma de inteligência artificial para professores',
-    excerpt:
-      'Estamos no Golfe Olímpico, onde está acontecendo um grande evento do cinturão de turismo. Hoje, tivemos o privilégio de conversar com Eduardo Giraldez, que recentemente deu uma palestra sobre inteligência artificial...',
+    titleKey: 'press_page.destaques_2_title',
+    excerptKey: 'press_page.destaques_2_excerpt',
     link: 'https://www.ultimahoraonline.com.br/noticia/eduardo-giraldezfala-sobre-a-inovadora-plataforma-de-inteligencia-artificial-para-professores',
   },
 ]
@@ -127,60 +125,54 @@ const OUTRAS_MATERIAS = [
     id: 1,
     imgColor: 'bg-teal-300',
     imgUrl: imgJorgeBarbosa,
-    title: 'Jorge Barbosa l Mais um dia Feliz #49',
-    date: '1 de dez. de 2023',
-    excerpt:
-      'Jorge Barbosa, o visionário CTO da empresa IPTV. Neste episódio visionário, Jorge compartilha histórias instigantes que exploram…',
+    titleKey: 'press_page.outras_1_title',
+    dateKey: 'press_page.outras_1_date',
+    excerptKey: 'press_page.outras_1_excerpt',
     link: 'https://www.youtube.com/watch?v=Hvn8Dz4v2EI',
   },
   {
     id: 2,
     imgColor: 'bg-green-300',
     imgUrl: imgCidadeCearense,
-    title: 'Cidade cearense participa de experiência de inclusão do metaverso na educação básica',
-    date: '19 de set. de 2023',
-    excerpt:
-      'A plataforma que será usada é resultado de uma aliança internacional com o aval do Instituto Federal do Amazonas e das Universidades Federais do Cariri e do Maranhão.',
+    titleKey: 'press_page.outras_2_title',
+    dateKey: 'press_page.outras_2_date',
+    excerptKey: 'press_page.outras_2_excerpt',
     link: 'https://www.opovo.com.br/noticias/ceara/porteiras/2023/09/19/cidade-cearense-participa-de-experiencia-de-inclusao-do-metaverso-na-educacao-basica.html',
   },
   {
     id: 3,
     imgColor: 'bg-purple-300',
     imgUrl: imgRioEmPauta,
-    title: 'Metaverso e educação com Eduardo Giraldez',
-    date: '11 de mai. de 2023',
-    excerpt:
-      'Entrevista com o presidente da IPTV, Eduardo Giraldez, que fala sobre o metaverso educacional. Ouça agora no link abaixo!',
+    titleKey: 'press_page.outras_3_title',
+    dateKey: 'press_page.outras_3_date',
+    excerptKey: 'press_page.outras_3_excerpt',
     link: 'https://www.rj.gov.br/radioroquettepinto/node/462',
   },
   {
     id: 4,
     imgColor: 'bg-blue-200',
     imgUrl: imgMetaverso,
-    title: 'Metaverso na educação: cariocas criam sistema...',
-    date: '10 de mai. de 2023',
-    excerpt:
-      'Parem as máquinas! Ou melhor, liguem as máquinas. A educação digital, pela Internet, já é uma realidade para muitas pessoas...',
+    titleKey: 'press_page.outras_4_title',
+    dateKey: 'press_page.outras_4_date',
+    excerptKey: 'press_page.outras_4_excerpt',
     link: 'https://diariodorio.com/metaverso-na-educacao-cariocas-criam-sistema-que-leva-alunos-para-estudar-em-um-ambiente-totalmente-digital/',
   },
   {
     id: 5,
     imgColor: 'bg-yellow-300',
     imgUrl: imgTecnologiaBR,
-    title: 'Tecnologia brasileira leva conhecimento a regiões isoladas',
-    date: '13 de ago. de 2022',
-    excerpt:
-      'O sistema une professores que vivem em cidades com mais estrutura e alunos de locais que vão do interior da Amazônia aos rincões da África.',
+    titleKey: 'press_page.outras_5_title',
+    dateKey: 'press_page.outras_5_date',
+    excerptKey: 'press_page.outras_5_excerpt',
     link: 'https://www.youtube.com/watch?v=UvVEQFZW02k',
   },
   {
     id: 6,
     imgColor: 'bg-orange-300',
     imgUrl: imgTrabalhoHibrido,
-    title: 'Trabalho híbrido ganha força e vira tendência entre profissionais de tecnologia',
-    date: '11 de out. de 2021',
-    excerpt:
-      'No Brasil, a demanda por colaboradores “home office também cresceu, principalmente entre os profissionais com ensino superior…',
+    titleKey: 'press_page.outras_6_title',
+    dateKey: 'press_page.outras_6_date',
+    excerptKey: 'press_page.outras_6_excerpt',
     link: 'https://correiodobrasil.com.br//a/trabalho-hibrido-ganha-forca-vira-tendencia-profissionais-tecnologia',
   },
 ]
@@ -416,34 +408,40 @@ function CTAFinalSection() {
 //  Destaques
 // ─────────────────────────────────────────────────────────────────
 function DestaquesSection() {
+  const { t } = useTranslation()
   return (
     <section className="bg-[#0d0d0d] py-14 border-t border-white/[0.05]">
       <Container>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-white text-center mb-10">
-          Destaques
+          {t('press_page.destaques_heading')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {DESTAQUES.map((item) => (
             <article key={item.id} className="flex flex-col">
               {/* image */}
-              <div className="w-full aspect-[16/9] overflow-hidden rounded-xl mb-4">
+              <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl mb-4">
                 {item.imgUrl ? (
                   <img
                     src={item.imgUrl}
-                    alt={item.title}
+                    alt={t(item.titleKey)}
                     className="rounded-xl w-full h-full object-cover"
                   />
                 ) : (
                   <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl" />
                 )}
+                <div
+                  className="absolute inset-0 rounded-xl pointer-events-none"
+                  style={{ backgroundColor: 'rgba(0, 2, 9, 0.10)' }}
+                  aria-hidden="true"
+                />
               </div>
-              <h3 className="text-lg font-bold text-white leading-snug mb-2">{item.title}</h3>
-              <p className="text-sm text-white/50 leading-relaxed mb-3">{item.excerpt}</p>
+              <h3 className="text-lg font-bold text-white leading-snug mb-2">{t(item.titleKey)}</h3>
+              <p className="text-sm text-white/50 leading-relaxed mb-3">{t(item.excerptKey)}</p>
               <a
                 href={item.link}
                 className="text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors"
               >
-                Leia Mais
+                {t('press_page.destaques_cta')}
               </a>
             </article>
           ))}
@@ -457,39 +455,45 @@ function DestaquesSection() {
 //  Veja outras matérias
 // ─────────────────────────────────────────────────────────────────
 function OutrasMaterialsSection() {
+  const { t } = useTranslation()
   return (
     <section className="bg-[#0a0a0a] py-14 border-t border-white/[0.05]">
       <Container>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-white text-center mb-10">
-          Veja outras matérias
+          {t('press_page.outras_heading')}
         </h2>
         <div className="border border-white/[0.07] rounded-2xl divide-y divide-white/[0.06]">
           {OUTRAS_MATERIAS.map((item) => (
             <article key={item.id} className="flex gap-5 p-5 hover:bg-white/[0.02] transition-colors duration-200">
               {/* thumbnail */}
-              <div className="flex-shrink-0 w-36 h-24 overflow-hidden rounded-xl">
+              <div className="relative flex-shrink-0 w-36 h-24 overflow-hidden rounded-xl">
                 {item.imgUrl ? (
                   <img
                     src={item.imgUrl}
-                    alt={item.title}
+                    alt={t(item.titleKey)}
                     className="rounded-xl w-full h-full object-cover"
                   />
                 ) : (
                   <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl h-24" />
                 )}
+                <div
+                  className="absolute inset-0 rounded-xl pointer-events-none"
+                  style={{ backgroundColor: 'rgba(0, 2, 9, 0.10)' }}
+                  aria-hidden="true"
+                />
               </div>
               {/* content */}
               <div className="flex flex-col justify-between min-w-0">
                 <div>
-                  <h3 className="text-base font-bold text-white leading-snug mb-1">{item.title}</h3>
-                  <p className="text-xs text-white/35 mb-2">{item.date}</p>
-                  <p className="text-sm text-white/50 leading-relaxed line-clamp-2">{item.excerpt}</p>
+                  <h3 className="text-base font-bold text-white leading-snug mb-1">{t(item.titleKey)}</h3>
+                  <p className="text-xs text-white/35 mb-2">{t(item.dateKey)}</p>
+                  <p className="text-sm text-white/50 leading-relaxed line-clamp-2">{t(item.excerptKey)}</p>
                 </div>
                 <a
                   href={item.link}
                   className="mt-2 text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors"
                 >
-                  Leia Mais
+                  {t('press_page.outras_cta')}
                 </a>
               </div>
             </article>
@@ -514,7 +518,7 @@ function UltimasNoticiasSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {ULTIMAS_NOTICIAS.map((item) => (
             <article key={item.id} className="flex flex-col">
-              <div className="w-full aspect-video overflow-hidden rounded-xl mb-4">
+              <div className="relative w-full aspect-video overflow-hidden rounded-xl mb-4">
                 {item.imgUrl ? (
                   <img
                     src={item.imgUrl}
@@ -525,6 +529,11 @@ function UltimasNoticiasSection() {
                 ) : (
                   <ImgPlaceholder colorClass={item.imgColor} className="rounded-xl h-full" />
                 )}
+                <div
+                  className="absolute inset-0 rounded-xl pointer-events-none"
+                  style={{ backgroundColor: 'rgba(0, 2, 9, 0.10)' }}
+                  aria-hidden="true"
+                />
               </div>
               <h3 className="text-base font-bold text-white leading-snug mb-2">{t(item.titleKey)}</h3>
               <p className="text-sm text-white/50 leading-relaxed mb-3 line-clamp-4">{t(item.excerptKey)}</p>

@@ -1,10 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PenLine, FileText, CheckSquare, Circle, Shuffle, CaseSensitive, ALargeSmall, SquareDashed, Paperclip } from 'lucide-react'
 import Container from '../../components/ui/Container'
 import AnimatedCounter from '../../components/ui/AnimatedCounter'
 import img1Eduxgen from '../../assets/eduxgen/img1-eduxgen.jpg'
 import img2Eduxgen from '../../assets/eduxgen/img2-eduxgen.jpg'
+import img3Eduxgen from '../../assets/eduxgen/img3-eduxgen.png'
+import img4Eduxgen from '../../assets/eduxgen/img4-eduxgen.png'
+import img5Eduxgen from '../../assets/eduxgen/img5-eduxgen.png'
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Feature cards metadata (marquee carousel)
@@ -143,28 +146,83 @@ function PhoneFrame({ src, alt, className = '' }) {
   return (
     <div
       className={`relative mx-auto ${className}`}
-      style={{ width: '220px' }}
+      style={{ width: '206px' }}
     >
-      {/* Phone shell */}
+      {/* Modern slim Android-like shell */}
       <div
         style={{
-          borderRadius: '36px',
-          border: '8px solid #1e293b',
-          background: '#1e293b',
-          boxShadow: '0 30px 60px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.06)',
-          overflow: 'hidden',
+          borderRadius: '32px',
+          border: '1.5px solid rgba(15,23,42,0.82)',
+          background: 'linear-gradient(160deg, #1f2937 0%, #0f172a 58%, #111827 100%)',
+          boxShadow: '0 20px 42px rgba(2,6,23,0.28), inset 0 1px 0 rgba(255,255,255,0.18)',
+          overflow: 'visible',
           position: 'relative',
+          padding: '8px 4px 7px',
         }}
       >
-        {/* Notch */}
-        <div style={{
-          position: 'absolute', top: '10px', left: '50%', transform: 'translateX(-50%)',
-          width: '70px', height: '18px', background: '#1e293b', borderRadius: '12px', zIndex: 2,
-        }} />
-        <img
-          src={src} alt={alt}
-          style={{ display: 'block', width: '100%', aspectRatio: '9/20', objectFit: 'cover', objectPosition: 'top' }}
+        {/* Punch-hole camera and slim speaker */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '4px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '38px',
+            height: '3px',
+            borderRadius: '999px',
+            background: 'rgba(2,6,23,0.58)',
+            boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.16)',
+            zIndex: 3,
+          }}
         />
+        <div
+          style={{
+            position: 'absolute',
+            top: '3px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '8px',
+            height: '8px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle at 35% 35%, #1e293b 0%, #020617 70%)',
+            boxShadow: '0 0 0 1px rgba(148,163,184,0.25), 0 0 0 3px rgba(2,6,23,0.55)',
+            zIndex: 3,
+          }}
+        />
+
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            right: '-2.5px',
+            top: '62px',
+            width: '2px',
+            height: '34px',
+            borderRadius: '2px',
+            background: 'linear-gradient(180deg, rgba(148,163,184,0.55), rgba(100,116,139,0.35))',
+          }}
+        />
+
+        <div
+          style={{
+            borderRadius: '26px',
+            overflow: 'hidden',
+            background: '#020617',
+            boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.09)',
+          }}
+        >
+          <img
+            src={src}
+            alt={alt}
+            style={{
+              display: 'block',
+              width: '100%',
+              aspectRatio: '9/20',
+              objectFit: 'cover',
+              objectPosition: 'center top',
+            }}
+          />
+        </div>
       </div>
     </div>
   )
@@ -433,7 +491,7 @@ function ContentSection() {
           {/* Left: UI screenshot */}
           <div className="reveal order-last lg:order-first">
             <BrowserFrame
-              src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=900&q=80&fit=crop"
+              src={img3Eduxgen}
               alt="Geração de conteúdo EduXGen"
             />
           </div>
@@ -526,7 +584,7 @@ function TasksSection() {
           {/* Right: UI screenshot */}
           <div className="reveal">
             <BrowserFrame
-              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&fit=crop"
+              src={img4Eduxgen}
               alt="Tarefas EduXGen"
             />
           </div>
@@ -565,77 +623,11 @@ function DashboardSection() {
             boxShadow: '0 32px 80px rgba(37,99,235,0.10), 0 4px 24px rgba(0,0,0,0.08)',
           }}
         >
-          {/* Chrome */}
-          <div style={{ background: '#f1f5f9', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid #e2e8f0' }}>
-            <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#fca5a5' }} />
-            <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#fcd34d' }} />
-            <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#86efac' }} />
-            <div style={{ flex: 1, marginLeft: '10px', background: '#ffffff', borderRadius: '7px', border: '1px solid #e2e8f0', padding: '5px 12px', display: 'flex', alignItems: 'center', gap: '8px', maxWidth: '280px' }}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '11px', height: '11px', flexShrink: 0 }}>
-                <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
-              </svg>
-              <span style={{ fontSize: '11px', color: '#94a3b8', fontFamily: 'monospace' }}>eduxgen.ai/dashboard</span>
-            </div>
-            {/* Nav pill */}
-            <div style={{ marginLeft: 'auto', display: 'flex', gap: '6px' }}>
-              {['Início', 'Turmas', 'Conteúdo', 'Análises'].map((item) => (
-                <span key={item} style={{ fontSize: '10px', padding: '3px 10px', borderRadius: '6px', background: item === 'Conteúdo' ? '#dbeafe' : 'transparent', color: item === 'Conteúdo' ? '#2563eb' : '#64748b', fontWeight: item === 'Conteúdo' ? 600 : 400 }}>{item}</span>
-              ))}
-            </div>
-          </div>
-
-          {/* Dashboard body — gradient placeholder with inline UI sketch */}
-          <div style={{ background: 'linear-gradient(135deg, #eff6ff 0%, #f0f9ff 50%, #eef2ff 100%)', padding: '32px', minHeight: '360px', position: 'relative', overflow: 'hidden' }}>
-            {/* Sidebar */}
-            <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '180px', background: '#ffffff', borderRight: '1px solid #e2e8f0', padding: '20px 14px' }}>
-              <div style={{ width: '100px', height: '12px', borderRadius: '6px', background: '#dbeafe', marginBottom: '24px' }} />
-              {['Dashboard', 'Turmas', 'Conteúdo', 'Avaliações', 'Análises'].map((item, i) => (
-                <div key={item} style={{ padding: '8px 10px', borderRadius: '8px', background: i === 0 ? '#eff6ff' : 'transparent', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '2px', background: i === 0 ? '#2563eb' : '#cbd5e1' }} />
-                  <span style={{ fontSize: '11px', color: i === 0 ? '#2563eb' : '#64748b', fontWeight: i === 0 ? 700 : 400 }}>{item}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Main content area */}
-            <div style={{ marginLeft: '196px' }}>
-              {/* Top stat row */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '12px', marginBottom: '20px' }}>
-                {[
-                  { label: 'Conteúdos gerados', value: '248', color: '#2563eb' },
-                  { label: 'Turmas ativas', value: '12', color: '#0ea5e9' },
-                  { label: 'Alunos', value: '380', color: '#6366f1' },
-                  { label: 'Tempo economizado', value: '96h', color: '#16a34a' },
-                ].map((s) => (
-                  <div key={s.label} style={{ background: '#ffffff', borderRadius: '10px', padding: '14px', border: '1px solid #e2e8f0' }}>
-                    <div style={{ fontSize: '20px', fontWeight: 900, color: s.color, lineHeight: 1 }}>{s.value}</div>
-                    <div style={{ fontSize: '10px', color: '#94a3b8', marginTop: '4px' }}>{s.label}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Table area */}
-              <div style={{ background: '#ffffff', borderRadius: '10px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
-                <div style={{ padding: '12px 16px', borderBottom: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: '12px', fontWeight: 700, color: '#0f172a' }}>Últimos conteúdos gerados</span>
-                  <span style={{ fontSize: '10px', color: '#2563eb', fontWeight: 600 }}>Ver todos</span>
-                </div>
-                {[
-                  { title: 'Plano de Aula — Frações 5º Ano', type: 'Plano', date: 'Hoje', status: '#22c55e' },
-                  { title: 'Simulado ENEM — Matemática', type: 'Simulado', date: 'Ontem', status: '#2563eb' },
-                  { title: 'Banco Questões — Ciências 6º Ano', type: 'Questões', date: '12 abr', status: '#f59e0b' },
-                  { title: 'Avaliação Diagnóstica — Língua Portuguesa', type: 'Avaliação', date: '10 abr', status: '#6366f1' },
-                ].map((row) => (
-                  <div key={row.title} style={{ padding: '10px 16px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: row.status, flexShrink: 0 }} />
-                    <span style={{ flex: 1, fontSize: '11px', color: '#374151' }}>{row.title}</span>
-                    <span style={{ fontSize: '10px', color: '#94a3b8', width: '60px', textAlign: 'center', padding: '2px 8px', borderRadius: '4px', background: '#f8fafc' }}>{row.type}</span>
-                    <span style={{ fontSize: '10px', color: '#94a3b8', width: '48px', textAlign: 'right' }}>{row.date}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <img
+            src={img5Eduxgen}
+            alt="Painel de controle EduXGen"
+            style={{ display: 'block', width: '100%' }}
+          />
         </div>
       </Container>
     </section>
@@ -816,9 +808,9 @@ function StatsSection() {
 function TestimonialsSection() {
   const { t } = useTranslation()
   const TESTIMONIALS = [
-    { quote: t('eduxgen_page.testimonial_1_quote'), author: 'Prof. Carlos Mendes', role: t('eduxgen_page.testimonial_1_role'), org: 'Rede Municipal RJ', initials: 'CM', accent: '#2563eb' },
-    { quote: t('eduxgen_page.testimonial_2_quote'), author: 'Profa. Ana Beatriz', role: t('eduxgen_page.testimonial_2_role'), org: 'Colégio Estadual MG', initials: 'AB', accent: '#0ea5e9' },
-    { quote: t('eduxgen_page.testimonial_3_quote'), author: 'Marcos Oliveira', role: t('eduxgen_page.testimonial_3_role'), org: 'Secretaria de Educação SP', initials: 'MO', accent: '#6366f1' },
+    { quote: t('eduxgen_page.testimonial_1_quote'), author: 'Prof. Carlos Mendes', role: t('eduxgen_page.testimonial_1_role'), org: 'Escola Municipal', initials: 'CM', accent: '#2563eb' },
+    { quote: t('eduxgen_page.testimonial_2_quote'), author: 'Profa. Ana Beatriz', role: t('eduxgen_page.testimonial_2_role'), org: 'Escola Estadual', initials: 'AB', accent: '#0ea5e9' },
+    { quote: t('eduxgen_page.testimonial_3_quote'), author: 'Prof. Marcos Oliveira', role: t('eduxgen_page.testimonial_3_role'), org: 'Escola Municipal', initials: 'MO', accent: '#6366f1' },
   ]
   return (
     <section className="py-20 lg:py-24" style={{ background: '#f8fafc' }}>

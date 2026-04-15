@@ -17,10 +17,10 @@ import imgUpscale from '../assets/upscalemedia-transformed (1).jpeg'
 const TESTIMONIALS = [
   {
     quote:
-      'A plataforma da Realms transformou completamente a forma como gerenciamos nossas salas de aula. Os professores economizam horas toda semana com o EduXGen.',
-    author: 'Dra. Ana Ferreira',
-    role: 'Diretora Pedagógica',
-    org: 'Colégio São Paulo',
+      'A plataforma da Realms transformou completamente a forma como preparo minhas aulas. Hoje economizo horas por semana com o EduXGen.',
+    author: 'Profa. Ana Ferreira',
+    role: 'Professora do Ensino Fundamental',
+    org: 'Escola Municipal',
     initials: 'AF',
     accentClass: 'bg-blue-600',
   },
@@ -28,17 +28,17 @@ const TESTIMONIALS = [
     quote:
       'Em 5 minutos crio avaliações completas alinhadas ao currículo. É como ter um assistente pedagógico sempre disponível. Revolucionou minha prática.',
     author: 'Prof. Carlos Mendes',
-    role: 'Coordenador de Ensino',
-    org: 'Rede Municipal RJ',
+    role: 'Professor de Matemática',
+    org: 'Escola Estadual',
     initials: 'CM',
     accentClass: 'bg-violet-600',
   },
   {
     quote:
-      'A Realms nos ajudou a escalar de 500 para 50.000 alunos sem perder qualidade. A infraestrutura é robusta e o suporte é excepcional.',
-    author: 'Fernanda Lima',
-    role: 'CEO',
-    org: 'EduTech Brasil',
+      'Com a Realms, consigo planejar conteúdo e adaptar atividades para turmas diferentes sem perder qualidade. O suporte da plataforma ajuda muito no dia a dia.',
+    author: 'Profa. Fernanda Lima',
+    role: 'Professora de Língua Portuguesa',
+    org: 'Escola Particular',
     initials: 'FL',
     accentClass: 'bg-emerald-600',
   },

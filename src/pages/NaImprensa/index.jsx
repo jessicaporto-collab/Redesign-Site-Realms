@@ -439,6 +439,8 @@ function DestaquesSection() {
               <p className="text-sm text-white/50 leading-relaxed mb-3">{t(item.excerptKey)}</p>
               <a
                 href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors"
               >
                 {t('press_page.destaques_cta')}
@@ -491,6 +493,8 @@ function OutrasMaterialsSection() {
                 </div>
                 <a
                   href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-2 text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors"
                 >
                   {t('press_page.outras_cta')}
@@ -539,6 +543,8 @@ function UltimasNoticiasSection() {
               <p className="text-sm text-white/50 leading-relaxed mb-3 line-clamp-4">{t(item.excerptKey)}</p>
               <a
                 href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-auto text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors"
               >
                 {t('press_page.ultimas_cta')}

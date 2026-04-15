@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import ProductsDropdown, { PRODUCTS } from '../navigation/ProductsDropdown'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -11,11 +11,16 @@ const NAV_LINKS = [
   { key: 'press', path: '/na-imprensa' },
 ]
 
+const LIGHT_PAGES = new Set(['/eduxgen', '/myclass', '/conteudo-educacional'])
+
 export default function Header() {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  const isLightPage = LIGHT_PAGES.has(pathname)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -123,74 +128,137 @@ export default function Header() {
         </div>
       </header>
 
-      {/* â”€â”€ Mobile full-screen menu â”€â”€ */}
-      {mobileOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-dark-900/98 backdrop-blur-xl flex flex-col pt-24 px-6 pb-10 overflow-y-auto"
-          role="dialog"
-          aria-label="Mobile navigation"
-        >
-          <nav className="flex flex-col gap-1 flex-1">
-            <Link
-              to="/"
-              onClick={closeMobile}
-              className="text-2xl font-bold text-white py-3 border-b border-white/[0.06] hover:text-blue-400 transition-colors"
+
+      {/* Mobile full-screen menu – always mounted for smooth animation */}
+      <div
+        className={`fixed inset-0 z-40 bg-dark-900/98 backdrop-blur-xl flex flex-col pt-24 px-6 pb-10 overflow-y-auto
+          transition-[opacity,transform] duration-300 ease-out
+          ${mobileOpen
+            ? 'opacity-100 pointer-events-auto translate-y-0'
+            : 'opacity-0 pointer-events-none -translate-y-4'
+          }`}
+        style={{ willChange: 'opacity, transform' }}
+        role="dialog"
+        aria-label="Mobile navigation"
+        aria-hidden={!mobileOpen}
+        onClick={closeMobile}
+      >
+        <nav className="flex flex-col gap-1 flex-1">
+          <Link
+            to="/"
+            onClick={closeMobile}
+            style={{ transitionDelay: mobileOpen ? '40ms' : '0ms', willChange: 'opacity, transform' }}
+            className={`text-2xl font-bold py-3 border-b transition-[opacity,transform] duration-250
+              ${mobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'}
+              ${isLightPage
+                ? 'text-gray-900 border-gray-900/10 hover:text-blue-600'
+                : 'text-white border-white/[0.06] hover:text-blue-400'
+              }`}
+          >
+            {t('nav.home')}
+          </Link>
+
+          {/* Products accordion */}
+          <div
+            style={{ transitionDelay: mobileOpen ? '80ms' : '0ms', willChange: 'opacity, transform' }}
+            className={`border-b transition-[opacity,transform] duration-250
+              ${mobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'}
+              ${isLightPage ? 'border-gray-900/10' : 'border-white/[0.06]'}`}
+          >
+            <button
+              onClick={(e) => { e.stopPropagation(); setMobileProductsOpen((v) => !v); }}
+              className={`w-full flex items-center justify-between text-2xl font-bold py-3 transition-colors ${
+                isLightPage
+                  ? 'text-gray-900 hover:text-blue-600'
+                  : 'text-white hover:text-blue-400'
+              }`}
             >
-              {t('nav.home')}
-            </Link>
-
-            {/* Products accordion */}
-            <div className="border-b border-white/[0.06]">
-              <button
-                onClick={() => setMobileProductsOpen((v) => !v)}
-                className="w-full flex items-center justify-between text-2xl font-bold text-white py-3 hover:text-blue-400 transition-colors"
+              {t('nav.products')}
+              <svg
+                className={`w-5 h-5 transition-transform duration-300 ease-in-out ${mobileProductsOpen ? 'rotate-180' : ''}`}
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
               >
-                {t('nav.products')}
-                <svg
-                  className={`w-5 h-5 transition-transform duration-300 ${mobileProductsOpen ? 'rotate-180' : ''}`}
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
 
-              {mobileProductsOpen && (
+            {/* Products list – grid-rows for smooth height transition */}
+            <div
+              className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+                mobileProductsOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+              }`}
+            >
+              <div className="overflow-hidden min-h-0">
                 <div className="pb-3 space-y-1 pl-4">
-                  {PRODUCTS.map((product) => (
+                  {PRODUCTS.map((product, i) => (
                     <Link
                       key={product.key}
                       to={product.path}
                       onClick={closeMobile}
-                      className="flex items-center gap-3 py-2.5 text-base text-white/60 hover:text-white transition-colors"
+                      style={{ transitionDelay: mobileProductsOpen ? `${i * 35}ms` : '0ms', willChange: 'opacity, transform' }}
+                      className={`flex items-center gap-3 py-2.5 text-base transition-[opacity,transform] duration-200
+                        ${mobileProductsOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'}
+                        ${isLightPage
+                          ? 'text-gray-700 hover:text-gray-900'
+                          : 'text-white/60 hover:text-white'
+                        }`}
                     >
                       <span>{t(`products.${product.key}`)}</span>
                     </Link>
                   ))}
+                  <a
+                    href="https://vocaciona.ai/#como-funciona"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeMobile}
+                    style={{ transitionDelay: mobileProductsOpen ? `${PRODUCTS.length * 35}ms` : '0ms', willChange: 'opacity, transform' }}
+                    className={`flex items-center gap-3 py-2.5 text-base transition-[opacity,transform] duration-200
+                      ${mobileProductsOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'}
+                      ${isLightPage
+                        ? 'text-gray-700 hover:text-gray-900'
+                        : 'text-white/60 hover:text-white'
+                      }`}
+                  >
+                    <span>Vocaciona.AI</span>
+                    <svg className="w-3.5 h-3.5 ml-auto opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
                 </div>
-              )}
+              </div>
             </div>
-
-            {NAV_LINKS.map(({ key, path }) => (
-              <Link
-                key={key}
-                to={path}
-                onClick={closeMobile}
-                className="text-2xl font-bold text-white py-3 border-b border-white/[0.06] hover:text-blue-400 transition-colors"
-              >
-                {t(`nav.${key}`)}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Bottom: language + CTA */}
-          <div className="flex items-center gap-4 pt-8">
-            <LanguageSwitcher />
-            <Button to="/contato" size="lg" variant="white" onClick={closeMobile} className="flex-1">
-              {t('nav.contact')}
-            </Button>
           </div>
+
+          {NAV_LINKS.map(({ key, path }, i) => (
+            <Link
+              key={key}
+              to={path}
+              onClick={closeMobile}
+              style={{ transitionDelay: mobileOpen ? `${120 + i * 40}ms` : '0ms', willChange: 'opacity, transform' }}
+              className={`text-2xl font-bold py-3 border-b transition-[opacity,transform] duration-250
+                ${mobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'}
+                ${isLightPage
+                  ? 'text-gray-900 border-gray-900/10 hover:text-blue-600'
+                  : 'text-white border-white/[0.06] hover:text-blue-400'
+                }`}
+            >
+              {t(`nav.${key}`)}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Bottom: language + CTA */}
+        <div
+          style={{ transitionDelay: mobileOpen ? '190ms' : '0ms', willChange: 'opacity, transform' }}
+          className={`flex items-center gap-4 pt-8 transition-[opacity,transform] duration-250
+            ${mobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'}`}
+        >
+          <LanguageSwitcher dropUp />
+          <Button to="/contato" size="lg" variant="white" onClick={closeMobile} className="flex-1">
+            {t('nav.contact')}
+          </Button>
         </div>
-      )}
+      </div>
     </>
   )
 }

@@ -843,7 +843,7 @@ export default function MyClass() {
                   </div>
                   <div>
                     <p style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 600, margin: 0 }}>USUÁRIOS ATIVOS</p>
-                    <p style={{ fontSize: '1.05rem', color: '#111827', fontWeight: 900, margin: 0 }}>9M+ Alunos</p>
+                    <p style={{ fontSize: '1.05rem', color: '#111827', fontWeight: 900, margin: 0 }}>+9M Alunos</p>
                   </div>
                 </div>
               </div>
@@ -920,7 +920,7 @@ export default function MyClass() {
                   </div>
                   <div>
                     <p style={{ fontSize: '0.65rem', color: '#9ca3af', fontWeight: 600, margin: 0, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Pico simultâneo</p>
-                    <p style={{ fontSize: '1rem', color: '#111827', fontWeight: 900, margin: 0 }}>400K+ usuários</p>
+                    <p style={{ fontSize: '1rem', color: '#111827', fontWeight: 900, margin: 0 }}>+400K usuários</p>
                   </div>
                 </div>
               </div>

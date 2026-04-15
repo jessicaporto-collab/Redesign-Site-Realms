@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Gamepad2, Glasses, Globe, UsersRound, Trophy, BarChart2, BrainCircuit, Map, Smartphone } from 'lucide-react'
 import Container from '../../components/ui/Container'
 import Button from '../../components/ui/Button'
 
@@ -410,9 +411,10 @@ function SectionDivider() {
 /* -- section badge -- */
 function Badge({ children }) {
   return (
-    <p className="reveal flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 mb-4">
+    <p className="reveal flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 mb-4">
       <span className="w-8 h-px" style={{ background: 'rgba(167,139,250,0.5)' }} />
       {children}
+      <span className="w-8 h-px" style={{ background: 'rgba(167,139,250,0.5)' }} />
     </p>
   )
 }
@@ -902,15 +904,15 @@ export default function EduxRealms() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: '🎮', title: 'Sistema Totalmente Jogável', desc: 'Quests, boss battles de conhecimento e puzzles educacionais para engajar alunos no aprendizado.', glow: '#a78bfa' },
-              { icon: '🥽', title: 'Realidade Virtual Completa', desc: 'Suporte nativo para Meta Quest, Apple Vision Pro, Pico e outros headsets do mercado.', glow: '#60a5fa' },
-              { icon: '🌐', title: 'Mundos 3D Interativos', desc: 'Ambientes completamente interativos onde cada objeto pode ser explorado e analisado.', glow: '#34d399' },
-              { icon: '👥', title: 'Colaboração Multijogador', desc: 'Estude com colegas no mesmo mundo virtual com avatares 3D e colaboração em tempo real.', glow: '#f472b6' },
-              { icon: '🏆', title: 'Conquistas & Rankings', desc: 'Sistema completo de gamificação com troféus, medalhas, leaderboard e progressão de nível.', glow: '#f59e0b' },
-              { icon: '📊', title: 'Analytics de Aprendizado', desc: 'Professores acompanham o progresso e engajamento individual de cada aluno em tempo real.', glow: '#10b981' },
-              { icon: '🤖', title: 'IA Adaptativa', desc: 'O sistema aprende com cada aluno e adapta os desafios ao nível e ritmo de aprendizado.', glow: '#a78bfa' },
-              { icon: '🗺️', title: 'Excursões Virtuais', desc: 'Visite museus, monumentos históricos, fundo do oceano e outros lugares sem sair da escola.', glow: '#60a5fa' },
-              { icon: '📱', title: 'App Mobile com AR', desc: 'Aplicativo iOS e Android com realidade aumentada integrada usando a câmera do celular.', glow: '#34d399' },
+              { icon: Gamepad2, title: 'Sistema Totalmente Jogável', desc: 'Quests, boss battles de conhecimento e puzzles educacionais para engajar alunos no aprendizado.', glow: '#a78bfa' },
+              { icon: Glasses, title: 'Realidade Virtual Completa', desc: 'Suporte nativo para Meta Quest, Apple Vision Pro, Pico e outros headsets do mercado.', glow: '#60a5fa' },
+              { icon: Globe, title: 'Mundos 3D Interativos', desc: 'Ambientes completamente interativos onde cada objeto pode ser explorado e analisado.', glow: '#34d399' },
+              { icon: UsersRound, title: 'Colaboração Multijogador', desc: 'Estude com colegas no mesmo mundo virtual com avatares 3D e colaboração em tempo real.', glow: '#f472b6' },
+              { icon: Trophy, title: 'Conquistas & Rankings', desc: 'Sistema completo de gamificação com troféus, medalhas, leaderboard e progressão de nível.', glow: '#f59e0b' },
+              { icon: BarChart2, title: 'Analytics de Aprendizado', desc: 'Professores acompanham o progresso e engajamento individual de cada aluno em tempo real.', glow: '#10b981' },
+              { icon: BrainCircuit, title: 'IA Adaptativa', desc: 'O sistema aprende com cada aluno e adapta os desafios ao nível e ritmo de aprendizado.', glow: '#a78bfa' },
+              { icon: Map, title: 'Excursões Virtuais', desc: 'Visite museus, monumentos históricos, fundo do oceano e outros lugares sem sair da escola.', glow: '#60a5fa' },
+              { icon: Smartphone, title: 'App Mobile com AR', desc: 'Aplicativo iOS e Android com realidade aumentada integrada usando a câmera do celular.', glow: '#34d399' },
             ].map((feat) => (
               <div
                 key={feat.title}
@@ -918,10 +920,10 @@ export default function EduxRealms() {
                 style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}
               >
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4"
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
                   style={{ background: `${feat.glow}18`, border: `1px solid ${feat.glow}30` }}
                 >
-                  {feat.icon}
+                  <feat.icon size={22} style={{ color: feat.glow }} strokeWidth={1.6} />
                 </div>
                 <h4 className="text-white font-bold mb-2 text-sm leading-snug">{feat.title}</h4>
                 <p className="text-white/40 text-xs leading-relaxed">{feat.desc}</p>

@@ -1,7 +1,8 @@
-﻿import { Link } from 'react-router-dom'
+﻿import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Container from '../ui/Container'
 import logoRealmsWhite from '../../assets/logo realms branca.svg'
+import logoRealmsBlue from '../../assets/logo realms azul.svg'
 
 const PRODUCT_LINKS = [
   { key: 'eduxgen',  path: '/eduxgen' },
@@ -43,24 +44,36 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
   const year = new Date().getFullYear()
 
+  const isLight = pathname === '/eduxgen' || pathname === '/myclass'
+
   return (
-    <footer className="bg-dark-950 text-white/40 border-t border-white/[0.06]" data-no-cursor>
+    <footer
+      className={isLight
+        ? 'bg-white text-gray-400 border-t border-gray-200'
+        : 'bg-dark-950 text-white/40 border-t border-white/[0.06]'}
+      data-no-cursor
+    >
       <Container>
-        <div className="py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-white/[0.06]">
+        <div className={`py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 border-b ${isLight ? 'border-gray-200' : 'border-white/[0.06]'}`}>
           <div className="lg:col-span-2">
             <Link to="/" className="inline-flex mb-5">
-              <img src={logoRealmsWhite} alt="Realms" className="h-9 w-auto" />
+              <img src={isLight ? logoRealmsBlue : logoRealmsWhite} alt="Realms" className="h-9 w-auto" />
             </Link>
-            <p className="text-sm leading-relaxed text-white/35 max-w-sm mb-6 font-light">
+            <p className={`text-sm leading-relaxed max-w-sm mb-6 font-light ${isLight ? 'text-gray-400' : 'text-white/35'}`}>
               {t('footer.tagline')}
             </p>
             <div className="flex items-center gap-3">
               {SOCIAL_LINKS.map((s) => (
                 <a key={s.label} href={s.href} aria-label={s.label} target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-white/[0.05] hover:bg-white/10 border border-white/[0.08] flex items-center justify-center transition-all duration-200">
-                  <svg className="w-4 h-4 text-white/40 hover:text-white" fill="currentColor" viewBox="0 0 24 24">
+                  className={`w-9 h-9 rounded-lg border flex items-center justify-center transition-all duration-200 ${
+                    isLight
+                      ? 'bg-gray-100 hover:bg-gray-200 border-gray-200'
+                      : 'bg-white/[0.05] hover:bg-white/10 border-white/[0.08]'
+                  }`}>
+                  <svg className={`w-4 h-4 ${isLight ? 'text-gray-400 hover:text-gray-700' : 'text-white/40 hover:text-white'}`} fill="currentColor" viewBox="0 0 24 24">
                     {s.icon}
                   </svg>
                 </a>
@@ -69,11 +82,11 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-white/70 text-[11px] mb-4 uppercase tracking-wider">{t('footer.products')}</h4>
+            <h4 className={`font-semibold text-[11px] mb-4 uppercase tracking-wider ${isLight ? 'text-gray-500' : 'text-white/70'}`}>{t('footer.products')}</h4>
             <ul className="space-y-2.5">
               {PRODUCT_LINKS.map(({ key, path }) => (
                 <li key={key}>
-                  <Link to={path} className="text-sm text-white/35 hover:text-white transition-colors font-light">
+                  <Link to={path} className={`text-sm transition-colors font-light ${isLight ? 'text-gray-400 hover:text-gray-900' : 'text-white/35 hover:text-white'}`}>
                     {t(`products.${key}`)}
                   </Link>
                 </li>
@@ -82,11 +95,11 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-white/70 text-[11px] mb-4 uppercase tracking-wider">{t('footer.company')}</h4>
+            <h4 className={`font-semibold text-[11px] mb-4 uppercase tracking-wider ${isLight ? 'text-gray-500' : 'text-white/70'}`}>{t('footer.company')}</h4>
             <ul className="space-y-2.5">
               {COMPANY_LINKS.map(({ key, path }) => (
                 <li key={key}>
-                  <Link to={path} className="text-sm text-white/35 hover:text-white transition-colors font-light">
+                  <Link to={path} className={`text-sm transition-colors font-light ${isLight ? 'text-gray-400 hover:text-gray-900' : 'text-white/35 hover:text-white'}`}>
                     {t(`nav.${key}`)}
                   </Link>
                 </li>
@@ -95,11 +108,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/25">
+        <div className={`py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs ${isLight ? 'text-gray-400' : 'text-white/25'}`}>
           <p> {year} Realms. {t('footer.rights')}</p>
           <div className="flex items-center gap-5">
-            <a href="https://realms-static.ip.tv/realms/privacy/privacidade-pt_br.html" target="_blank" rel="noopener noreferrer" className="hover:text-white/50 transition-colors">Política de Privacidade</a>
-            <a href="https://realms-static.ip.tv/realms/terms/termos-pt_br.html" target="_blank" rel="noopener noreferrer" className="hover:text-white/50 transition-colors">Termos de Uso</a>
+            <a href="https://realms-static.ip.tv/realms/privacy/privacidade-pt_br.html" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isLight ? 'hover:text-gray-700' : 'hover:text-white/50'}`}>Política de Privacidade</a>
+            <a href="https://realms-static.ip.tv/realms/terms/termos-pt_br.html" target="_blank" rel="noopener noreferrer" className={`transition-colors ${isLight ? 'hover:text-gray-700' : 'hover:text-white/50'}`}>Termos de Uso</a>
           </div>
         </div>
       </Container>

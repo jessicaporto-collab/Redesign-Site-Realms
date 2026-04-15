@@ -225,9 +225,9 @@ const BRANDS = [
 const BRANDS_DOUBLED = [...BRANDS, ...BRANDS]
 
 const STATS = [
-  { value: '200+', labelKey: 'press_page.stat1_label' },
-  { value: '50+', labelKey: 'press_page.stat2_label' },
-  { value: '20+', labelKey: 'press_page.stat3_label' },
+  { value: '+200', labelKey: 'press_page.stat1_label' },
+  { value: '+50', labelKey: 'press_page.stat2_label' },
+  { value: '+20', labelKey: 'press_page.stat3_label' },
   { value: '8', labelKey: 'press_page.stat4_label' },
 ]
 

@@ -552,7 +552,7 @@
     "platform_web_title": "Dashboard Web",
     "platform_web_desc": "Painel completo para professores gerenciarem turmas, criar conteúdo, aplicar avaliações e acompanhar desempenho.",
     "platform_live_label": "📡 Ao Vivo",
-    "platform_live_title": "Aulas ao Vivo",
+    "platform_live_title": "Integração com IP.TV",
     "platform_live_desc": "Videoconferência integrada com quadro branco, enquetes, chat e gravação automática para revisão posterior.",
     "platform_mobile_label": "📍 Em Qualquer Lugar",
     "platform_mobile_title": "App Mobile",

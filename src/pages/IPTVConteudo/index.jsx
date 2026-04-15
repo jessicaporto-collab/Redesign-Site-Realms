@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Video, Server, Users, Paperclip, ShieldCheck, CloudUpload, Radio, Lock, Link } from 'lucide-react'
 import Container from '../../components/ui/Container'
+import Button from '../../components/ui/Button'
 import heroImg from '../../assets/iptv/img1-iptv.jpg'
 import webinarImg from '../../assets/iptv/img2-iptv.jpg'
 
@@ -153,11 +155,12 @@ function SectionDivider() {
   )
 }
 
-function Badge({ children }) {
+function Badge({ children, align = 'center' }) {
   return (
-    <p className="reveal flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 mb-4">
+    <p className={`reveal flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 mb-4 ${align === 'center' ? 'justify-center' : ''}`}>
       <span className="w-8 h-px" style={{ background: 'linear-gradient(90deg, rgba(59,130,246,0.7), rgba(52,211,153,0.7))' }} />
       {children}
+      {align === 'center' && <span className="w-8 h-px" style={{ background: 'linear-gradient(90deg, rgba(52,211,153,0.7), rgba(59,130,246,0.7))' }} />}
     </p>
   )
 }
@@ -256,7 +259,7 @@ export default function IPTVConteudo() {
               </div>
             </div>
             <div>
-              <Badge>{t('iptv_page.intro_badge')}</Badge>
+              <Badge align="left">{t('iptv_page.intro_badge')}</Badge>
               <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-6 leading-tight">
                 {t('iptv_page.intro_h2_1')}{' '}
                 <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, #60a5fa, #34d399)' }}>
@@ -266,41 +269,6 @@ export default function IPTVConteudo() {
               <p className="reveal text-white/55 text-lg leading-relaxed mb-4">{t('iptv_page.intro_p1')}</p>
               <p className="reveal text-white/40 text-base leading-relaxed">{t('iptv_page.intro_p2')}</p>
             </div>
-          </div>
-        </Container>
-      </section>
-
-      <SectionDivider />
-
-      {/* PLATAFORMAS */}
-      <section className="py-28 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #020a14 0%, #020e1c 50%, #020a14 100%)' }}>
-        <Container>
-          <div className="text-center mb-16">
-            <Badge>{t('iptv_page.platforms_badge')}</Badge>
-            <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
-              {t('iptv_page.platforms_h2_1')}{' '}
-              <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, #60a5fa, #34d399, #6ee7b7)' }}>{t('iptv_page.platforms_h2_2')}</span>
-            </h2>
-            <p className="reveal text-white/40 text-lg max-w-2xl mx-auto">{t('iptv_page.platforms_desc')}</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { img: IMG.web,     label: t('iptv_page.platform_web_label'),     title: t('iptv_page.platform_web_title'),     desc: t('iptv_page.platform_web_desc'),     color: '#60a5fa' },
-              { img: IMG.mobile,  label: t('iptv_page.platform_mobile_label'),  title: t('iptv_page.platform_mobile_title'),  desc: t('iptv_page.platform_mobile_desc'),  color: '#34d399' },
-              { img: IMG.desktop, label: t('iptv_page.platform_desktop_label'), title: t('iptv_page.platform_desktop_title'), desc: t('iptv_page.platform_desktop_desc'), color: '#6ee7b7' },
-            ].map((p) => (
-              <div key={p.title} className="reveal group relative rounded-3xl overflow-hidden" style={{ border: `1px solid ${p.color}20` }}>
-                <div className="relative overflow-hidden aspect-[4/3]">
-                  <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(2,2,7,0.9) 0%, rgba(2,2,7,0.3) 60%, transparent 100%)' }} />
-                  <span className="top-4 left-43TOP4_z-10 left-4 z-102x-3 py-1 rounded-full text-xs font-semibold" style={{ background: `${p.color}20`, color: p.color, border: `1px solid ${p.color}40` }}>{p.label}</span>
-                </div>
-                <div className="p-6" style={{ background: `${p.color}06` }}>
-                  <h3 className="text-white font-bold text-lg mb-2">{p.title}</h3>
-                  <p className="text-white/45 text-sm leading-relaxed">{p.desc}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </Container>
       </section>
@@ -355,18 +323,18 @@ export default function IPTVConteudo() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: '📹', title: t('iptv_page.feat_1_title'), desc: t('iptv_page.feat_1_desc'), glow: '#60a5fa' },
-              { icon: '🖥️', title: t('iptv_page.feat_2_title'), desc: t('iptv_page.feat_2_desc'), glow: '#34d399' },
-              { icon: '📋', title: t('iptv_page.feat_3_title'), desc: t('iptv_page.feat_3_desc'), glow: '#6ee7b7' },
-              { icon: '🎙️', title: t('iptv_page.feat_4_title'), desc: t('iptv_page.feat_4_desc'), glow: '#60a5fa' },
-              { icon: '💬', title: t('iptv_page.feat_5_title'), desc: t('iptv_page.feat_5_desc'), glow: '#34d399' },
-              { icon: '🎬', title: t('iptv_page.feat_6_title'), desc: t('iptv_page.feat_6_desc'), glow: '#10b981' },
-              { icon: '🤖', title: t('iptv_page.feat_7_title'), desc: t('iptv_page.feat_7_desc'), glow: '#60a5fa' },
-              { icon: '🔒', title: t('iptv_page.feat_8_title'), desc: t('iptv_page.feat_8_desc'), glow: '#34d399' },
-              { icon: '🔗', title: t('iptv_page.feat_9_title'), desc: t('iptv_page.feat_9_desc'), glow: '#6ee7b7' },
+              { icon: Video, title: t('iptv_page.feat_1_title'), desc: t('iptv_page.feat_1_desc'), glow: '#60a5fa' },
+              { icon: Server, title: t('iptv_page.feat_2_title'), desc: t('iptv_page.feat_2_desc'), glow: '#34d399' },
+              { icon: Users, title: t('iptv_page.feat_3_title'), desc: t('iptv_page.feat_3_desc'), glow: '#6ee7b7' },
+              { icon: Paperclip, title: t('iptv_page.feat_4_title'), desc: t('iptv_page.feat_4_desc'), glow: '#60a5fa' },
+              { icon: ShieldCheck, title: t('iptv_page.feat_5_title'), desc: t('iptv_page.feat_5_desc'), glow: '#34d399' },
+              { icon: CloudUpload, title: t('iptv_page.feat_6_title'), desc: t('iptv_page.feat_6_desc'), glow: '#10b981' },
+              { icon: Radio, title: t('iptv_page.feat_7_title'), desc: t('iptv_page.feat_7_desc'), glow: '#60a5fa' },
+              { icon: Lock, title: t('iptv_page.feat_8_title'), desc: t('iptv_page.feat_8_desc'), glow: '#34d399' },
+              { icon: Link, title: t('iptv_page.feat_9_title'), desc: t('iptv_page.feat_9_desc'), glow: '#6ee7b7' },
             ].map((feat) => (
               <div key={feat.title} className="reveal group relative rounded-2xl p-6 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4" style={{ background: `${feat.glow}18`, border: `1px solid ${feat.glow}30` }}>{feat.icon}</div>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `${feat.glow}18`, border: `1px solid ${feat.glow}30` }}><feat.icon size={22} style={{ color: feat.glow }} strokeWidth={1.6} /></div>
                 <h4 className="text-white font-bold mb-2 text-sm leading-snug">{feat.title}</h4>
                 <p className="text-white/40 text-xs leading-relaxed">{feat.desc}</p>
                 <div className="absolute bottom-0 right-0 w-24 h-24 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `${feat.glow}20` }} />
@@ -399,6 +367,41 @@ export default function IPTVConteudo() {
 
       <SectionDivider />
 
+      {/* PLATAFORMAS */}
+      <section className="py-28 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #020a14 0%, #020e1c 50%, #020a14 100%)' }}>
+        <Container>
+          <div className="text-center mb-16">
+            <Badge>{t('iptv_page.platforms_badge')}</Badge>
+            <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
+              {t('iptv_page.platforms_h2_1')}{' '}
+              <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, #60a5fa, #34d399, #6ee7b7)' }}>{t('iptv_page.platforms_h2_2')}</span>
+            </h2>
+            <p className="reveal text-white/40 text-lg max-w-2xl mx-auto">{t('iptv_page.platforms_desc')}</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { img: IMG.web,     label: t('iptv_page.platform_web_label'),     title: t('iptv_page.platform_web_title'),     desc: t('iptv_page.platform_web_desc'),     color: '#60a5fa' },
+              { img: IMG.mobile,  label: t('iptv_page.platform_mobile_label'),  title: t('iptv_page.platform_mobile_title'),  desc: t('iptv_page.platform_mobile_desc'),  color: '#34d399' },
+              { img: IMG.desktop, label: t('iptv_page.platform_desktop_label'), title: t('iptv_page.platform_desktop_title'), desc: t('iptv_page.platform_desktop_desc'), color: '#6ee7b7' },
+            ].map((p) => (
+              <div key={p.title} className="reveal group relative rounded-3xl overflow-hidden" style={{ border: `1px solid ${p.color}20` }}>
+                <div className="relative overflow-hidden aspect-[4/3]">
+                  <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(2,2,7,0.9) 0%, rgba(2,2,7,0.3) 60%, transparent 100%)' }} />
+                  <span className="top-4 left-43TOP4_z-10 left-4 z-102x-3 py-1 rounded-full text-xs font-semibold" style={{ background: `${p.color}20`, color: p.color, border: `1px solid ${p.color}40` }}>{p.label}</span>
+                </div>
+                <div className="p-6" style={{ background: `${p.color}06` }}>
+                  <h3 className="text-white font-bold text-lg mb-2">{p.title}</h3>
+                  <p className="text-white/45 text-sm leading-relaxed">{p.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <SectionDivider />
+
       {/* CTA */}
       <section className="py-32 relative overflow-hidden" style={{ background: '#080808' }}>
         {/* Particles */}
@@ -419,6 +422,9 @@ export default function IPTVConteudo() {
               <span key={pill} className="px-4 py-2 rounded-full text-sm font-medium text-white/60 border border-white/10" style={{ background: 'rgba(255,255,255,0.04)' }}>{pill}</span>
             ))}
           </div>
+          <Button to="/contato" size="xl" variant="outline-white" className="reveal">
+            Solicitar Demo
+          </Button>
         </Container>
       </section>
     </div>

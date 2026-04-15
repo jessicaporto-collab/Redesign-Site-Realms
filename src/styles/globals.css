@@ -109,10 +109,7 @@
     width: max-content;
     animation: marqueeReverse 35s linear infinite;
   }
-  .marquee-track:hover,
-  .marquee-track-reverse:hover {
-    animation-play-state: paused;
-  }
+
 }
 
 @keyframes marquee {
@@ -169,6 +166,8 @@
   85%  { opacity: 0.1;  filter: hue-rotate(60deg);  background-position: 45% 45%; }
   100% { opacity: 0.6;  filter: hue-rotate(0deg);   background-position: 50% 50%; }
 }
+
+/* ── MyClass hero blobs: animados via JS (AnimatedBlob component) ── */
 
 @layer components {
   /* ── Legacy light-theme helpers (used by inner pages) ── */

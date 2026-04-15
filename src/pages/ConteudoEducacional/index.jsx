@@ -441,8 +441,8 @@ function StatsSection() {
           {stats.map((s, i) => (
             <div key={s.label} className={`reveal delay-${i + 2} text-center`}>
               <p className="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2 leading-none">
-                <AnimatedCounter to={s.value} />
                 <span className="text-indigo-500">{s.suffix}</span>
+                <AnimatedCounter to={s.value} />
               </p>
               <p className="text-gray-800 font-semibold mb-1">{s.label}</p>
               <p className="text-gray-500 text-xs font-medium">{s.desc}</p>

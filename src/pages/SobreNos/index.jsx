@@ -328,17 +328,17 @@ function HeroSection() {
           {/* Metrics */}
           <div className="hero-item w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { value: 20,  suffix: '+',  label: t('about.years') },
-              { value: 9,   suffix: 'M+', label: t('about.students') },
-              { value: 350, suffix: 'K+', label: t('about.teachers') },
-              { value: 14,  suffix: 'M+', label: t('about_page.hero_stat4') },
-            ].map(({ value, suffix, label }) => (
+              { value: 20,  prefix: '+', suffix: '',  label: t('about.years') },
+              { value: 9,   prefix: '+', suffix: 'M', label: t('about.students') },
+              { value: 350, prefix: '+', suffix: 'K', label: t('about.teachers') },
+              { value: 14,  prefix: '+', suffix: 'M', label: t('about_page.hero_stat4') },
+            ].map(({ value, prefix, suffix, label }) => (
               <div
                 key={label}
                 className="about-metric-card p-6 text-center hover:-translate-y-1"
               >
                 <div className="text-3xl font-extrabold text-white tabular-nums leading-none mb-2 drop-shadow-[0_2px_12px_rgba(56,189,248,0.2)]">
-                  <AnimatedCounter to={value} suffix={suffix} duration={1800} />
+                  <AnimatedCounter to={value} prefix={prefix} suffix={suffix} duration={1800} />
                 </div>
                 <p className="text-xs text-slate-200/80 font-light leading-snug">{label}</p>
               </div>

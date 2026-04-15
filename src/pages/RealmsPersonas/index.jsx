@@ -192,9 +192,10 @@ const LOOPED_SLIDES = [
 ───────────────────────────────────────────── */
 function Badge({ children }) {
   return (
-    <p className="reveal flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 mb-4">
+    <p className="reveal flex items-center justify-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 mb-4">
       <span className="w-8 h-px" style={{ background: 'rgba(167,139,250,0.5)' }} />
       {children}
+      <span className="w-8 h-px" style={{ background: 'rgba(167,139,250,0.5)' }} />
     </p>
   )
 }
@@ -458,17 +459,7 @@ export default function RealmsPersonas() {
                       className="absolute inset-0"
                       style={{ background: 'linear-gradient(to top, #0d0d0d 0%, rgba(13,13,13,0.5) 50%, rgba(0,0,0,0.3) 100%)' }}
                     />
-                    <div
-                      className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold"
-                      style={{
-                        background: 'rgba(13,13,13,0.82)',
-                        color: cap.accent,
-                        border: `1px solid ${cap.accent}55`,
-                        backdropFilter: 'blur(12px)',
-                      }}
-                    >
-                      {cap.icon} {cap.tag}
-                    </div>
+
                   </div>
                   <div className="p-5 relative">
                     <h3 className="text-base font-black text-white mb-1.5">{cap.title}</h3>
@@ -513,12 +504,24 @@ export default function RealmsPersonas() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
-              {/* Connector line (desktop) */}
+              {/* Connector line segment 1: circle 01 → circle 02 */}
               <div
-                className="hidden lg:block absolute top-10 left-[16.66%] right-[16.66%] h-px pointer-events-none"
+                className="hidden lg:block absolute top-10 h-px pointer-events-none"
                 style={{
-                  background:
-                    'linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)',
+                  left: 'calc(16.66% + 2.5rem)',
+                  right: 'calc(50% + 2.5rem)',
+                  background: 'linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%)',
+                  opacity: 0.25,
+                }}
+                aria-hidden="true"
+              />
+              {/* Connector line segment 2: circle 02 → circle 03 */}
+              <div
+                className="hidden lg:block absolute top-10 h-px pointer-events-none"
+                style={{
+                  left: 'calc(50% + 2.5rem)',
+                  right: 'calc(16.66% + 2.5rem)',
+                  background: 'linear-gradient(90deg, #8b5cf6 0%, #ec4899 100%)',
                   opacity: 0.25,
                 }}
                 aria-hidden="true"
@@ -750,7 +753,8 @@ export default function RealmsPersonas() {
           <div className="text-center max-w-2xl mx-auto">
             <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40 mb-6">
               <span className="w-5 h-px bg-white/20"></span>
-              {' '}{t('personas_page.cta_badge')}
+              {' '}{t('personas_page.cta_badge')}{' '}
+              <span className="w-5 h-px bg-white/20"></span>
             </span>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tight">
               {t('personas_page.cta_h2')}

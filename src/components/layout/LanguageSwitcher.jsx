@@ -8,7 +8,7 @@ const LANGUAGES = [
   { code: 'es', label: 'ES', name: 'Español', flagCode: 'es' },
 ]
 
-export default function LanguageSwitcher({ className = '' }) {
+export default function LanguageSwitcher({ className = '', dropUp = false }) {
   const { i18n } = useTranslation()
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
@@ -25,7 +25,7 @@ export default function LanguageSwitcher({ className = '' }) {
   }, [])
 
   return (
-    <div ref={ref} className={`relative ${className}`}>
+    <div ref={ref} className={`relative ${className}`} onClick={(e) => e.stopPropagation()}>
       <button
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="listbox"
@@ -45,7 +45,9 @@ export default function LanguageSwitcher({ className = '' }) {
       {open && (
         <ul
           role="listbox"
-          className="absolute right-0 mt-2 w-36 bg-dark-800 rounded-2xl shadow-xl border border-white/[0.08] overflow-hidden z-50 py-1"
+          className={`absolute right-0 w-36 bg-dark-800 rounded-2xl shadow-xl border border-white/[0.08] overflow-hidden z-50 py-1 ${
+            dropUp ? 'bottom-full mb-2' : 'top-full mt-2'
+          }`}
         >
           {LANGUAGES.map((lang) => (
             <li key={lang.code} role="option" aria-selected={lang.code === i18n.language}>

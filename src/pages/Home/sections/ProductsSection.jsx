@@ -2,25 +2,35 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Container from '../../../components/ui/Container'
+import personaBg from '../../../assets/home/Persona.png'
+import eduxgenBg from '../../../assets/home/EduxGenAi.png'
+import myclassBg from '../../../assets/home/myclass.png'
+import eduxrealmsBg from '../../../assets/home/eduxrealms.png'
+import iptvBg from '../../../assets/home/iptv.png'
+import conteudoBg from '../../../assets/home/conteudoeducacional.png'
 
 const PRODUCTS = [
   {
     key: 'eduxgen',
     path: '/eduxgen',
-    gradientFrom: '#1e3a5f',
-    gradientTo: '#2563eb',
-    gridColor: 'rgba(59,130,246,0.15)',
-    accent: '#60a5fa',
-    symbol: '✦',
-  },
-  {
-    key: 'myclass',
-    path: '/myclass',
     gradientFrom: '#2e1065',
     gradientTo: '#7c3aed',
     gridColor: 'rgba(124,58,237,0.15)',
     accent: '#a78bfa',
+    symbol: '✦',
+    bgImage: eduxgenBg,
+    bgPosition: '35% center',
+  },
+  {
+    key: 'myclass',
+    path: '/myclass',
+    gradientFrom: '#1e3a5f',
+    gradientTo: '#2563eb',
+    gridColor: 'rgba(59,130,246,0.15)',
+    accent: '#60a5fa',
     symbol: '◈',
+    bgImage: myclassBg,
+    bgPosition: 'center +80%',
   },
   {
     key: 'personas',
@@ -30,6 +40,8 @@ const PRODUCTS = [
     gridColor: 'rgba(5,150,105,0.12)',
     accent: '#34d399',
     symbol: '◉',
+    bgImage: personaBg,
+    bgPosition: 'center',
   },
   {
     key: 'eduxrealms',
@@ -39,6 +51,9 @@ const PRODUCTS = [
     gridColor: 'rgba(234,88,12,0.12)',
     accent: '#fb923c',
     symbol: '◎',
+    bgImage: eduxrealmsBg,
+    bgPosition: 'center',
+    bgScale: 1.18,
   },
   {
     key: 'iptv',
@@ -48,6 +63,8 @@ const PRODUCTS = [
     gridColor: 'rgba(225,29,72,0.12)',
     accent: '#fb7185',
     symbol: '◐',
+    bgImage: iptvBg,
+    bgPosition: 'center',
   },
   {
     key: 'conteudo',
@@ -57,6 +74,10 @@ const PRODUCTS = [
     gridColor: 'rgba(217,119,6,0.12)',
     accent: '#fbbf24',
     symbol: '◑',
+    bgImage: conteudoBg,
+    bgPosition: 'center',
+    bgScale: 1,
+    bgSize: '110%',
   },
 ]
 
@@ -136,33 +157,48 @@ export default function ProductsSection() {
                 }`}
                 aria-hidden={i !== active}
               >
-                {/* Gradient BG */}
+                {/* Background: image or gradient */}
                 <div
                   className="absolute inset-0"
-                  style={{
-                    background: `linear-gradient(135deg, ${product.gradientFrom} 0%, ${product.gradientTo} 100%)`,
-                  }}
+                  style={
+                    product.bgImage
+                      ? {
+                          backgroundImage: `url(${product.bgImage})`,
+                          backgroundSize: product.bgSize ?? 'cover',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundPosition: product.bgPosition ?? 'center',
+                          transform: `scale(${product.bgScale ?? 1.08})`,
+                          transformOrigin: 'center',
+                        }
+                      : {
+                          background: `linear-gradient(135deg, ${product.gradientFrom} 0%, ${product.gradientTo} 100%)`,
+                        }
+                  }
                 />
                 {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black/45" />
-                {/* Grid pattern */}
-                <div
-                  className="absolute inset-0 opacity-100"
-                  style={{
-                    backgroundImage: `linear-gradient(${product.gridColor} 1px, transparent 1px), linear-gradient(90deg, ${product.gridColor} 1px, transparent 1px)`,
-                    backgroundSize: '52px 52px',
-                  }}
-                  aria-hidden="true"
-                />
+                {/* Grid pattern — not shown when card uses an image background */}
+                {!product.bgImage && (
+                  <div
+                    className="absolute inset-0 opacity-100"
+                    style={{
+                      backgroundImage: `linear-gradient(${product.gridColor} 1px, transparent 1px), linear-gradient(90deg, ${product.gridColor} 1px, transparent 1px)`,
+                      backgroundSize: '52px 52px',
+                    }}
+                    aria-hidden="true"
+                  />
+                )}
 
-                {/* Giant number in background */}
-                <span
-                  className="absolute top-6 right-8 text-[160px] lg:text-[200px] font-black leading-none select-none tabular-nums"
-                  style={{ color: `${product.accent}08` }}
-                  aria-hidden="true"
-                >
-                  {String(i + 1).padStart(2, '0')}
-                </span>
+                {/* Giant number — not shown when card uses an image background */}
+                {!product.bgImage && (
+                  <span
+                    className="absolute top-6 right-8 text-[160px] lg:text-[200px] font-black leading-none select-none tabular-nums"
+                    style={{ color: `${product.accent}08` }}
+                    aria-hidden="true"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                )}
 
                 {/* Content */}
                 <div className="relative z-10 flex flex-col justify-end h-full p-8 lg:p-12 min-h-[560px]">

@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import Container from '../../components/ui/Container'
 import img1Persona from './assets/img1-persona.jpg'
 import img2Persona from './assets/img2-persona.png'
+import personaBannerBg from '../../assets/realms-personas/Persona.png'
+import faleComPersonaBg from '../../assets/realms-personas/falecompersona.jpg'
+import persona2Bg from '../../assets/realms-personas/Persona2.jpg'
 
 /* ─────────────────────────────────────────────
    Mouse dust / particle effect  (canvas-based)
@@ -146,7 +149,7 @@ function useEntrance(ref) {
 const PERSONA_SLIDES = [
   {
     id: 'ia',
-    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1600&q=80&fit=crop',
+    image: personaBannerBg,
     accent: '#60a5fa',
     symbol: '✦',
     title: 'Tutor que aprende\ncom o aluno',
@@ -168,7 +171,7 @@ const PERSONA_SLIDES = [
   },
   {
     id: 'multilingue',
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&q=80&fit=crop',
+    image: persona2Bg,
     accent: '#22d3ee',
     symbol: '◉',
     title: 'Comunicação\nsem fronteiras',
@@ -565,7 +568,7 @@ export default function RealmsPersonas() {
             <div className="reveal delay-2 group rounded-3xl overflow-hidden bg-white/5 transition-colors duration-300">
               <div className="overflow-hidden rounded-t-3xl">
                 <img
-                  src={img1Persona}
+                  src={faleComPersonaBg}
                   alt="Fale com o Persona"
                   className="w-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -625,20 +628,14 @@ export default function RealmsPersonas() {
                 width: '85vw',
                 height: '100%',
                 borderRadius: '16px',
-                opacity: i === bannerActive ? 1 : 0.45,
-                cursor: i === bannerActive ? 'default' : 'pointer',
-                transition: 'opacity 600ms ease',
-              }}
+              backgroundImage: `url(${slide.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              opacity: i === bannerActive ? 1 : 0.45,
+              cursor: i === bannerActive ? 'default' : 'pointer',
+              transition: 'opacity 600ms ease',
+            }}
             >
-              {/* Background image */}
-              <img
-                src={slide.image}
-                alt={slide.subtitle}
-                className="absolute inset-0 w-full h-full object-cover object-center"
-              />
-              {/* Solid dark overlay for legibility */}
-              <div className="absolute inset-0 bg-black/50" />
-
               {/* Content */}
               <div className="relative z-10 h-full flex flex-col justify-end pb-12 px-10 lg:px-14">
                 {/* Symbol */}

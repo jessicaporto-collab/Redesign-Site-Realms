@@ -120,7 +120,7 @@ function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ background: '#f0f7ff' }}>
+    <section className="relative min-h-screen flex items-center justify-center [overflow:clip]" style={{ background: '#f0f7ff' }}>
       {/* ── Background gradient ── */}
       <div className="absolute inset-0 pointer-events-none">
         <div
@@ -270,7 +270,7 @@ function HeroSection() {
           </div>
 
           {/* Headline */}
-          <h1 className="hero-item text-5xl sm:text-6xl lg:text-7xl xl:text-[5rem] font-extrabold text-gray-900 leading-[1] tracking-tight mb-6">
+          <h1 className="hero-item text-5xl sm:text-6xl lg:text-7xl xl:text-[5rem] font-extrabold text-gray-900 leading-[1.1] tracking-tight mb-6 break-words w-full">
             {t('conteudo_page.hero_h1_1')}&nbsp;
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-blue-500 to-sky-500">
               {t('conteudo_page.hero_h1_2')}
@@ -280,19 +280,22 @@ function HeroSection() {
           </h1>
 
           {/* Subtitle */}
-          <p className="hero-item text-gray-600 text-lg sm:text-xl leading-relaxed max-w-2xl mb-16">
+          <p className="hero-item text-gray-600 text-lg sm:text-xl leading-relaxed max-w-2xl mb-8">
             {t('conteudo_page.hero_desc')}
           </p>
 
-          {/* CTA phrase */}
-          <div className="hero-item pt-10 border-t border-gray-200 w-full">
-            <p className="text-gray-700 text-lg sm:text-xl font-semibold text-center max-w-3xl mx-auto leading-relaxed">
-              Explore um dos jogos disponiveis na plataforma e veja, na pratica, como o aprendizado pode ser mais envolvente, divertido e eficaz.
-            </p>
+          {/* CTA Button */}
+          <div className="hero-item flex justify-center mb-6">
+            <a
+              href="/contato"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-base border-2 border-indigo-400 text-indigo-600 bg-transparent transition-all duration-300 hover:bg-blue-500 hover:border-blue-500 hover:text-white hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-300/40"
+            >
+              Saiba Mais
+            </a>
           </div>
 
           {/* Game only */}
-          <div className="hero-item w-full mt-8">
+          <div className="hero-item w-full mt-4">
             <div
               className="relative w-full overflow-hidden rounded-3xl border-4 border-amber-300"
               style={{ paddingBottom: '62.25%' }}
@@ -355,7 +358,7 @@ function VideoSection() {
       {/* ── Wave top ── */}
       <div className="absolute top-0 left-0 right-0 pointer-events-none overflow-hidden leading-none">
         <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-16 lg:h-20">
-          <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,0 L0,0 Z" fill="white" />
+          <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,0 L0,0 Z" fill="#f0f7ff" />
         </svg>
       </div>
 
@@ -400,8 +403,8 @@ function VideoSection() {
       {/* ── Wave bottom ── */}
       <div className="absolute bottom-0 left-0 right-0 pointer-events-none overflow-hidden leading-none">
         <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-20 lg:h-28">
-          <path d="M0,60 C360,100 720,20 1080,60 C1260,80 1380,50 1440,40 L1440,100 L0,100 Z" fill="white" />
-          <path d="M0,80 C300,50 600,100 900,70 C1100,50 1300,80 1440,65 L1440,100 L0,100 Z" fill="white" opacity="0.5" />
+          <path d="M0,60 C360,100 720,20 1080,60 C1260,80 1380,50 1440,40 L1440,100 L0,100 Z" fill="#eef2ff" />
+          <path d="M0,80 C300,50 600,100 900,70 C1100,50 1300,80 1440,65 L1440,100 L0,100 Z" fill="#eef2ff" opacity="0.5" />
         </svg>
       </div>
     </section>
@@ -431,11 +434,6 @@ function StatsSection() {
         }}
         aria-hidden="true"
       />
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-indigo-300 to-transparent"
-        aria-hidden="true"
-      />
-
       <Container>
         <div ref={sectionRef} className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12">
           {stats.map((s, i) => (
@@ -521,15 +519,6 @@ function LevelsSection() {
 
   return (
     <section className="bg-white py-24 lg:py-36 relative overflow-hidden">
-      {/* Subtle bottom glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 90% 50% at 50% 110%, rgba(238,242,255,0.9) 0%, transparent 65%)',
-        }}
-        aria-hidden="true"
-      />
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"
         aria-hidden="true"
@@ -632,7 +621,7 @@ function CTASection() {
       {/* Wave top divider */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] pointer-events-none z-[2]">
         <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-16 sm:h-20">
-          <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,0 L0,0 Z" fill="white" />
+          <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,0 L0,0 Z" fill="#ffffff" />
         </svg>
       </div>
       {/* Particles / stars */}
@@ -760,7 +749,6 @@ export default function ConteudoEducacional() {
   return (
     <>
       <CosmicCursor />
-      <PageDecorations />
       <HeroSection />
       <VideoSection />
       <StatsSection />

@@ -66,7 +66,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative h-screen min-h-[640px] w-full overflow-hidden flex items-center"
+      className="relative h-[75vh] sm:h-screen min-h-[520px] sm:min-h-[640px] w-full overflow-hidden flex items-start sm:items-center"
       aria-label="Hero"
     >
       {/* ── Background video ── */}
@@ -99,7 +99,7 @@ export default function HeroSection() {
       {/* ── Main content ── */}
       <div
         ref={contentRef}
-        className="relative z-10 w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-24"
+        className="relative z-10 w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-16 md:pt-24"
       >
         <div className="max-w-4xl">
           {/* Tagline */}
@@ -109,7 +109,7 @@ export default function HeroSection() {
           </p>
 
           {/* Heading */}
-          <h1 className="hero-item text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[0.9] tracking-tight mb-6">
+          <h1 className="hero-item text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[0.9] tracking-tight mb-6">
             {t('hero.line1')}
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400">
@@ -135,7 +135,7 @@ export default function HeroSection() {
       </div>
 
       {/* ── Social links — left side ── */}
-      <div className="absolute bottom-10 left-4 sm:left-8 z-10 flex flex-col gap-3">
+      <div className="absolute bottom-10 left-4 sm:left-8 z-10 hidden sm:flex flex-col gap-3">
         {SOCIAL_LINKS.map((s) => (
           <a
             key={s.label}

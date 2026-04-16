@@ -68,7 +68,7 @@ const PRODUCTS = [
   },
   {
     key: 'conteudo',
-    path: '/iptv-conteudo',
+    path: '/conteudo-educacional',
     gradientFrom: '#451a03',
     gradientTo: '#d97706',
     gridColor: 'rgba(217,119,6,0.12)',
@@ -142,9 +142,6 @@ export default function ProductsSection() {
                 {t('products.heading')}
               </h2>
             </div>
-            <p className="reveal delay-3 text-sm text-white/35 max-w-xs leading-relaxed font-light flex-shrink-0 pb-1">
-              {t('products.sub')}
-            </p>
           </div>
 
           {/* ── Showcase carousel ── */}

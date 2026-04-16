@@ -7,11 +7,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply font-sans antialiased text-white;
     background-color: #0a0a0a;
+    overflow-x: hidden;
   }
 
   * {
@@ -20,6 +22,27 @@
 }
 
 @layer components {
+  /* Mantem o mesmo visual escuro quando o navegador aplica autofill no formulario de contato */
+  #contact-form input:-webkit-autofill,
+  #contact-form input:-webkit-autofill:hover,
+  #contact-form input:-webkit-autofill:focus,
+  #contact-form textarea:-webkit-autofill,
+  #contact-form textarea:-webkit-autofill:hover,
+  #contact-form textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: #ffffff !important;
+    background-color: transparent !important;
+    box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.04) inset !important;
+    -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.04) inset !important;
+    transition: background-color 99999s ease-in-out 0s !important;
+  }
+
+  #contact-form input:-moz-autofill,
+  #contact-form textarea:-moz-autofill {
+    color: #ffffff !important;
+    box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.04) inset !important;
+  }
+
   /* ── Scroll reveal ── */
   .reveal {
     opacity: 0;

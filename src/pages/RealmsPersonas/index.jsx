@@ -7,6 +7,12 @@ import img2Persona from './assets/img2-persona.png'
 import personaBannerBg from '../../assets/realms-personas/Persona.png'
 import faleComPersonaBg from '../../assets/realms-personas/falecompersona.jpg'
 import persona2Bg from '../../assets/realms-personas/Persona2.jpg'
+import capImg1 from '../../assets/realms-persona/img1-persona.png'
+import capImg2 from '../../assets/realms-persona/img 2-persona.png'
+import capImg3 from '../../assets/realms-persona/img3-persona.png'
+import capImg4 from '../../assets/realms-persona/img4-persona.png'
+import capImg5 from '../../assets/realms-persona/img5-persona.png'
+import capImg6 from '../../assets/realms-persona/img6-persona.png'
 
 /* ─────────────────────────────────────────────
    Mouse dust / particle effect  (canvas-based)
@@ -261,12 +267,12 @@ export default function RealmsPersonas() {
   useReveal(casesRef)
 
   const CAPABILITIES = [
-    { icon: '💬', tag: t('personas_page.cap_1_tag'), title: t('personas_page.cap_1_title'), desc: t('personas_page.cap_1_desc'), accent: '#3b82f6', image: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=800&q=75&fit=crop' },
-    { icon: '🧠', tag: t('personas_page.cap_2_tag'), title: t('personas_page.cap_2_title'), desc: t('personas_page.cap_2_desc'), accent: '#8b5cf6', image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=75&fit=crop' },
-    { icon: '🎭', tag: t('personas_page.cap_3_tag'), title: t('personas_page.cap_3_title'), desc: t('personas_page.cap_3_desc'), accent: '#ec4899', image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=75&fit=crop' },
-    { icon: '📚', tag: t('personas_page.cap_4_tag'), title: t('personas_page.cap_4_title'), desc: t('personas_page.cap_4_desc'), accent: '#6366f1', image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=75&fit=crop' },
-    { icon: '🗂️', tag: t('personas_page.cap_5_tag'), title: t('personas_page.cap_5_title'), desc: t('personas_page.cap_5_desc'), accent: '#a855f7', image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&q=75&fit=crop' },
-    { icon: '📊', tag: t('personas_page.cap_6_tag'), title: t('personas_page.cap_6_title'), desc: t('personas_page.cap_6_desc'), accent: '#f472b6', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=75&fit=crop' },
+    { icon: '💬', tag: t('personas_page.cap_1_tag'), title: t('personas_page.cap_1_title'), desc: t('personas_page.cap_1_desc'), accent: '#3b82f6', image: capImg1 },
+    { icon: '🧠', tag: t('personas_page.cap_2_tag'), title: t('personas_page.cap_2_title'), desc: t('personas_page.cap_2_desc'), accent: '#8b5cf6', image: capImg2 },
+    { icon: '🎭', tag: t('personas_page.cap_3_tag'), title: t('personas_page.cap_3_title'), desc: t('personas_page.cap_3_desc'), accent: '#ec4899', image: capImg3 },
+    { icon: '📚', tag: t('personas_page.cap_4_tag'), title: t('personas_page.cap_4_title'), desc: t('personas_page.cap_4_desc'), accent: '#6366f1', image: capImg4 },
+    { icon: '🗂️', tag: t('personas_page.cap_5_tag'), title: t('personas_page.cap_5_title'), desc: t('personas_page.cap_5_desc'), accent: '#a855f7', image: capImg5 },
+    { icon: '📊', tag: t('personas_page.cap_6_tag'), title: t('personas_page.cap_6_title'), desc: t('personas_page.cap_6_desc'), accent: '#f472b6', image: capImg6 },
   ]
 
   const STEPS = [
@@ -295,7 +301,7 @@ export default function RealmsPersonas() {
           HERO
       ══════════════════════════════════════ */}
       <section
-        className="relative h-screen min-h-[680px] w-full overflow-hidden flex items-center"
+        className="relative h-auto sm:h-screen sm:min-h-[680px] w-full overflow-hidden flex items-start sm:items-center"
         aria-label="Realms Personas Hero"
       >
         {/* Gradient background */}
@@ -332,36 +338,43 @@ export default function RealmsPersonas() {
         />
 
         {/* Content */}
-        <div ref={heroRef} className="relative z-20 w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-24">
-          <div className="max-w-4xl">
-            <p className="hero-item flex items-center gap-3 text-white/40 text-[11px] font-semibold uppercase tracking-[0.25em] mb-7">
-              <span className="w-8 h-px bg-white/30" aria-hidden="true"></span>
-              {' '}{t('personas_page.hero_badge')}
-            </p>
+        <div ref={heroRef} className="relative z-20 w-full container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 sm:pt-24 sm:pb-0">
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+            <div
+              className="hero-item inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-8"
+              style={{ background: 'rgba(99,60,255,0.1)', borderColor: 'rgba(139,92,246,0.35)' }}
+            >
+              <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#a78bfa' }} />
+              <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: '#a78bfa' }}>
+                {t('personas_page.hero_badge')}
+              </span>
+            </div>
 
-            <h1 className="hero-item text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[0.92] tracking-tight mb-6">
-              {t('personas_page.hero_h1_1')}
-              <br />
+            <h1 className="hero-item text-[2rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6">
+              <span className="text-white">
+                {t('personas_page.hero_h1_prefix')}{' '}
+              </span>
               <span
-                className="text-transparent bg-clip-text"
+                className="text-transparent bg-clip-text sm:whitespace-nowrap"
                 style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 40%, #ec4899 80%)' }}
               >
-                {t('personas_page.hero_h1_2')}
+                {t('personas_page.hero_h1_brand')}
               </span>
+              {t('personas_page.hero_h1_2') && (
+                <>
+                  <br />
+                  <span className="text-white whitespace-nowrap">
+                    {t('personas_page.hero_h1_2')}
+                  </span>
+                </>
+              )}
             </h1>
 
             <p className="hero-item text-lg sm:text-xl text-white/55 font-light leading-relaxed mb-10 max-w-xl">
               {t('personas_page.hero_desc')}
             </p>
 
-            <div className="hero-item flex flex-wrap gap-4">
-              <Link
-                to="/contato"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm text-white transition-all duration-300 hover:scale-105 hover:brightness-110"
-                style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)' }}
-              >
-                {t('personas_page.hero_cta_primary')}
-              </Link>
+            <div className="hero-item flex flex-wrap gap-4 justify-center">
               <Link
                 to="/contato"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm text-white/70 border border-white/15 hover:bg-white hover:border-white hover:text-gray-900 transition-all duration-300"
@@ -371,7 +384,7 @@ export default function RealmsPersonas() {
             </div>
 
             {/* Floating tags */}
-            <div className="hero-item flex flex-wrap gap-3 mt-12">
+            <div className="hero-item flex flex-wrap gap-3 mt-12 justify-center">
               {[t('personas_page.hero_tag1'), t('personas_page.hero_tag2'), t('personas_page.hero_tag3'), t('personas_page.hero_tag4'), t('personas_page.hero_tag5')].map(
                 (tag) => (
                   <span
@@ -428,22 +441,7 @@ export default function RealmsPersonas() {
 
         <Container>
           <div ref={capRef}>
-            <div className="text-center mb-16 lg:mb-20">
-              <Badge>{t('personas_page.capabilities_badge')}</Badge>
-              <h2 className="reveal text-4xl lg:text-5xl font-black text-white mb-4">
-                {t('personas_page.capabilities_h2_1')}{' '}
-                <span
-                  className="text-transparent bg-clip-text"
-                  style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)' }}
-                >
-                  {t('personas_page.capabilities_h2_2')}
-                </span>
-                {' '}{t('personas_page.capabilities_h2_3')}
-              </h2>
-              <p className="reveal text-white/45 max-w-2xl mx-auto leading-relaxed">
-                {t('personas_page.capabilities_desc')}
-              </p>
-            </div>
+
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {CAPABILITIES.map((cap, i) => (
@@ -460,7 +458,7 @@ export default function RealmsPersonas() {
                     />
                     <div
                       className="absolute inset-0"
-                      style={{ background: 'linear-gradient(to top, #0d0d0d 0%, rgba(13,13,13,0.5) 50%, rgba(0,0,0,0.3) 100%)' }}
+                      style={{ background: 'linear-gradient(to top, rgba(13,13,13,0.85) 0%, rgba(13,13,13,0.15) 40%, transparent 100%)' }}
                     />
 
                   </div>
@@ -482,7 +480,7 @@ export default function RealmsPersonas() {
       {/* ══════════════════════════════════════
           HOW IT WORKS
       ══════════════════════════════════════ */}
-      <section className="bg-[#0a0a0a] py-24 lg:py-32 relative">
+      <section className="bg-[#0a0a0a] pt-10 pb-24 lg:pt-14 lg:pb-32 relative">
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-px bg-gradient-to-r from-transparent via-white/8 to-transparent"
           aria-hidden="true"

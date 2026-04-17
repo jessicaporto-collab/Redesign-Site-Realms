@@ -47,7 +47,8 @@ function FormSection() {
   const sectionRef = useRef(null)
   useReveal(sectionRef)
 
-  const [form, setForm] = useState({ name: '', subject: '', message: '' })
+  const INITIAL_FORM_STATE = { name: '', subject: '', message: '' }
+  const [form, setForm] = useState(INITIAL_FORM_STATE)
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [pendingEmail, setPendingEmail] = useState(null)
 
@@ -55,16 +56,30 @@ function FormSection() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
 
   const openEmailClient = ({ to, subject, body }) => {
+    const encodedSubject = encodeURIComponent(subject)
+    const encodedBody = encodeURIComponent(body)
+    const mailtoUrl = `mailto:${to}?subject=${encodedSubject}&body=${encodedBody}`
     const gmailUrl =
       `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}` +
-      `&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      `&su=${encodedSubject}&body=${encodedBody}`
 
-    const opened = globalThis.open(gmailUrl, '_blank', 'noopener,noreferrer')
+    const userAgent = globalThis.navigator?.userAgent || ''
+    const isMobileByUA = /Android|iPhone|iPad|iPod|Mobile|Windows Phone/i.test(userAgent)
+    const isMobileByClientHint = Boolean(globalThis.navigator?.userAgentData?.mobile)
+    const isMobile = isMobileByUA || isMobileByClientHint
 
-    // Fallback para clientes de email quando o Gmail não estiver acessível.
+    // No mobile, chama diretamente o app de email padrao via mailto.
+    if (isMobile) {
+      globalThis.location.href = mailtoUrl
+      return
+    }
+
+    // No desktop, mantem envio via Gmail web para evitar prompt de app mailto.
+    const opened = globalThis.open(gmailUrl, '_blank')
+
+    // Se popup estiver bloqueado, abre na aba atual sem acionar mailto.
     if (!opened) {
-      globalThis.location.href =
-        `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      globalThis.location.href = gmailUrl
     }
   }
 
@@ -83,6 +98,7 @@ function FormSection() {
     openEmailClient(pendingEmail)
     setConfirmOpen(false)
     setPendingEmail(null)
+    setForm(INITIAL_FORM_STATE)
   }
 
   const handleCancelSend = () => {

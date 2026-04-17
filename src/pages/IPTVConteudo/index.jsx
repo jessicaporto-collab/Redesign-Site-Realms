@@ -171,7 +171,7 @@ export default function IPTVConteudo() {
   useParticles('iptv-cta-particles')
 
   return (
-    <div style={{ background: '#020a14', color: 'white', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ background: '#020a14', color: 'white', position: 'relative', overflowX: 'hidden' }}>
       <StarField />
 
       {/* HERO */}
@@ -189,8 +189,8 @@ export default function IPTVConteudo() {
               <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
               <span className="text-blue-300 text-xs font-semibold uppercase tracking-widest">{t('iptv_page.hero_badge')}</span>
             </div>
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-[1.05] tracking-tight">
-              <span className="whitespace-nowrap">
+            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-[1.1] tracking-tight">
+              <span>
                 {t('iptv_page.hero_h1_1')}{' '}
                 <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, #60a5fa 0%, #34d399 60%, #6ee7b7 100%)' }}>
                   {t('iptv_page.hero_h1_2')}
@@ -203,7 +203,7 @@ export default function IPTVConteudo() {
         </Container>
 
         {/* Imagem produto — de ponta a ponta, estilo "app screenshot" */}
-        <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 xl:px-32">
+        <div className="relative z-10 w-full px-3 sm:px-6 md:px-16 lg:px-24 xl:px-32">
           <div
             className="relative w-full overflow-hidden"
             style={{
@@ -229,7 +229,7 @@ export default function IPTVConteudo() {
               src={IMG.hero}
               alt="Videoconferência IP.TV"
               className="w-full block"
-              style={{ height: '72vh', objectFit: 'cover', objectPosition: 'center 20%' }}
+              style={{ height: 'clamp(220px, 52vw, 72vh)', objectFit: 'cover', objectPosition: 'center 20%' }}
             />
             {/* Gradiente na base para cortar suavemente */}
             <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: 'linear-gradient(to bottom, transparent 0%, #020a14 100%)' }} />
@@ -248,9 +248,11 @@ export default function IPTVConteudo() {
                 <img src={IMG.webinar} alt="Webinar IP.TV" className="w-full object-contain" />
               </div>
 
-              <div className="absolute -top-6 -left-6 rounded-2xl p-4 border border-white/10" style={{ background: 'rgba(8,8,28,0.95)', backdropFilter: 'blur(20px)' }}>
+              <div className="hidden sm:block absolute -top-6 -left-6 rounded-2xl p-4 border border-white/10" style={{ background: 'rgba(8,8,28,0.95)', backdropFilter: 'blur(20px)' }}>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background: 'rgba(96,165,250,0.2)' }}>🔒</div>
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(96,165,250,0.2)' }}>
+                    <Lock size={20} strokeWidth={2} className="text-blue-300" aria-hidden="true" />
+                  </div>
                   <div>
                     <p className="text-white font-bold text-sm">{t('iptv_page.intro_chip2_title')}</p>
                     <p className="text-white/40 text-xs">{t('iptv_page.intro_chip2_sub')}</p>

@@ -2,6 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Container from '../../components/ui/Container'
 import img1Myclass from '../../assets/myclass/img1-myclass.png'
+import img2Myclass from '../../assets/myclass/img2-myclass.png'
+import img3Myclass from '../../assets/myclass/img3-myclass.png'
+import img4Myclass from '../../assets/myclass/img4-myclass.png'
+import img5Myclass from '../../assets/myclass/img5-myclass.png'
+import img6Myclass from '../../assets/myclass/img6-myclass.png'
+import img7Myclass from '../../assets/myclass/img7-myclass.png'
+import img8Myclass from '../../assets/myclass/img8-myclass.png'
 import imgTrilha from '../../assets/myclass/img-trilha.jpg'
 
 /* ---------------------------------------------
@@ -211,9 +218,9 @@ function Badge({ children }) {
 
 /* -- intro image grid com gaveta individual -- */
 const INTRO_IMGS = [
-  { src: IMG.collaboration, alt: 'Colaboração', titleKey: 'intro_img1_title', descKey: 'intro_img1_desc', accent: '#7c3aed' },
-  { src: IMG.teacher, alt: 'Professor', titleKey: 'intro_img2_title', descKey: 'intro_img2_desc', accent: '#ec4899' },
-  { src: IMG.students, alt: 'Alunos', titleKey: 'intro_img3_title', descKey: 'intro_img3_desc', accent: '#3b82f6' },
+  { src: img2Myclass, alt: 'Colaboração', titleKey: 'intro_img1_title', descKey: 'intro_img1_desc', accent: '#7c3aed' },
+  { src: img3Myclass, alt: 'Professor', titleKey: 'intro_img2_title', descKey: 'intro_img2_desc', accent: '#ec4899' },
+  { src: img4Myclass, alt: 'Alunos', titleKey: 'intro_img3_title', descKey: 'intro_img3_desc', accent: '#3b82f6' },
 ]
 
 function IntroImageGrid({ t }) {
@@ -513,10 +520,19 @@ export default function MyClass() {
             {/* Professores */}
             <div
               className="reveal relative rounded-3xl overflow-hidden border"
-              style={{ background: '#ffffff', borderColor: '#e5e7eb', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}
+              style={{ background: '#ffffff', borderColor: '#ddd6fe', boxShadow: '0 14px 35px rgba(124,58,237,0.10)' }}
             >
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <img src={IMG.teacher} alt="Professor usando MyClass" className="w-full h-full object-cover" />
+              <div className="relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #f5f3ff 0%, #eef2ff 100%)' }}>
+                <div
+                  aria-hidden="true"
+                  className="absolute -top-20 -left-20 h-52 w-52 rounded-full"
+                  style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.22) 0%, rgba(124,58,237,0) 70%)' }}
+                />
+                <img
+                  src={img5Myclass}
+                  alt="Professor usando MyClass"
+                  className="relative z-[1] w-full h-auto object-contain p-3 md:p-4"
+                />
               </div>
               <div className="p-8">
                 <h3 className="text-3xl font-black mb-4" style={{ color: '#111827' }}>{t('myclass_page.teacher_title')}</h3>
@@ -540,10 +556,19 @@ export default function MyClass() {
             {/* Alunos */}
             <div
               className="reveal relative rounded-3xl overflow-hidden border"
-              style={{ background: '#ffffff', borderColor: '#e5e7eb', boxShadow: '0 4px 20px rgba(0,0,0,0.07)' }}
+              style={{ background: '#ffffff', borderColor: '#bfdbfe', boxShadow: '0 14px 35px rgba(59,130,246,0.12)' }}
             >
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <img src={IMG.students} alt="Alunos usando MyClass" className="w-full h-full object-cover" />
+              <div className="relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #eff6ff 0%, #ecfeff 100%)' }}>
+                <div
+                  aria-hidden="true"
+                  className="absolute -top-20 -right-20 h-52 w-52 rounded-full"
+                  style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.22) 0%, rgba(59,130,246,0) 70%)' }}
+                />
+                <img
+                  src={img6Myclass}
+                  alt="Alunos usando MyClass"
+                  className="relative z-[1] w-full h-auto object-contain p-3 md:p-4"
+                />
               </div>
               <div className="p-8">
                 <h3 className="text-3xl font-black mb-4" style={{ color: '#111827' }}>{t('myclass_page.student_title')}</h3>
@@ -805,47 +830,17 @@ export default function MyClass() {
             {/* Visual */}
             <div className="reveal relative">
               <div
-                className="relative rounded-3xl overflow-hidden"
+                className="rounded-3xl overflow-hidden"
                 style={{
                   border: '1px solid rgba(0,0,0,0.07)',
                   boxShadow: '0 20px 60px rgba(124,58,237,0.12), 0 4px 20px rgba(0,0,0,0.08)',
                 }}
               >
                 <img
-                  src={IMG.learning}
+                  src={img7Myclass}
                   alt="Gestão Escolar MyClass"
-                  className="w-full aspect-[4/3] object-cover block"
+                  className="w-full h-auto block"
                 />
-                {/* stat pill */}
-                <div
-                  style={{
-                    position: 'absolute', bottom: '20px', left: '20px',
-                    background: 'rgba(255,255,255,0.95)',
-                    borderRadius: '14px',
-                    padding: '12px 18px',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.10)',
-                    display: 'flex', alignItems: 'center', gap: '12px',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '36px', height: '36px', borderRadius: '10px',
-                      background: 'rgba(124,58,237,0.1)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p style={{ fontSize: '0.7rem', color: '#9ca3af', fontWeight: 600, margin: 0 }}>USUÁRIOS ATIVOS</p>
-                    <p style={{ fontSize: '1.05rem', color: '#111827', fontWeight: 900, margin: 0 }}>+9M Alunos</p>
-                  </div>
-                </div>
               </div>
               {/* Decoração */}
               <div
@@ -874,55 +869,17 @@ export default function MyClass() {
             {/* Visual — imagem do dashboard à esquerda */}
             <div className="reveal relative order-last lg:order-first">
               <div
-                className="relative rounded-3xl overflow-hidden"
+                className="rounded-3xl overflow-hidden"
                 style={{
                   border: '1px solid rgba(0,0,0,0.07)',
                   boxShadow: '0 20px 60px rgba(59,130,246,0.12), 0 4px 20px rgba(0,0,0,0.08)',
                 }}
               >
                 <img
-                  src={img1Myclass}
+                  src={img8Myclass}
                   alt="Analytics e BI MyClass"
-                  className="w-full object-cover object-top block"
-                  style={{ maxHeight: '420px' }}
+                  className="w-full h-auto block"
                 />
-                {/* Gradiente sutil embaixo */}
-                <div
-                  style={{
-                    position: 'absolute', bottom: 0, left: 0, right: 0, height: '80px',
-                    background: 'linear-gradient(to bottom, transparent, rgba(249,250,251,0.9))',
-                    pointerEvents: 'none',
-                  }}
-                />
-                {/* peak stat pill */}
-                <div
-                  style={{
-                    position: 'absolute', bottom: '16px', right: '16px',
-                    background: 'rgba(255,255,255,0.96)',
-                    borderRadius: '14px',
-                    padding: '10px 16px',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.10)',
-                    display: 'flex', alignItems: 'center', gap: '10px',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '32px', height: '32px', borderRadius: '8px',
-                      background: 'rgba(59,130,246,0.1)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                      <path d="M3 3v18h18" />
-                      <path d="M7 16l4-6 4 4 4-6" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p style={{ fontSize: '0.65rem', color: '#9ca3af', fontWeight: 600, margin: 0, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Pico simultâneo</p>
-                    <p style={{ fontSize: '1rem', color: '#111827', fontWeight: 900, margin: 0 }}>+400K usuários</p>
-                  </div>
-                </div>
               </div>
               <div
                 aria-hidden="true"

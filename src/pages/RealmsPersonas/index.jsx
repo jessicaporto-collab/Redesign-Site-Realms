@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import Container from '../../components/ui/Container'
 import img1Persona from './assets/img1-persona.jpg'
-import img2Persona from './assets/img2-persona.png'
+import img2Persona from '../../assets/realms-personas/persona4.png'
 import personaBannerBg from '../../assets/realms-personas/Persona.png'
 import faleComPersonaBg from '../../assets/realms-personas/falecompersona.jpg'
 import persona2Bg from '../../assets/realms-personas/Persona2.jpg'
+import persona3Bg from '../../assets/realms-personas/persona3.png'
 import capImg1 from '../../assets/realms-persona/img1-persona.png'
 import capImg2 from '../../assets/realms-persona/img 2-persona.png'
 import capImg3 from '../../assets/realms-persona/img3-persona.png'
@@ -166,7 +167,7 @@ const PERSONA_SLIDES = [
   },
   {
     id: 'identidade',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1600&q=80&fit=crop',
+    image: persona3Bg,
     accent: '#c084fc',
     symbol: '◈',
     title: 'Personas com\npersonalidade própria',
@@ -563,7 +564,7 @@ export default function RealmsPersonas() {
         <div ref={casesRef} className="px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Card 1 – Fale com o Persona */}
-            <div className="reveal delay-2 group rounded-3xl overflow-hidden bg-white/5 transition-colors duration-300">
+            <div className="reveal delay-2 group rounded-3xl overflow-hidden bg-white/5 transition-colors duration-300 flex flex-col">
               <div className="overflow-hidden rounded-t-3xl">
                 <img
                   src={faleComPersonaBg}
@@ -571,7 +572,7 @@ export default function RealmsPersonas() {
                   className="w-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
-              <div className="px-8 py-7">
+              <div className="px-8 py-7" style={{ minHeight: '120px' }}>
                 <h3 className="text-white font-extrabold text-2xl mb-2">
                   {t('personas_page.card_talk_title')}
                 </h3>
@@ -582,7 +583,7 @@ export default function RealmsPersonas() {
             </div>
 
             {/* Card 2 – Use onde quiser */}
-            <div className="reveal delay-3 group rounded-3xl overflow-hidden bg-white/5 transition-colors duration-300">
+            <div className="reveal delay-3 group rounded-3xl overflow-hidden bg-white/5 transition-colors duration-300 flex flex-col">
               <div className="overflow-hidden rounded-t-3xl">
                 <img
                   src={img2Persona}
@@ -590,7 +591,7 @@ export default function RealmsPersonas() {
                   className="w-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
-              <div className="px-8 py-7">
+              <div className="px-8 py-7" style={{ minHeight: '120px' }}>
                 <h3 className="text-white font-extrabold text-2xl mb-2">
                   {t('personas_page.card_anywhere_title')}
                 </h3>

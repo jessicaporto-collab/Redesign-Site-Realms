@@ -10,6 +10,7 @@ import img6Myclass from '../../assets/myclass/img6-myclass.png'
 import img7Myclass from '../../assets/myclass/img7-myclass.png'
 import img8Myclass from '../../assets/myclass/img8-myclass.png'
 import imgTrilha from '../../assets/myclass/img-trilha.jpg'
+import imgProvaComToken from '../../assets/myclass/ProvaComToken.png'
 
 /* ---------------------------------------------
    Unsplash images (free / no copyright)
@@ -265,7 +266,7 @@ function IntroImageGrid({ t }) {
                 left: 0,
                 right: 0,
                 overflow: 'hidden',
-                maxHeight: open ? '160px' : '0px',
+                maxHeight: '160px',
                 transition: 'max-height 0.45s cubic-bezier(0.4,0,0.2,1)',
               }}>
                 <div style={{
@@ -921,6 +922,77 @@ export default function MyClass() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <SectionDivider />
+
+      {/* ═══════════════════════════════
+          REALMS SAFE TASK
+      ═══════════════════════════════ */}
+      <section className="py-28" style={{ background: '#ffffff' }}>
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Conteúdo */}
+            <div>
+              <Badge>REALMS SAFE TASK</Badge>
+              <h2 className="reveal text-4xl lg:text-5xl font-black mb-6 leading-tight" style={{ color: '#111827' }}>
+                Segurança para aplicação de{' '}
+                <span
+                  className="text-transparent bg-clip-text"
+                  style={{ backgroundImage: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}
+                >
+                  avaliações
+                </span>
+              </h2>
+              <p className="reveal text-base leading-relaxed mb-8" style={{ color: '#6b7280' }}>
+                Controle de ambiente para garantir integridade em provas e atividades digitais. Redução de fraudes e padronização do processo avaliativo.
+              </p>
+              <ul className="space-y-4">
+                {[
+                  'Acesso às provas com token único e validade controlada',
+                  'Bloqueio de tentativas não autorizadas e compartilhamento indevido',
+                  'Rastreabilidade completa de início, envio e conclusão da avaliação',
+                  'Padronização do processo avaliativo entre turmas e disciplinas',
+                  'Mais segurança e confiabilidade nos resultados de aprendizagem',
+                ].map((item) => (
+                  <li key={item} className="reveal flex items-start gap-3">
+                    <Check color="#7c3aed" />
+                    <span className="text-base" style={{ color: '#4b5563' }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Visual */}
+            <div className="reveal relative">
+              <div
+                className="rounded-3xl overflow-hidden"
+                style={{
+                  border: '1px solid rgba(0,0,0,0.07)',
+                  boxShadow: '0 20px 60px rgba(124,58,237,0.12), 0 4px 20px rgba(0,0,0,0.08)',
+                  aspectRatio: '1205 / 727',
+                }}
+              >
+                <img
+                  src={imgProvaComToken}
+                  alt="Realms Safe Task"
+                  className="w-full block"
+                  style={{ height: '100%', objectFit: 'cover' }}
+                />
+              </div>
+              <div
+                aria-hidden="true"
+                style={{
+                  position: 'absolute', top: '-24px', right: '-24px',
+                  width: '180px', height: '180px', borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%)',
+                  filter: 'blur(30px)',
+                  zIndex: -1,
+                }}
+              />
             </div>
           </div>
         </Container>
